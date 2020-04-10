@@ -1,0 +1,72 @@
+Tau results for Planck 2018 PC and tanh chains, w/ comparison to literature results
+
+Note: All plik + lowE type of chains also implicitly assume +lowl (the low l TT likelihood);
+while lowE only means really lowE only and fixed cosmological parameters.
+
+0. Planck 2018 Cosmological Params paper (https://arxiv.org/pdf/1807.06209.pdf)
+
+lowE only: 0.0519 + 0.0030 - 0.0079 (TANH, flat tau prior)
+lowE only: 0.0504 + 0.0050 - 0.0079 (FlexKnot, flat tau prior)
+lowE only: 0.0487 + 0.0038 - 0.0081 (PCA, Millea method "flat tau prior")
+
+lowE only: tau(15,30) < 0.006 (FlexKnot, flat tau(15,30))
+lowE only: tau(15,30) < 0.007 (FlexKnot, flat knot)
+(guessing that these should be 95% upper limits)
+
+1. TANH
+
+plik full + lowE: Gotten tau = 0.0542 + 0.0075 - 0.0075 (68p)
+expect tau = 0.0544 + 0.0070 - 0.0081 (Planck official)
+
+plik lite + srollv2: Gotten tau = 0.0591 + 0.0055 - 0.0067 (68p)
+expect tau = 0.0591 + 0.0056 - 0.0068 (Planck official)
+
+2. PC zmax = 30, pliklite + lowl (TT) + srollv2 (EE)
+
+pl18_pc_zmax30_pliklite_srollv2_0930: total tau from chains = 0.0620 + 0.0056 - 0.0068 (68p) --> 0.0619 + 0.0056 - 0.0068 
+pl18_pc_zmax30_pliklite_srollv2_0930: total tau from taumj = 0.0620 + 0.0056 - 0.0068 (68p) --> 0.0619 + 0.0056 - 0.0069
+Planck PC (M. Millea, biased low) =  0.0487 + 0.0038 - 0.0081
+
+tau2 from chain 0.68% lower: 0.055 upper: 0.068 (two tail)
+tau2 from chain 0.95% lower: 0.050 upper: 0.075 (two tail)
+tau2 from chain 0.99% lower: 0.047 upper: 0.080 (two tail)
+
+3. PC zmax = 30, pliklite + lowl (TT) + lowE (zmax30_mortonson --> zmax30_heinrich physicality cuts)
+
+pl18_pc_zmax30_pliklite_post_0930: total tau from chains = 0.0583 + 0.0072 - 0.0082 (68p) --> 0.0582 + 0.0072 - 0.0083 (68p)
+pl18_pc_zmax30_pliklite_post_0930: total tau from taumj = 0.0583 + 0.0072 - 0.0082 (68p) --> 0.0582 + 0.0072 - 0.0083 (68p)
+Planck PC (M. Millea, biased low) =  0.0487 + 0.0038 - 0.0081
+
+tau2 from chain 0.68% lower: 0.050 upper: 0.066 (two tail) --> upper: 0.065 (two tail)
+tau2 from chain 0.95% lower: 0.043 upper: 0.075 (two tail)
+tau2 from chain 0.99% lower: 0.038 upper: 0.081 (two tail)
+
+4. PC zmax = 30, plikfull + lowl (TT) + lowE  (zmax30_mortonson --> zmax30_heinrich physicality cuts)
+
+pl18_pc_zmax30_plikfull: total tau from chains = 0.0581 + 0.0072 - 0.0082 (68p) --> 0.0581 + 0.0072 - 0.0082
+pl18_pc_zmax30_plikfull: total tau from taumj = 0.0581 + 0.0072 - 0.0082 (68p) --> 0.0581 + 0.0072 - 0.0083
+Planck PC (M. Millea, biased low) =  0.0487 + 0.0038 - 0.0081
+
+tau2 from chain 0.68% lower: 0.050 upper: 0.065 (two tail)
+tau2 from chain 0.95% lower: 0.043 upper: 0.075 (two tail) --> upper: 0.074 (two tail)
+tau2 from chain 0.99% lower: 0.039 upper: 0.081 (two tail)
+
+5. PC zmax = 50, pliklite + lowl (TT) + srollv2 (EE)
+
+pl18_pc_zmax50_pliklite_srollv2: total tau from chains = 0.0626 + 0.0061 - 0.0072 (68p)
+pl18_pc_zmax50_pliklite_srollv2: total tau from taumj = 0.0626 + 0.0061 - 0.0072 (68p)
+Planck PC (M. Millea, biased low) =  0.0487 + 0.0038 - 0.0081
+
+tau2 from chain 0.68% lower: 0.055 upper: 0.069 (two tail)
+tau2 from chain 0.95% lower: 0.050 upper: 0.076 (two tail)
+tau2 from chain 0.99% lower: 0.047 upper: 0.082 (two tail)
+
+6. PC zmax = 50, pliklite + lowl (TT) + lowE
+
+pl18_pc_zmax50_pliklite_post: total tau from chains = 0.0582 + 0.0077 - 0.0088 (68p)
+pl18_pc_zmax50_pliklite_post: total tau from taumj = 0.0582 + 0.0077 - 0.0088 (68p)
+Planck PC (M. Millea, biased low) =  0.0487 + 0.0038 - 0.0081
+
+tau2 from chain 0.68% lower: 0.049 upper: 0.066 (two tail)
+tau2 from chain 0.95% lower: 0.042 upper: 0.075 (two tail)
+tau2 from chain 0.99% lower: 0.037 upper: 0.081 (two tail)
