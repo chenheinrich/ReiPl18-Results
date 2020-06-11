@@ -1,0 +1,4 @@
+Marginalized limits: 0.68; 0.95; 0.99
+
+parameter   mean           sddev          lower1         upper1         limit1 lower2         upper2         limit2 lower3         upper3         limit3 
+tau         0.5880064E-01  0.7427394E-02  0.5269744E-01  0.6549497E-01  two    0.4553576E-01  0.7245659E-01  two    0.1000000E-01  0.7537483E-01  >       \tau

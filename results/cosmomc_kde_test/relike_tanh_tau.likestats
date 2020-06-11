@@ -1,0 +1,7 @@
+ Best fit sample -log(Like) =    1.31413700000000     
+ Ln(mean 1/like) =    3.02197130516969     
+ mean(-Ln(like)) =    1.87042118097328     
+ -Ln(mean like)  =    1.66695202326397     
+
+param  bestfit        lower1         upper1         lower2         upper2
+    1  0.5831643E-01  0.5221866E-01  0.6507553E-01  0.4600946E-01  0.7313350E-01   \tau
