@@ -1,0 +1,4 @@
+plik full + lowE: Gotten tau = 0.0542 + 0.0075 - 0.0075 (68p)
+expect tau = 0.0544 + 0.0070 - 0.0081
+plik lite + srollv2: Gotten tau = 0.0591 + 0.0055 - 0.0067 (68p)
+expect tau = 0.0591 + 0.0056 - 0.0068
