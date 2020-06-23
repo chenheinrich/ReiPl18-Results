@@ -25,14 +25,8 @@
 \usepackage{float}
 \restylefloat{table}
 
-\newcommand{\Omegamzero}{\Omega_{{\rm m,0}}}
-\newcommand{\Rbar}{$\bar{R}$}
-\newcommand{\lsc}{\mathcal{L}}
-\newcommand{\rhom}{\rho_{\rm m}}
-\newcommand{\Mpch}{\mbox{Mpc}/h}
-\newcommand{\iMpch}{h/\mbox{Mpc}}
-\newcommand{\Msun}{M_\odot}
-\newcommand{\Mv}{M_{\rm v}}
+\newcommand{\tauhi}{$\tau_{\rm hi}\,$}
+\newcommand{\taulo}{$\tau_{\rm lo}\,$}
 
 \newcommand{\refsec}[1]{section~\ref{sec:#1}}
 \newcommand{\refeq}[1]{Eq.~(\ref{eq:#1})}
@@ -84,22 +78,9 @@ pdfsubject={}
 	
 \title{Reionization Planck 2018 Notes}
 
-\author{Chen Heinrich}\email{chenhe@caltech.edu}
-\affiliation{$Jet\ Propulsion\ Laboratory,\ California\ Institute\ of\ Technology,\ Pasadena,\ California\ 91109,\ USA$}
-\affiliation{$California\ Institute\ of\ Technology,\ Pasadena,\ California\ 91109,\ USA$}
-
+\author{Chen Heinrich}
 \author{Wayne Hu}
-\affiliation{Kavli Institute for Cosmological Physics, Enrico Fermi Institute, University of Chicago, Chicago Illinois 60637}
-\affiliation{Department of Astronomy \& Astrophysics,
- University of Chicago, Illinois 60637}
-
-\begin{abstract}
-
-...
-
-\end{abstract}
-\pacs{}
-
+ 
 \maketitle
 
 \section{Introduction}
@@ -113,17 +94,49 @@ List of tests:\\
         \begin{enumerate}
             \item {PC zmax = 30}
             \item {PC zmax = 50}
-            \item{tanh tau}
-            \item{two-parameter model with taulo and tauhi}
+            \item{Tanh model}
+            \item{Two-parameter model with \taulo and \tauhi}
         \end{enumerate}
     }
-    \item{best tests
+    \item{Best-fit tests
         \begin{enumerate}
-            \item {from tanh highz 2-parameter model we found that for tau hi $>$ 0.02, we get ML is tau hi = 0.0206, tau lo = 0.0414 corresponding to zre = 6.29 and xe hi = 0.0748. This model has a -loglike = 499.5458 against the full ML 498.2425 which gives a difference of 2.6 in chi2. (full ML has tau lo = 0.0543, tau hi = 0.00542 corresponding to zre = 7.68 and xe hi = 0.0214. }
-            \item{Using above informatiion, we fixed tau hi = 0.02, and ran a best-fit searching for best tau lo and found tau lo = 0.045 (c.f. 0.0414 from chains), together with the fixed tau hi = 0.02, corresponds to zre = 6.67 and xe min = 0.073. The likelihood here is 499.2914, a difference of 2.1 (instead of 2.6) in chi2.}
+            \item {From the chains for the 2-parameter model, we found that if we restrict \tauhi $> 0.02$, we get that the ML model is: 
+            \begin{itemize}
+                \item {\tauhi = 0.0206}
+                \item {\taulo = 0.0414} 
+                \item {$z_{\rm re}$ = 6.29} 
+                \item {$x_{e, \mathrm{hi}}$ = 0.0748}
+                \item {-loglike = 499.5458} 
+            \end{itemize}
+            There is a difference of $\Delta \chi^2 = 2.6$, compared against the ML model from the full chain:
+            \begin{itemize}
+                \item {\tauhi = 0.00542}
+                \item {\taulo = 0.0543} 
+                \item {$z_{\rm re}$ = 7.68} 
+                \item {$x_{e, \mathrm{hi}}$ = 0.0214}
+                \item {-loglike = 498.2425} 
+            \end{itemize}
+             }
+            \item{Using above information, we ran a best-fit search fixing \tauhi = 0.02 to find the best-fit model:
+            \begin{itemize}
+                \item {\tauhi = 0.02 (fixed)}
+                \item {\taulo = 0.045 (c.f. 0.0414 from chains)} 
+                \item {$z_{\rm re}$ = 6.67} 
+                \item {$x_{e, \mathrm{hi}}$ = 0.073}
+                \item {-loglike = 499.2914} 
+            \end{itemize} 
+            giving a difference of $\Delta \chi^2 = 2.1$  (c.f. 2.6 above).}\\
+            Note: I need to update the plots with xe(z) to this model.
+            \item{We also ran a chain fixing \taulo = 0.04, but I forgot what this was for ...}
         \end{enumerate}
         }
-
+        
+    \item {KDE tests
+        \begin{enumerate}
+            \item {The tanh model: direct MCMC, vs python (f = 0.10, 0.12, 0.14) and fortran version (0.14) - coming up}
+            \item {The 2-parameter model: direct MCMC vs fortran version (f = 0.10, 0.12, 0.14) - coming up}
+        \end{enumerate}
+    }
     
 \end{itemize} 
 
@@ -168,13 +181,16 @@ List of tests:\\
 \end{figure}
 
 
-
-
-
+ \begin{figure}
+\includegraphics[width=0.65\textwidth]{results/cosmomc_runs/two_parameter_model/tauhi_taulo_chains/pl18_tanh_highz_test2_run1_2D.pdf}
+\caption{Direct MCMC chains of the two-parameter model with \tauhi and \taulo: 2D plot of \tauhi and \taulo.
+}
+\label{fig:two_parameter_model_2D_plot}
+\end{figure}
 
  \begin{figure}
 \includegraphics[width=0.65\textwidth]{   results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_tanh_post_pliklite_srollv2_with_added_two_parameter_ML_xe_full.pdf}
-\caption{PC zmax = 30 vs tanh chains with plik lite and srollv2, with ML model from two-parameter model for tau hi restricted to $>$ 0.02 (ML model: tau hi = 0.0206, tau lo = 0.0414).
+\caption{PC zmax = 30 vs tanh chains with plik lite and srollv2, with ML model from two-parameter model for \tauhi restricted to $>$ 0.02 (ML model: \tauhi = 0.0206, \taulo = 0.0414).
 }
 \label{fig:two_parameter_model_ML}
 \end{figure}
@@ -186,11 +202,9 @@ List of tests:\\
 \label{fig:}
 \end{figure}
 
- \begin{figure}
-\includegraphics[width=0.65\textwidth]{    results/cosmomc_runs/two_parameter_model/plot_1D_tau_hi_pl18_tanh_highz_fixed_taulo_test2_run1.pdf
-}
-\caption{
-}
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{   results/cosmomc_runs/two_parameter_model/plot_1D_tau_hi_pl18_tanh_highz_fixed_taulo_test2_run1.pdf}
+\caption{Chains for two-parameter model with fixed \taulo = 0.04: 1D distribution of \tauhi (not sure what this is for anymore...).}
 \label{fig:}
 \end{figure}
 
