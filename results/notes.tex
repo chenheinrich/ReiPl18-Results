@@ -115,9 +115,15 @@ List of tests:\\
             \item {PC zmax = 50}
             \item{tanh tau}
             \item{tanh highz model}
-            \item{tanh highz model: fixed tau_lo, MCMC tau_hi ?}
         \end{enumerate}
     }
+    \item{best tests
+        \begin{enumerate}
+            \item {from tanh highz 2-parameter model we found that for tau hi > 0.02, we get ML is tau hi = 0.0206, tau lo = 0.0414 corresponding to zre = 6.29 and xe hi = 0.0748. This model has a -loglike = 499.5458 against the full ML 498.2425 which gives a difference of 2.6 in chi2. (full ML has tau lo = 0.0543, tau hi = 0.00542 corresponding to zre = 7.68 and xe hi = 0.0214. }
+            \item{Using above informatiion, we fixed tau hi = 0.02, and ran a best-fit searching for best tau lo and found tau lo = 0.045 (c.f. 0.0414 from chains), together with the fixed tau hi = 0.02, corresponds to zre = 6.67 and xe min = 0.073. The likelihood here is 499.2914, a difference of 2.1 (instead of 2.6) in chi2.}
+        \end{enumerate}
+        }
+
     
     \item {Direct MCMC chains}
     
@@ -125,10 +131,32 @@ List of tests:\\
 
 
 
+\begin{figure}
+\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_post_0930_and_pl18_pc_zmax30_pliklite_srollv2_0930.pdf}
+\caption{Comparing zmax = 50 PC chains using Planck 2018 original lowE vs srollv2 likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE vs plik\_lite\_TTTEEE + lowl + sroll2\_EE).
+}
+\label{fig:}
+\end{figure}
 
-\begin{figure}[t]
+\begin{figure}
 \includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax50/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax50_pliklite_post_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
-\caption{Comparing zmax = 50 PC chains using Planck 2018 original lowE vs srollv2 likelihood.
+\caption{Comparing zmax = 50 PC chains using Planck 2018 original lowE vs srollv2 likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE vs plik\_lite\_TTTEEE + lowl + sroll2\_EE).
+}
+\label{fig:}
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_post_0930_and_pl18_pc_zmax50_pliklite_post.pdf}
+\caption{Comparing zmax = 30 and 50 PC chains using Planck 2018 original lowE likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE). Note that the zmax = 30 uses 5 PCs, whereas the zmax = 50 chains uses 7 PCs.
+}
+\label{fig:tau_gtz_zmax_30_vs_50_simall_EE}
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
+\caption{Same as Fig.~\ref{fig:tau_gtz_zmax_30_vs_50_simall_EE}, but for the srollv2 likelihood (plik\_lite\_TTTEEE + lowl + sroll2\_EE).
 }
 \label{fig:}
 \end{figure}
