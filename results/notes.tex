@@ -1,4 +1,4 @@
-\documentclass[prd,twocolumn,amsmath,amssymb,floatfix,superscriptaddress,nofootinbib]{revtex4-1}
+\documentclass[prd,amsmath,amssymb,floatfix,superscriptaddress,nofootinbib]{revtex4-1}
 \usepackage{bm}
 \usepackage{amsmath}
 \usepackage{epsfig}
@@ -82,7 +82,7 @@ pdfsubject={}
 
 \begin{document}
 	
-\title{Reionization Planck 2018 ...}
+\title{Reionization Planck 2018 Notes}
 
 \author{Chen Heinrich}\email{chenhe@caltech.edu}
 \affiliation{$Jet\ Propulsion\ Laboratory,\ California\ Institute\ of\ Technology,\ Pasadena,\ California\ 91109,\ USA$}
@@ -114,40 +114,38 @@ List of tests:\\
             \item {PC zmax = 30}
             \item {PC zmax = 50}
             \item{tanh tau}
-            \item{tanh highz model}
+            \item{two-parameter model with taulo and tauhi}
         \end{enumerate}
     }
     \item{best tests
         \begin{enumerate}
-            \item {from tanh highz 2-parameter model we found that for tau hi > 0.02, we get ML is tau hi = 0.0206, tau lo = 0.0414 corresponding to zre = 6.29 and xe hi = 0.0748. This model has a -loglike = 499.5458 against the full ML 498.2425 which gives a difference of 2.6 in chi2. (full ML has tau lo = 0.0543, tau hi = 0.00542 corresponding to zre = 7.68 and xe hi = 0.0214. }
+            \item {from tanh highz 2-parameter model we found that for tau hi $>$ 0.02, we get ML is tau hi = 0.0206, tau lo = 0.0414 corresponding to zre = 6.29 and xe hi = 0.0748. This model has a -loglike = 499.5458 against the full ML 498.2425 which gives a difference of 2.6 in chi2. (full ML has tau lo = 0.0543, tau hi = 0.00542 corresponding to zre = 7.68 and xe hi = 0.0214. }
             \item{Using above informatiion, we fixed tau hi = 0.02, and ran a best-fit searching for best tau lo and found tau lo = 0.045 (c.f. 0.0414 from chains), together with the fixed tau hi = 0.02, corresponds to zre = 6.67 and xe min = 0.073. The likelihood here is 499.2914, a difference of 2.1 (instead of 2.6) in chi2.}
         \end{enumerate}
         }
 
-    
-    \item {Direct MCMC chains}
     
 \end{itemize} 
 
 
 
 \begin{figure}
-\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_post_0930_and_pl18_pc_zmax30_pliklite_srollv2_0930.pdf}
-\caption{Comparing zmax = 50 PC chains using Planck 2018 original lowE vs srollv2 likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE vs plik\_lite\_TTTEEE + lowl + sroll2\_EE).
+\includegraphics[width=0.65\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_post_0930_and_pl18_pc_zmax30_pliklite_srollv2_0930.pdf}
+\caption{PC chains for zmax = 30. Planck 2018 original lowE vs srollv2 likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE vs plik\_lite\_TTTEEE + lowl + sroll2\_EE).
 }
 \label{fig:}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax50/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax50_pliklite_post_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
-\caption{Comparing zmax = 50 PC chains using Planck 2018 original lowE vs srollv2 likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE vs plik\_lite\_TTTEEE + lowl + sroll2\_EE).
+\includegraphics[width=0.65\textwidth]{results/cosmomc_runs/pl18_plots_zmax50/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax50_pliklite_post_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
+\caption{PC chains for zmax = 50. Planck 2018 original lowE vs srollv2 likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE vs plik\_lite\_TTTEEE + lowl + sroll2\_EE).
 }
 \label{fig:}
 \end{figure}
 
 
 \begin{figure}
-\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_post_0930_and_pl18_pc_zmax50_pliklite_post.pdf}
+\includegraphics[width=0.65\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_post_0930_and_pl18_pc_zmax50_pliklite_post.pdf}
 \caption{Comparing zmax = 30 and 50 PC chains using Planck 2018 original lowE likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE). Note that the zmax = 30 uses 5 PCs, whereas the zmax = 50 chains uses 7 PCs.
 }
 \label{fig:tau_gtz_zmax_30_vs_50_simall_EE}
@@ -155,26 +153,58 @@ List of tests:\\
 
 
 \begin{figure}
-\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
+\includegraphics[width=0.65\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
 \caption{Same as Fig.~\ref{fig:tau_gtz_zmax_30_vs_50_simall_EE}, but for the srollv2 likelihood (plik\_lite\_TTTEEE + lowl + sroll2\_EE).
 }
 \label{fig:}
 \end{figure}
 
-\begin{figure}[t]
-\includegraphics[width=0.40\textwidth]{../paper/plots/plot_tau_gtz.pdf}
-\caption{...
+%Optional
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_plikfull_and_pl18_tanh_post_plikfull.pdf}
+\caption{PC zmax = 30 vs tanh chains with plik\_full\_TTTEEE for the high-l likelihood.
+}
+\label{fig:}
+\end{figure}
+
+
+
+
+
+
+ \begin{figure}
+\includegraphics[width=0.65\textwidth]{   results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_tanh_post_pliklite_srollv2_with_added_two_parameter_ML_xe_full.pdf}
+\caption{PC zmax = 30 vs tanh chains with plik lite and srollv2, with ML model from two-parameter model for tau hi restricted to $>$ 0.02 (ML model: tau hi = 0.0206, tau lo = 0.0414).
+}
+\label{fig:two_parameter_model_ML}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{  results/cosmomc_runs/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_tanh_post_pliklite_srollv2_with_added_two_parameter_ML_PC_proj.pdf}
+\caption{Same as Fig.~\ref{fig:two_parameter_model_ML} except the blue curve is a PC projection instead of the full xe(z) of the model.
+}
+\label{fig:}
+\end{figure}
+
+ \begin{figure}
+\includegraphics[width=0.65\textwidth]{    results/cosmomc_runs/two_parameter_model/plot_1D_tau_hi_pl18_tanh_highz_fixed_taulo_test2_run1.pdf
+}
+\caption{
 }
 \label{fig:}
 \end{figure}
 
 
 \begin{figure}
-\includegraphics[width=0.40\textwidth]{python_kde_test/pl18_pc_zmax30_pliklite_srollv2_1015_tau_posterior_fraccov_1p0_burnin_10000_yes_norm_gaussian0p1_0p12_0p14.pdf}
-\caption{...
+\includegraphics[width=0.65\textwidth]{python_kde_test/pl18_pc_zmax30_pliklite_srollv2_1015_tau_posterior_fraccov_1p0_burnin_10000_yes_norm_gaussian0p1_0p12_0p14.pdf}
+\caption{KDE tests in python for the tanh model with various f = 0.1, 0.12, 0.14. It is probably safest to use any of these, so given the smaller f the better, f = 0.1 is probably the best choice here.
 }
 \label{fig:}
 \end{figure}
+
+
+
+
 
 \bibliography{rei.bib}
 
