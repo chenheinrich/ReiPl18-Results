@@ -108,9 +108,30 @@ pdfsubject={}
 Trying to collect all of our tests here.\\
 
 List of tests:\\
-- 
+\begin{itemize}
+    \item {Direct MCMC chains
+        \begin{enumerate}
+            \item {PC zmax = 30}
+            \item {PC zmax = 50}
+            \item{tanh tau}
+            \item{tanh highz model}
+            \item{tanh highz model: fixed tau_lo, MCMC tau_hi ?}
+        \end{enumerate}
+    }
+    
+    \item {Direct MCMC chains}
+    
+\end{itemize} 
 
 
+
+
+\begin{figure}[t]
+\includegraphics[width=0.40\textwidth]{results/cosmomc_runs/pl18_plots_zmax50/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax50_pliklite_post_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
+\caption{Comparing zmax = 50 PC chains using Planck 2018 original lowE vs srollv2 likelihood.
+}
+\label{fig:}
+\end{figure}
 
 \begin{figure}[t]
 \includegraphics[width=0.40\textwidth]{../paper/plots/plot_tau_gtz.pdf}
