@@ -220,18 +220,48 @@ List of tests:\\
 \includegraphics[width=0.65\textwidth]{cosmomc_kde/direct_mcmc_vs_python_kde_and_cosmomc_kde_tanh_tau.png}
 \caption{LATEST (to be debugged) -- Added cosmomc KDE version of tau posterior computed with f = 0.14, against python versions with f = 0.1, 0.12, 0.14. They do not agree ... (Note: need to make sure python version had the same covariance matrix, and length of chain ... should probably rerun python version actually.)
 }
-\label{fig:}s
+\label{fig:}
 \end{figure}
 
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_1D_direct_vs_fortran_and_python_kde.png}
+\caption{DEBUGGING - updated the KDE tanh results to have tanh dz = 0.5. Also added in faint blue lines Gaussian and convolved Gaussian with $\sigma \rightarrow \sigma$.
+}
+\label{fig:}
+\end{figure}
 
 \begin{figure}
-\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_tri.png}
-\caption{LATEST (to be debugged) -- 2-parameter model 2D plot from cosmomc KDE with f = 0.14 vs direct MCMC. They don't agree for low \taulo, in particular there is a strip around \tauhi = 0.02 that seems to have large likelihood (Note: perhaps I should pick a single point in that region to check that PC projection works fine and see if it is something with the PC chain when doing the KDE ... Also, there is a \taulo lower bound = 0.02 used just like for the direct MCMC, but giving getdist that limit doesn't help. We need this lower bound because otherwise the conversion \taulo, \tauhi to xemin and zre doesn't converge.)
+\includegraphics[width=0.65\textwidth]{ cosmomc_kde/pl18_relike_tanh_tau_dz0p5_1D_direct_vs_fortran_kde.png}
+\caption{DEBUGGING - tanh dz = 0.5 for all curves. Same as above, but only keeping some curves for clarity.)
 }
 \label{fig:}
 \end{figure}
 
 
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_tri.png}
+\caption{version 1 (has bug that \taulo is not limited to where PCs can model z>6): 2-parameter model 2D plot from cosmomc KDE with f = 0.14 vs direct MCMC.
+}
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_taulo_prior_0p0415_tri.png}
+\caption{version 2 (added prior \taulo $\leq 0.0415$ for the KDE version, f = 0.14). Direct MCMC chain with the same prior is still running.
+}
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_and_f0p20_taulo_prior_0p0415_tri.png}
+\caption{version 3, added a curve with f = 0.20 (blue).
+}
+\label{fig:}
+\end{figure}
+
+
+
+ 
 \bibliography{rei.bib}
 
 \end{document}
