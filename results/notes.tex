@@ -226,12 +226,28 @@ List of tests:\\
 
 \begin{figure}
 \includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_tri.png}
-\caption{LATEST (to be debugged) -- 2-parameter model 2D plot from cosmomc KDE with f = 0.14 vs direct MCMC. They don't agree for low \taulo, in particular there is a strip around \tauhi = 0.02 that seems to have large likelihood (Note: perhaps I should pick a single point in that region to check that PC projection works fine and see if it is something with the PC chain when doing the KDE ... Also, there is a \taulo lower bound = 0.02 used just like for the direct MCMC, but giving getdist that limit doesn't help. We need this lower bound because otherwise the conversion \taulo, \tauhi to xemin and zre doesn't converge.)
+\caption{version 1 (has bug that \taulo is not limited to where PCs can model z>6): 2-parameter model 2D plot from cosmomc KDE with f = 0.14 vs direct MCMC.
+}
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_taulo_prior_0p0415_tri.png}
+\caption{version 2 (added prior \taulo $\leq 0.0415$ for the KDE version, f = 0.14). Direct MCMC chain with the same prior is still running.
+}
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_and_f0p20_taulo_prior_0p0415_tri.png}
+\caption{version 3, added a curve with f = 0.20 (blue).
 }
 \label{fig:}
 \end{figure}
 
 
+
+ 
 \bibliography{rei.bib}
 
 \end{document}
