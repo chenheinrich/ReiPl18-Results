@@ -225,7 +225,7 @@ List of tests:\\
 
 \begin{figure}
 \includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_1D_direct_vs_fortran_and_python_kde.png}
-\caption{DEBUGGING - updated the KDE tanh results to have tanh dz = 0.5. Also added in faint blue lines Gaussian and convolved Gaussian with $\sigma \rightarrow \sigma$.
+\caption{DEBUGGING - updated the KDE tanh results to have tanh dz = 0.5. Also added in faint blue lines Gaussian and convolved Gaussian with $\sigma \rightarrow \sigma \sqrt(1+f)$.
 }
 \label{fig:}
 \end{figure}
@@ -247,7 +247,16 @@ List of tests:\\
 
 \begin{figure}
 \includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_1D_direct_vs_fortran_and_python_kde_with_grid_test.png}
-\caption{DEBUGGING - tanh dz = 0.5 for all curves. ...)
+\caption{NEW - added blue circles which are evaluating the Fortran KDE code on a grid of 100 values of $\tau$. This shows that the extra smoothing in the red curve (Fotran MCMC code) vs green (python grid evaluations) are \textbf{likely due to the smoothing used in getdist to make the red curve}.
+}
+\label{fig:}
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_1D_direct_vs_fortran_vs_mock_gaussian_fp10_fp14.png
+}
+\caption{NEW - comparing f = 0.10 and 0.14 in python KDE (latest version) against an example of gaussian smoothing with 0.10, 0.14 on a symmetric Gaussian function.
 }
 \label{fig:}
 \end{figure}
