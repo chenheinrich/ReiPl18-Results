@@ -137,6 +137,13 @@ List of tests:\\
             \item {The 2-parameter model: direct MCMC vs fortran version (f = 0.10, 0.12, 0.14) - coming up}
         \end{enumerate}
     }
+        
+    \item {Preparation for manuscript
+        \begin{enumerate}
+            \item {Testing \taulo prior (\taulo $\geq 0.04$) - Figs~\ref{fig:taulo_prior_test_cl} and~\ref{fig:tau_lo_prior_test_xe}: $\chi^2 = 0.03$ for $l\in[2, 100]$ between $C_l^{EE}$ from full vs PC projected $x_e(z)$ for the model (\taulo, \tauhi) = (0.04, 0.02).}
+            \item {Plots to remake for paper: 1) }
+        \end{enumerate}
+    }
     
 \end{itemize} 
 
@@ -282,36 +289,42 @@ List of tests:\\
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.65\textwidth]{\begin{figure}
 \includegraphics[width=0.65\textwidth]{cosmomc_kde/pl18_tanh_highz_test2_run1_vs_relike_tanh_highz_test1_run1_f0p14_and_f0p20_taulo_prior_0p0415_tri.png}
 \label{fig:}
-\end{figure}}
 \caption{NEW: Direct MCMC without prior (gray) vs with prior (red) vs KDE fortran with same prior (\taulo \geq 0.0415) and $f = 0.14$.
 } 
-\label{fig:}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.65\textwidth]{\begin{figure}
-\includegraphics[width=0.65\textwidth]{cosmomc_kde/taulo_prior_test/plot_cls_taulo_0p04_tauhi_0p02.png}
+\includegraphics[width=0.65\textwidth]{getdist_smoothing_test/pl18_relike_tanh_tau_dz0p5_1D_gauss_smoothed_tanh_std_0p0067.png}
 \label{fig:}
-\end{figure}}
-\caption{Testing \taulo $\geq$ 0.04 as \taulo prior is OK, by calculating $\chi^2$ between $C_l$ from full $x_e(z)$ vs PC decomposition of the model (\taulo, \tauhi) = (0.04, 0.02). The $\chi^2 = \sum_{2}^{l_{\rm max}} (\Delta C_l^{EE})^2 / \mathrm{Cov}_l) = 0.03$ where $\mathrm{Cov}_l = 2 (C_l^{EE})^2/(2l+1) $. 
+\caption{Gaussian convolving the direct MCMC 1D distribution by hand with f = 0.14 where the original standard deviation is set to 0.0067. This corresponds to the right side of asymmetric distribution from the original MCMC $\tau = 0.0591 + 0.0055 - 0.0067$.
+} 
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{getdist_smoothing_test/pl18_relike_tanh_tau_dz0p5_1D_gauss_smoothed_tanh_std_0p0055.png}
+\label{fig:}
+\caption{Gaussian convolving the direct MCMC 1D distribution by hand with f = 0.14 where the original standard deviation is set to 0.0055. This corresponds to the left side of asymmetric distribution from the original MCMC $\tau = 0.0591 + 0.0055 - 0.0067$.
+} 
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/taulo_prior_test/plot_cls_taulo_0p04_tauhi_0p02.png}
+\caption{Testing \taulo prior -- testing that \taulo $\geq$ 0.04 as \taulo prior is OK, by calculating $\chi^2$ between $C_l$ from full $x_e(z)$ vs PC decomposition of the model (\taulo, \tauhi) = (0.04, 0.02). The $\chi^2 = \sum_{2}^{l_{\rm max}} (\Delta C_l^{EE})^2 / \mathrm{Cov}_l = 0.03$ where $\mathrm{Cov}_l = 2 (C_l^{EE})^2/(2l+1)$. 
 } 
 \label{fig:taulo_prior_test_cl}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.65\textwidth]{\begin{figure}
-\includegraphics[width=0.65\textwidth]{cosmomc_kde/taulo_prior_test/plot_cls_taulo_0p04_tauhi_0p02.png}
-\label{fig:}
-\end{figure}}
-\caption{Full $x_e(z)$ of the model (\taulo, \tauhi) = (0.04, 0.02) shown in the Fig.~\ref{taulo_prior_test_cl}. 
-} 
-\label{fig:taulo_prior_test_xez}
+\includegraphics[width=0.65\textwidth]{cosmomc_kde/taulo_prior_test/plot_xez_taulo_0p04_tauhi_0p02.png}
+\caption{Testing \taulo prior -- Full $x_e(z)$ of the model (\taulo, \tauhi) = (0.04, 0.02) shown in the Fig.~\ref{fig:taulo_prior_test_cl}. 
+}
+\label{fig:tau_lo_prior_test_xe}
 \end{figure}
 
- 
+
 \bibliography{rei.bib}
 
 \end{document}
