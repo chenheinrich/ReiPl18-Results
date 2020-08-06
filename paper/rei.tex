@@ -103,30 +103,74 @@ pdfsubject={}
 \maketitle
 
 
-\section{Outline (in progress)}
-
-\begin{enumerate}
-	\item{Intro}
-	\item{Background}
-		\begin{itemize}
-			\item{Reionization Principal Components}	
-			\item{Kernel Density Estimate}
-		\end{itemize}
-	\item{Planck 2018 PC results:\\
-		- can discuss discrepancy here on high-redshift tau($>$15) constraints. }
-	\item{Effective Likelihood}
-		\begin{itemize}
-			\item{Code Description}
-			\item{Examples - one and two parameter models}
-		\end{itemize}
-	\item{Discussion}
-		
-\end{enumerate}
 
 
 \section{Introduction}
 \label{sec:intro}
 
+\section{Background}
+
+\subsection{Reionization Principal Components}
+\subsection{Effective Likelihood from PCs -- Kernel Density Estimate}
+
+\section{Planck 2018 PC Results}
+\label{sec:results}
+
+\subsection{Constraints on Principle Components}
+
+
+\begin{figure}
+\includegraphics[width=0.48\textwidth]{results/pc_results/plot_mj_triangle_pl18_pc_zmax30_pliklite_srollv2_vs_pl18_pc_zmax30_pliklite.pdf}
+\caption{PC chains for zmax = 30 using Planck 2018 srollv2 likelihood vs Planck 2015.
+}
+\label{fig:plot_mjs}
+\end{figure}
+
+[Plot: Insert m1-m2 plot about priors]
+
+\begin{figure}
+\includegraphics[width=0.48\textwidth]{results/pc_results/plot_m1_m2_pl18_pc_zmax30_pliklite_srollv2_vs_pl18_pc_zmax30_pliklite_wTauTrajectory.pdf}
+\caption{m1-m2 plane for zmax = 30 using Planck 2018 srollv2 likelihood vs Planck 2015.
+}
+\label{fig:plot_m1m2}
+\end{figure}
+
+
+
+[Plot: Insert m1-m2 plot to show Gaussian covariance does not work]
+
+[Text: recap our appendix from Planck 2015]
+
+[Text: compare with Planck 2015 our PC results]
+
+[Text: statement that zmax = 50 and zmax = 30 are consistent, there is no evidence for high-redshift ionization for $z>30$.]
+
+[Text: make a point that tanh misses high-z again, compare to PCs using the tau($>z$) plot tanh vs PCs.]
+
+[Table: insert table of mean and covariance matrix for the PC components?]
+
+
+\begin{figure}
+\includegraphics[width=0.48\textwidth]{results/direct_mcmc/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_post_0930_and_pl18_pc_zmax30_pliklite_srollv2_0930.pdf}
+\caption{PC chains for zmax = 30. Planck 2018 original lowE vs srollv2 likelihood (plik\_lite\_TTTEEE + lowl + simall\_EE vs plik\_lite\_TTTEEE + lowl + sroll2\_EE).
+}
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.48\textwidth]{results/direct_mcmc/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
+\caption{Comparing zmax = 30 and 50 PC chains using Planck 2018 original lowE likelihood (plik\_lite\_TTTEEE + lowl + sroll2\_EE). Note that the zmax = 30 uses 5 PCs, whereas the zmax = 50 chains uses 7 PCs. .
+}
+\label{fig:}
+\end{figure}
+
+%Optional
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{results/direct_mcmc/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_plikfull_and_pl18_tanh_post_plikfull.pdf}
+\caption{PC zmax = 30 vs tanh chains with plik\_full\_TTTEEE for the high-l likelihood.
+}
+\label{fig:}
+\end{figure}
 
 
 \begin{figure}[t]
@@ -144,6 +188,85 @@ pdfsubject={}
 \label{fig:}
 \end{figure}
 
+
+\subsection{A note on priors}
+
+[Text: compare with Planck official results]
+
+[Text: comment that Planck tau(15,30) constraints are too stringent (flex knots). Compare to ours. Point out why.]
+
+[Text: compare with Planck official results, PCs (add comments on priors), FlexKnots]
+
+[*Text (maybe in another section): make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Effective Likelihood}
+\label{sec:effective_likelihood}
+
+\subsection{Code description}
+\label{sec:code}
+
+\subsection{Example 1: tanh model}
+\label{sec:example1}
+
+\subsection{Example 2: high-z model}
+\label{sec:example2}
+
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_xez_taulo_0p04_tauhi_0p02.png}
+\caption{Testing \taulo prior -- Full $x_e(z)$ of the model (\taulo, \tauhi) = (0.04, 0.02) shown in the Fig.~\ref{fig:taulo_prior_test_cl}. 
+}
+\label{fig:tau_lo_prior_test_xe}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_cls_taulo_0p04_tauhi_0p02.png}
+\caption{Testing \taulo prior -- testing that \taulo $\geq$ 0.04 as \taulo prior is OK, by calculating $\chi^2$ between $C_l$ from full $x_e(z)$ vs PC decomposition of the model (\taulo, \tauhi) = (0.04, 0.02). 
+The $\chi^2 = \sum_{2}^{l_{\rm max}} (\Delta C_l^{EE})^2 / \mathrm{Cov}_l = 0.03$ where $\mathrm{Cov}_l = 2 (C_l^{EE})^2/(2l+1)$. } 
+\label{fig:taulo_prior_test_cl}
+\end{figure}
+
+
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{results/direct_mcmc/two_parameter_model/tauhi_taulo_chains/pl18_tanh_highz_test2_run1_tri.png}
+\caption{Direct MCMC chains of the two-parameter model with \tauhi and \taulo: triangle plot of \tauhi and \taulo. The marginalized 1D constraints are \taulo = $0.0516 \pm 0.0076$, \tauhi = $0.0100 \pm   0.0066$. The ML model is \taulo = 0.0543 and \tauhi = 0.0054 corresponding to $z_{\rm re} = 7.68$ and $x_{e, \mathrm{min}} = 0.021$.
+}
+\label{fig:two_parameter_model_2D_plot}
+\end{figure}
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+
 \bibliography{rei.bib}
+
+\appendix
+
+\section{Outline (in progress)}
+
+\begin{enumerate}
+	\item{Intro}
+	\item{Background}
+		\begin{itemize}
+			\item{Reionization Principal Components}	
+			\item{Kernel Density Estimate}
+		\end{itemize}
+	\item{Planck 2018 PC results:\\
+		- can discuss discrepancy here on high-redshift tau($>$15) constraints.\\
+		- compare with our own 2015 PC results
+		- zmax = 30 vs 50}
+	\item{Effective Likelihood}
+		\begin{itemize}
+			\item{Code Description}
+			\item{Examples - one and two parameter models}
+		\end{itemize}
+	\item{Discussion}
+		
+\end{enumerate}
+
 
 \end{document}
