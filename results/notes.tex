@@ -342,7 +342,73 @@ List of tests:\\
 \label{fig:tau_lo_prior_test_xe}
 \end{figure}
 
+\begin{widetext}
+
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{results/pc_results/plot_mj_triangle_pl18_pc_zmax30_pliklite_srollv2_vs_pl18_pc_zmax30_pliklite.pdf}
+\caption{PC chains for zmax = 30 using Planck 2018 srollv2 likelihood vs Planck 2015.
+}
+\label{fig:plot_mjs}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{results/pc_results/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite.pdf}
+\caption{PC chains plane for zmax = 30 using Planck 2018 srollv2 likelihood vs Planck 2015.
+}
+\label{fig:plot_mjs_2018_vs_2015}
+\end{figure}
+
+\end{widetext}
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{results/pc_results/plot_m1_m2_pl18_pc_zmax30_pliklite_srollv2_vs_pl18_pc_zmax30_pliklite_wTauTrajectory.pdf}
+\caption{m1-m2 plane for zmax = 30 using Planck 2018 original lowE vs srollv2 likelihood.
+}
+\label{fig:plot_m1m2}
+\end{figure}
+
+Tests done for tanh high-z model:
+
+Problem:
+1) For the smaller tanh width at low z, now set to be dz = 0.015(1+z), the model with parameters taulo = 4.0, tauhi = 0.0 gives Cl = NaN while applying smoothing or using tauhi = 1e-4 gives sensible Cls. For the original fixed dz = 0.25, this was not problem.
+
+Observations and solution:
+1) It is automatically set that xemin = 0.0 if tauhi < some threshold. 
+2) xemin = 0.0 gives Cl = NaN because of precision issues.
+3) In fact, xemin < approximately 1e-18 would also give Cl = NaN.
+4) Instead of setting xemin to 0.0 for tauhi below some threshold, we let iterative search converge by itself.
+
+Additional fixes:
+1) We set xemin to sign(xemin) * 1e-7 if |xemin| < 1e-7. 
+2) We start the xemin search between -0.1 and 100 instead of 0.0 and 100, to allow for negative values of xemin to be searched. We checked that setting xemin = -1e-18 does not cause a problem.
+3) Smoothing capability is added to smooth xe(z), but this is not used for it is too slow. 
+
+The above changes are implemented in the branch chen/debug\_cl\_nan.
+
+-----
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_tanh_highz_test3_run1_vs_relike_tanh_highz_test1_run1_f0p10_taulo_prior_0p0415_0p10_0p14_0p20_tri_from_getdist_chains_smooth_scale_1D_-1_num_bins_1D_100.png}
+\caption{
+}
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
+\caption{
+}
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/plot_tanh_highz_direct_mcmc_with_taulo_priors.png}
+\caption{
+}
+\label{fig:}
+\end{figure}
 
 \bibliography{rei.bib}
 
 \end{document}
+
