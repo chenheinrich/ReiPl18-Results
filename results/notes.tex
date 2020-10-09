@@ -387,26 +387,39 @@ The above changes are implemented in the branch chen/debug\_cl\_nan.
 
 -----
 
-\begin{figure}
-\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_tanh_highz_test3_run1_vs_relike_tanh_highz_test1_run1_f0p10_taulo_prior_0p0415_0p10_0p14_0p20_tri_from_getdist_chains_smooth_scale_1D_-1_num_bins_1D_100.png}
-\caption{
-}
-\label{fig:}
-\end{figure}
 
 \begin{figure}
-\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
-\caption{
+\includegraphics[width=0.4\textwidth]{results/cosmomc_kde/taulo_prior_test/relike_tanh_highz_f0p14_taulo_prior_0p04_with_derived_parameters_zre_greater_than_6p25_tri.png}
+\caption{Illustration of the bug in the tanh high-z model, introduced before running chains w/ taulo prior 0.04 instead of 0.0415.
 }
 \label{fig:}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=0.4\textwidth]{cosmomc_kde/plot_tanh_highz_direct_mcmc_with_taulo_priors.png}
-\caption{
+\caption{Previous plot of direct MCMC w/ various \taulo priors showing that the MCMC runs look fine and inferring bug is on the KDE side of the code.
+} 
+\label{fig:}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
+\caption{After bug fix: direct MCMC ($z_{\rm re} > 6.1$) vs KDE ($z_{\rm re} > 6.1$) done by hand) everything is in good agreement! This is applying the bug fix on the latest code, i.e. w/ new definition of tanh high-z model that adopts a smaller $dz = 0.015 (1+z)$ at the low-z transition and boundary point for \taulo and \tauhi defined at $z_{\rm re} + 1 \times dz$ instead of $z_{\rm re} + 2 \times dz$ and various other minor changes (e.g. $|x_{e,\rm min}|<10^{-7}$ is sent to $x_{e,\rm min} = \mathrm{sgn}(x_{e,\rm min}) \times 10^{-7}$, $\tau$ convergence change, etc.) —  
 }
 \label{fig:}
 \end{figure}
+
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{results/cosmomc_kde/getdist_smoothing_test/pl18_tanh_highz_test3_run1_vs_relike_tanh_highz_test1_run1_f0p10_taulo_prior_0p0415_0p10_0p14_0p20_tri_from_getdist_chains_smooth_scale_1D_-1_num_bins_1D_100.png}
+\caption{Previous plot of direct MCMC vs KDE for the old tanh high-z model (less sharp transition, etc) for various f = 0.10, 0.14, 0.20. (CH: Same test to be done for the after bug fixed version shown in the previous plot.)
+}
+\label{fig:}
+\end{figure}
+
+
+
+
 
 \bibliography{rei.bib}
 
