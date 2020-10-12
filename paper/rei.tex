@@ -117,16 +117,16 @@ In fact, to extract the most information possible from this E-mode bump, Ref.~\c
 In a re-analysis of the Planck 2015 data with PCs~\cite{Heinrich:2016ojb}, a component of the high-redshift ionization that would have been missed by a simple steplike model~\cite{Heinrich:2016ojb} was uncovered. In the latest official Planck 2018 release~\cite{Aghanim:2018eyx}, the PC method was also adopted to probe ionization at high-redshift, whose significance was reduced since the Planck 2015 release, largely due to the reduction of systematics at large-scales~\cite{Aghanim:2018eyx, Heinrich:2018btc}. In addition to PCs, the FlexKnot method was employed, which is also able to capture general ionization histories by varying the number of ``knots" in redshifts and the amplitude of the ionization fraction at these knots. 
 % Planck intermediate results on reionization history: \cite{Adam:2016hgk}
 
-Since the release of the Planck 2018 official analysis, an improved likelihood for the low-$\ell$ $E$-mode polarization was publicly released in 2019. This new likelihood, called $\textsc{srollv2}$, allows for improved reionization constraints with its better foreground modeling: The error bar on the optical depth $\tau$ in the steplike model is reduced by roughly a factor of two from XX to XX. [fill in numbers]
+Since the release of the Planck 2018 official analysis, an improved likelihood for the low-$\ell$ $E$-mode polarization was publicly released in 2019. This new likelihood, called $\texttt{srollv2}$, allows for improved reionization constraints with its better foreground modeling: The error bar on the optical depth $\tau$ in the steplike model is reduced by roughly a factor of two from XX to XX. [fill in numbers]
 
-Since the Planck final release will likely be the best full-sky survey from space available to us in the next decade, it is important to extract all the information present in the data. In light of the $\textsc{srollv2}$ likelihood release, we obtain new reionization PC constraints with this latest likelihood. Enabled by the completeness property of the PCs, we also turn these constraints into an effective likelihood useful for assessing the CMB likelihood of \textit{any} reionization model out to $\zmax$ = 30, following techniques tested in Ref.~\cite{Heinrich:2016ojb}. 
+Since the Planck final release will likely be the best full-sky survey from space available to us in the next decade, it is important to extract all the information present in the data. In light of the $\texttt{srollv2}$ likelihood release, we obtain new reionization PC constraints with this latest likelihood. Enabled by the completeness property of the PCs, we also turn these constraints into an effective likelihood useful for assessing the CMB likelihood of \textit{any} reionization model out to $\zmax$ = 30, following techniques tested in Ref.~\cite{Heinrich:2016ojb}. 
 
 The code is publicly available on GitHub\footnote{[give link]}. [a bit more description here]. [comment on speed]. [comment on joint likelihood].
 
 Extending PCs to cover up to $z_{\rm max} = 50$,we verified that there is no hint of ionization beyond $z>30$ in this Planck data release. But for the high-z ionization below $z=30$, we did find a less stringent constraint on $\tau(15, 30)$, the optical depth in the redshift range 15 to 30, that is XX times less stringent than the Planck official results using Flex Knots [fill in number and make sure to say its flex knot or PC] in Ref.~\cite{Aghanim:2018eyx}. Moreover, we demonstrate that the PC results of Ref.~\cite{Aghanim:2018eyx} suffers from a logical flaw in the treatment of its priors following Ref.
 ~\cite{Millea:2018bko} and ends up penalizing lower optical depth models. [quote difference in tau(15, 30) or total tau possibly attributed to this treatment]. %We follow the appendix of Ref.~\cite{Heinrich:2018btc} for the Planck 2015 data
 
-The paper is structured as follows. We first describe in section~\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in section~\ref{sec:results}, we describe the PC results using the Planck 2018 + \textsc{srollv2} likelihood, and compare with previous results in literature. Then in section~\ref{sec:effective_likelihood}, we present the effective likelihood code, and demonstrate its fidelity with two examples, 1) the standard steplike model, and 2) a two-parameter model where a plateau of ionization at high-$z$ is added to the standard one-step model for illustration purposes. Finally, we summarize our results and conclude in section~\ref{sec:conclusion}.
+The paper is structured as follows. We first describe in section~\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in section~\ref{sec:results}, we describe the PC results using the Planck 2018 + \texttt{srollv2} likelihood, and compare with previous results in literature. Then in section~\ref{sec:effective_likelihood}, we present the effective likelihood code, and demonstrate its fidelity with two examples, 1) the standard steplike model, and 2) a two-parameter model where a plateau of ionization at high-$z$ is added to the standard one-step model for illustration purposes. Finally, we summarize our results and conclude in section~\ref{sec:conclusion}.
 
 
 
@@ -222,7 +222,7 @@ Evaluating the posterior distribution of model parameters $\bf p$ using the effe
 \begin{equation}
 P({\bf p}| {\rm data}) \propto {\cal L}_{\rm PC}\left[ {\rm data}|\mathbf{m}(\bf p) \right] P(\bf p),
 \end{equation}
-we demonstrate a successful recovery of the posterior distributions from direct MCMC analyses (using the Planck likelihood and varying all cosmological parameters) with significantly less computational time. We show these results in sections~\ref{sec:example1} and~\ref{sec:example2} for two example models: the tanh model and a two-parameter model allowing for high-redshift ionization. 
+we demonstrate a successful recovery of the posterior distributions from direct MCMC analyses (using the Planck likelihood and varying all cosmological parameters) with significantly less computational time. We show these results in sections~\ref{sec:example1} and~\ref{sec:example2} for two example models: the standard steplike model and a two-step model allowing for high-redshift ionization. 
 
 
 %Therefore, the PC-based effective likelihood allows one to easily explore different models of ionization history while providing a much faster convergence in the MCMC analysis.
@@ -239,22 +239,59 @@ we demonstrate a successful recovery of the posterior distributions from direct 
 \section{Planck 2018 PC Results}
 \label{sec:results}
 
-We now present the complete reionization constraints obtained from the Planck 2018 likelihoods using the principle component technique. 
+We now present the complete reionization constraints obtained from the Planck 2018 likelihoods using the principle components.
 
 \subsection{Constraints on Principle Components}
 
-We use the official Planck likelihoods \textsc{plik\_lite} for the high-$\ell$ $TT$, $TE$ and $EE$ as well as \textsc{lowl} for the low-$\ell$ $TT$ throughout the paper. (We have tested that our results do not change when we switch to the full version \textsc{plik full} where the foregrounds are marginalized over in the likelihood.) For the low-$\ell$ $EE$, we use the third-party released \textsc{srollv2} likelihood for our official result. Compared to the official version released by Planck \textsc{lowE}, the new \textsc{srollv2} likelihood was made with an improved foreground cleaning method [cite], and leads to a factor of two improvement in $\tau$ in the steplike model. We will compare the PC results from these likelihoods later in this section.
+We use the official Planck likelihoods [add citation] \texttt{plik\_lite} for the high-$\ell$ $TT$, $TE$ and $EE$ as well as \texttt{lowl} for the low-$\ell$ $TT$ throughout this paper. We have tested that our results do not change if in lieu of \texttt{plik\_lite} we used the full \texttt{plik\_full} likelihood in which the foreground parameters have not been marginalized over. For the low-$\ell$ $EE$ likelihood, we use the third-party released \texttt{srollv2} likelihood [add citation] in our official PC results and the effective likelihood code. In comparison with the official Planck-released \texttt{lowE} likelihood, the \texttt{srollv2} likelihood had improved foreground cleaning, which enabled a factor of XX improvement in $\tau$ just in the steplike model [cite].
 
-[I'm here.]
+In Fig.~\ref{fig:plot_mjs_2018_vs_2015}, we show the 1D posterior and 2D 68\% and 95\% confidence level contours for the 5 PC amplitudes that describe ionization models up to $\zmax=30$. The box boundaries correspond to the physicality priors shown in Eq.~\ref{eq:individualprior} and include all physical models along with some unphysical models. Results using the Planck 2018 data are shown in blue. While all five PC amplitudes are being constrained by Planck, the first two are particularly well-constrained. Contrary to the Planck 2015 results of Ref.~\cite{Heinrich:2016ojb} shown in red, the 2018 data prefers a much smaller amplitude for the first PC, which contributes positively to the total optical depth, leading to a reduced optical depth.
 
-In Fig.~\ref{fig:plot_mjs_2018_vs_2015}, we show the constraints in the $m_a-m_b$ plane of Planck 2015 vs Planck 2018. [Describe changes] [Mention Gaussian covariance]
 
-\begin{itemize}
-    \item compare with Planck 2015 our PC results; Fig.~\ref{fig:plot_mjs_2018_vs_2015} shows the PC constraints of Planck 2015 vs Planck 2018. [Describe changes] [Mention Gaussian covariance]
-    \item insert table of mean and covariance matrix for the PC components?
-    \item make a point that tanh misses high-z again, compare to PCs using the tau($>z$) plot tanh vs PCs.
-    \item statement that zmax = 50 and zmax = 30 are consistent, there is no evidence for high-redshift ionization for $z>30$.\\
+[I'm here] \\
+
+[Should save this for later? Or expand to explain more clearly, use a whole paragraph] This reduction is partly attributed to better foreground removal at large angular scales in the $E$-mode polarization data, which would mimic a high redshift ionization component [cite planck papers].
+
+Make these plots and add text:
+- mention Gaussian covariance \\
+- mention table of covariance and mean\\
+- compare in m1-m2 plane the two low-l likelihoods (and perhaps Planck 2015 vs Planck 2018)
+- make a point that tanh misses high-z again\\
+- compare to PCs using the tau($>z$) plot tanh vs PCs.\\
+- statement that zmax = 50 and zmax = 30 are consistent, there is no evidence for high-redshift ionization for $z>30$.\\
 \end{itemize}
+
+\begin{widetext}
+
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{results/pc_results/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite.pdf}
+\caption{Constraints from Planck data on the amplitudes of the five reionization principle components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend]}
+\label{fig:plot_mjs_2018_vs_2015}
+\end{figure}
+
+\end{widetext}
+
+\begin{table}[b]
+\centering
+\caption{[Placeholder, need to fill in real numbers] PC chain means $\bar m_a$, standard deviations $\sigma(m_a)$, and correlation matrix $R_{ab}$.}
+\label{tab:PC_stats}
+\begin{tabular}{|r | r r@{\hskip 0.06in}|r r r r r|}
+\hline
+		
+			  &  \multicolumn{1}{c}{$\bar m_a$} & \multicolumn{1}{c}{$\sigma(m_a)$}	 & \multicolumn{1}{|c}{$m_1$} & \multicolumn{1}{c}{$m_2$} & \multicolumn{1}{c}{$m_3$} & \multicolumn{1}{c}{$m_4$} & \multicolumn{1}{c|}{$m_5$} 
+		\\ \hline
+$m_1$ 
+	& 0.002 & 0.053 & 1.000 & 0.450 & $-$0.432 & 0.273 & $-$0.073 \\ 
+$m_2$ 
+	& $-$0.030 &  0.101 & 0.450 & 1.000 & $-$0.262 & 0.055 & 0.072 \\ 
+$m_3$ 
+	& 0.019 &  0.128 & $-$0.432 & $-$0.262 &1.000 & $-$0.417 & 0.155 \\
+$m_4$  
+	& $-$0.012 & 0.143 &  0.273 & 0.055 & $-$0.417 & 1.000 & $-$0.428 \\ 
+$m_5$ 
+	& 0.026 & 0.143 & $-$0.073 & 0.072 & 0.155 & $-$0.428 & 1.000\\ \hline
+\end{tabular}
+\end{table}
 
 
 \subsection{Comparison with Previous Results}
@@ -276,19 +313,11 @@ Recap our appendix from Planck 2015 on the issue of prior:
     \item{inversion method should not be used on future dataset, since data is more informative than prior.}
 \end{itemize}
 
-\begin{widetext}
 
-\begin{figure}
-\includegraphics[width=0.7\textwidth]{results/pc_results/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite.pdf}
-\caption{Constraints from Planck data on the amplitudes of the five reionization principle components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \textsc{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend]}
-\label{fig:plot_mjs_2018_vs_2015}
-\end{figure}
-
-\end{widetext}
 
 \begin{figure}
 \includegraphics[width=0.4\textwidth]{results/pc_results/plot_m1_m2_pl18_pc_zmax30_pliklite_srollv2_vs_pl18_pc_zmax30_pliklite_wTauTrajectory.pdf}
-\caption{The best-constrained $z_{\rm max} = 30$ PC plane, $m_1-m_2$. We compare Planck 2018 results with two different low-$\ell$ $EE$ likelihoods: the official \textsc{lowE} likelihood vs. the third-party released \textsc{srollv2} likelihood (zoomed-in from Fig.~\ref{fig:plot_mjs_2018_vs_2015}). [Comments on shift m1-m2 plane]. [TODO: Add Gaussian covariance, add legend, shrink x-axis]
+\caption{The best-constrained $z_{\rm max} = 30$ PC plane, $m_1-m_2$. We compare Planck 2018 results with two different low-$\ell$ $EE$ likelihoods: the official \texttt{lowE} likelihood vs. the third-party released \texttt{srollv2} likelihood (zoomed-in from Fig.~\ref{fig:plot_mjs_2018_vs_2015}). [Comments on shift m1-m2 plane]. [TODO: Add Gaussian covariance, add legend, shrink x-axis]
 }
 \label{fig:plot_m1m2}
 \end{figure}
