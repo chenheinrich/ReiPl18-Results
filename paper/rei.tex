@@ -208,55 +208,32 @@ Note that the original $0<x_e<x_e^{\rm max}$ condition cannot be strictly enforc
 \subsection{Effective Likelihood from PCs -- Kernel Density Estimate}
 \label{sec:KDE}
 
-The completeness property of the PCs enables us to turn PC chains obtained from a MCMC run into an effective likelihood. In the following, we briefly recap the kernel density estimate technique used here to build the likelihood and refer the readers to Ref.~\cite{Heinrich:2016ojb} for more details.
+The completeness property of the PCs enables us to turn PC chains obtained from a MCMC run into an effective likelihood. In the following, we briefly recap the kernel density estimate technique used to build this likelihood and refer the readers to Ref.~\cite{Heinrich:2016ojb} for more details.
 
-The PC chains are composed of $N_{\rm sample}$ samples of discrete values of $\mathbf{m}_i = \{m_1, \ldots, m_5\}$ along with multiplicities $w_i$ and posterior values for $i = 1$...$N_{\rm sample}$. Given any physical ionization history $x_e(z)$, we first obtain its PC representation $\mathbf{m}$ using Eq.~\ref{eq:xetommu}. Since $\mathbf{m}$ could take any continuous values, we approximate its effective likelihood with a kernel density estimate
+The PC chains are composed of $N_{\rm sample}$ samples of discrete values of $\mathbf{m}_i = \{m_1, \ldots, m_5\}$ along with multiplicities $w_i$ for $i = 1$...$N_{\rm sample}$. Given any physical ionization history $x_e(z)$, we first obtain its PC representation $\mathbf{m}$ using Eq.~\ref{eq:xetommu}. Since $\mathbf{m}$ could take any continuous value, we approximate its effective likelihood with a kernel density estimate
 \beq
 {\cal L}_{\rm PC}\left({\rm data}|\mathbf{m} \right)  = \sum_{i = 1}^{N_{\rm sample}} w_i K_f(\mathbf{m}-\mathbf{m}_i),
 \eeq
-where the overall normalization is arbitrary, and we have chosen the smoothing kernel $K_f$ to be a  multivariate Gaussian with mean zero. We take the covariance of the Gaussian to be $f\mathbf{C}$, where $\mathbf{C}$ is the $N_{\rm PC} \times N_{\rm PC}$ covariance matrix estimated from the PC chains (see Table~\ref{tab:PC_stats}) and $f$ is a fraction smaller 1.
+where the overall normalization is arbitrary, and where we have chosen the smoothing kernel $K_f$ to be a  multivariate Gaussian with mean zero and covariance $f\mathbf{C}$, where $\mathbf{C}$ is the $N_{\rm PC} \times N_{\rm PC}$ covariance matrix estimated from the PC chains (see Table~\ref{tab:PC_stats}) and $f$ is a fraction smaller than 1.
 
-[I'm here].
-For a Gaussian posterior, the effect of smoothing
-is to increase the covariance by $1+f$ or the errors by approximately $1+f/2$.   
-To minimize the amount of smoothing required to capture the behavior of models
-in the tail of the distribution like the standard tanh model, we oversample the posterior by running  the 
-chain past normal convergence requirements for a total of $N\approx 1.4 \times 10^6$ chain elements.
-In practice we choose $f=0.14$.  Note also that we employ the full chain without physicality priors since the smoothing kernel transfers information across these boundaries.
+For a Gaussian posterior, increasing the covariance by $1+f$ corresponds to increasing the standard deviation by approximately $1+f/2$. To minimize the amount of smoothing needed while still maintaining good accuracy in the tail of the distribution for any physical models, we oversample the PC distributions by running the PC chains far beyond convergence for about $N_{\sample} \approx XX \times 10^{X}$ [to fill] chain samples. For this $N_{\sample}$, a fraction of $f = 0.14$ should be sufficient. Note also that we employ PC chains without the physicality priors allowing the smoothing kernel to cross over these priors. 
 
-To illustrate and test this approach, we  use the effective likelihood to compare constraints on
-the 
-standard tanh model. In this case the model parameter is the total $\tau$ 
-given the tanh ionization history $x_e(z; \tau)$.   We can then construct the posterior probability of
-$\tau$ as usual via Bayes' theorem and the effective likelihood given $\mathbf{m}(\tau)$
+Evaluating the posterior distribution of model parameters $\bf p$ using the effective likelihood
 \begin{equation}
-P(\tau| {\rm data}) \propto {\cal L}_{\rm PC}\left[ {\rm data}|\mathbf{m}(\tau) \right] P(\tau).
+P({\bf p}| {\rm data}) \propto {\cal L}_{\rm PC}\left[ {\rm data}|\mathbf{m}(\bf p) \right] P(\bf p),
 \end{equation}
-To match the MCMC analysis of the standard tanh model we take flat priors $P(\tau)=1$.   
-For the conversion between the ionization history and $\tau$ we take the cosmological parameters
-of the ML tanh model.  
+we demonstrate a successful recovery of the posterior distributions from direct MCMC analyses (using the Planck likelihood and varying all cosmological parameters) with significantly less computational time. We show these results in sections~\ref{sec:example1} and~\ref{sec:example2} for two example models: the tanh model and a two-parameter model allowing for high-redshift ionization. 
 
-In Fig.~\ref{fig:tanh_tau_posterior}, we compare the posterior probabilities from the direct MCMC
-analysis and the effective PC likelihood.   The distributions match to much better than $1\sigma$
-in their means and widths.    This is a fairly stringent test on the method given that 
-tanh models live in the tails of the PC posterior.  
- The cutoff at low $\tau$ in the effective likelihood method
- simply reflects the $z_{\rm min}$ restriction for the PCs which assumes hydrogen ionization occurred at $z>6$ as is observationally the case.  
- 
-It is also interesting to compare these results to an even simpler effective likelihood.  In
-Fig.~\ref{fig:tanh_tau_posterior} (shaded region), we also show the result of approximating
- the $m_a$ posterior as a multivariate Gaussian with mean $\bar m_a$
- and covariance $\mathbf{C}$
- \begin{equation}
- {\cal L}_{\rm G}\left({\rm data}|\mathbf{m} \right) = \frac{ e^{-\frac{1}{2} ({\bf m}-\bar{\bf m})^T {\bf C}^{-1} ({\bf m}-\bar{\bf m}) } }{\sqrt{(2\pi)^5 | \mathbf{C}| }}
-.
- \label{eq:gaussian}
- \end{equation}
- For an extremely fast but approximate effective likelihood and for models near the peak
- of the distribution, the Gaussian approximation may suffice.
- 
-Validated on the tanh model, our effective likelihood technique allows a rapid exploration of other models without the need for
- a separate MCMC analysis.
+
+%Therefore, the PC-based effective likelihood allows one to easily explore different models of ionization history while providing a much faster convergence in the MCMC analysis.
+
+
+%In what follows, we also show a even simpler effective likelihood, which approximates the $m_a$ posterior as a multivariate Gaussian with mean $\bar{\bf m}$ and covariance $\bf C$:
+%\begin{equation}
+% {\cal L}_{\rm gauss}\left({\rm data}|\mathbf{m} \right) = \frac{ e^{-\frac{1}{2} ({\bf m}-\bar{\bf m})^T {\bf C}^{-1} ({\bf m}-\bar{\bf m}) } }{\sqrt{(2\pi)^{N_{\rm PC}} | \mathbf{C}| }}.
+% \label{eq:gaussian}
+% \end{equation}
+% This likelihood may suffice for models near the peak of the distribution, but would not be accurate for sampling less-constrained models or in the tails of distributions.
 
 
 \section{Planck 2018 PC Results}
