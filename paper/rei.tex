@@ -152,11 +152,11 @@ and
 \eeq
 We have an upper limit on $\tau(15, \zmax)$ of 
 \beq
-\tau(z, \zmax)_{\rm PC,\, \zmax=30} < XX \; (95\% \mathrm{CL})
+\tau(15, \zmax)_{\rm PC,\, \zmax=30} < XX \; (95\% \mathrm{CL})
 \eeq
 and 
 \beq
-\tau(z, \zmax)_{\rm PC,\, \zmax=50} < XX \; (95\% \mathrm{CL})
+\tau(15, \zmax)_{\rm PC,\, \zmax=50} < XX \; (95\% \mathrm{CL})
 \eeq
 
 \begin{figure}[ht]
@@ -191,14 +191,20 @@ and
 
 \subsection{Comparison with Previous Results}
 
-Outline
-\begin{itemize}
-    \item compare with Planck official results
-    \item comment that Planck tau(15,30) constraints are too stringent (flex knots). Compare to ours. Point out why.
-    \item{ Comments on priors (see below).}
-    \item (*maybe in  another section): make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.
-\end{itemize}
+The Planck collaboration has released constraints on the total optical depth $\tau$ with a steplike model parameterized by the tanh function, which has evolved from $\tau = 0.067 \pm 0.022$ (Planck 2015) to $\tau = 0.055 \pm 0.009$ (Planck 2016), then to $\tau = 0.0506 \pm 0.0086$ (Planck 2018) [cite papers]. The major improvement comes from clean-up of systematics in the High Frequency Instrument (HFI) data. 
 
+In Planck 2018 VI, using only lowE data and fixing all cosmological parameters including $A_s e^{-2\tau}$, the optical depth constraints was found to be $\tau = 0.0519^{+0.0030}_{-0.0079}$ for a steplike model, $\tau = 0.0504^{+0.0050}
+_{-0.0079}$ for the FlexKnot method and $\tau = 0.0487^{+0.0038}_{−0.0081}$ for the PC method with a different prior than that used in this paper. 
+
+They also found the upper limit on high-redshift optical depth to be: $\tau(15, 30) < 0.006$ for the FlexKnot method with a flat $\tau(15, 30)$ prior or $<0.007$ with a flat knot prior. The PC result for the upper limit was not computed. 
+
+Here we show that we find a less stringent upper limit using the PC method $\tau(15, \zmax)_{\rm PC,\, \zmax=30} < XX \; (95\% \mathrm{CL})$. [explain why FlexKnot could give more stringent results.]
+
+\subsection{A note on priors}
+
+In Ref.~\cite{Millea:2018bko} (hereafter MB18)  a concern was raised that the physicality prior we take for the PC analysis in Ref.~\cite{Heinrich:2016ojb} correspond to a particular shape of prior that is not flat in of $\tau$ and would bias the PC result. The authors also proposed a method for flattening the prior by multiplying its inverse at each point in the multidimensional PC space. They claim that the choice of the physicality prior used here and in Ref.~\cite{Heinrich:2016ojb} contributed to the a large fraction of the shift in the $\tau$ posterior between the steplike and PC method. 
+
+In Planck 2018 paper on cosmological parameters, the shift between the steplike model and the PC result in $\tau$ was attributed mostly to the reduction of HFI systematics, with subdominant contribution from priors. We therefore would like to clarify the impacts of the priors we choose and illustrate explicitly that there is no bias with this choice, whereas the flattening method proposed in MB18 is actually at risk of creating a non-flat prior and biasing results.
 
 Recap our appendix from Planck 2015 on the issue of prior:
 \begin{itemize}
@@ -210,8 +216,6 @@ Recap our appendix from Planck 2015 on the issue of prior:
 \end{itemize}
 
 
-
- 
  \begin{figure}
           \includegraphics[width=0.9\columnwidth]{paper/plots/plot_rotated_box_flat_tau_prior_fac_0p8.pdf}
           \caption
@@ -223,7 +227,7 @@ Recap our appendix from Planck 2015 on the issue of prior:
 \end{figure}
 
 
-[Plot: add plot for tau(>z) contours for the 2 parameter model vs PC; direct integration first]
+[Plot: add plot for $\tau(>z)$ contours for the 2 parameter model vs PC; direct integration first]
 
 \begin{figure}
 \includegraphics[width=0.40\textwidth]{plots/plot_tau_gtz.pdf}
@@ -240,6 +244,11 @@ Recap our appendix from Planck 2015 on the issue of prior:
 \label{fig:}
 \end{figure}
 
+
+\begin{itemize}
+    \item{Might also want to address this statement in Planck 2018 paper: ``The TANH result gives slightly higheroptical  depth  than  the  others,  which  is  primarily driven  by  the  fixed  duration  of  reionization assumed.” Is this true? Then transition to the following point}
+    \item {Make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.}
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
