@@ -126,7 +126,142 @@ The code is publicly available on GitHub\footnote{[give link]}. [a bit more desc
 Extending PCs to cover up to $z_{\rm max} = 50$,we verified that there is no hint of ionization beyond $z>30$ in this Planck data release. But for the high-z ionization below $z=30$, we did find a less stringent constraint on $\tau(15, 30)$, the optical depth in the redshift range 15 to 30, that is XX times less stringent than the Planck official results using Flex Knots [fill in number and make sure to say its flex knot or PC] in Ref.~\cite{Aghanim:2018eyx}. Moreover, we demonstrate that the PC results of Ref.~\cite{Aghanim:2018eyx} suffers from a logical flaw in the treatment of its priors following Ref.
 ~\cite{Millea:2018bko} and ends up penalizing lower optical depth models. [quote difference in tau(15, 30) or total tau possibly attributed to this treatment]. %We follow the appendix of Ref.~\cite{Heinrich:2018btc} for the Planck 2015 data
 
-The paper is structured as follows. We first describe in section~\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in section~\ref{sec:results}, we describe the PC results using the Planck 2018 + \texttt{srollv2} likelihood, and k 
+The paper is structured as follows. We first describe in section~\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in section~\ref{sec:results}, we describe the PC results using the Planck 2018 + \texttt{srollv2} likelihood, and compare with previous results in literature. Then in section~\ref{sec:effective_likelihood}, we present the effective likelihood code, and demonstrate its fidelity with two examples, 1) the standard steplike model, and 2) a two-parameter model where a plateau of ionization at high-$z$ is added to the standard one-step model for illustration purposes. Finally, we summarize our results and conclude in section~\ref{sec:conclusion}.
+\section{Background}
+\label{sec:background}
+The principal component technique for constraining reionization using the large-angle $C_\ell^{EE}$ polarization spectrum was first introduced in Ref.~\cite{Hu:2003gh}. We now briefly summarize the PC technique in section~\ref{sec:PC}, as well as the kernel density estimate technique for building the effective likelihood in section~\ref{sec:KDE}. We refer the readers to Refs.~\cite{Hu:2003gh, Mortonson:2008rx, Mortonson:2007hq, Heinrich:2018btc}[pick 1-2] and Refs.~\cite{Heinrich:2016ojb} respectively for a more complete description on these topics.
+\subsection{Reionization Principal Components}
+\label{sec:PC}
+We begin by parametrizing $x_e(z)$, the ionization fraction relative to the fully ionized hydrogen at redshift $z$, into its principal components $S_{a}(z)$ with respect to the CMB $E$-mode polarization:
+%
+\begin{equation}
+x_e(z)=\xef(z)+\sum_{a}m_{a}S_{a}(z),
+\label{eq:mmutoxe}
+\end{equation}
+%
+where $m_a$ are the PC amplitudes and $\xef(z)$ is the fiducial model. We obtain the PCs $S_{a}(z)$ as eigenfunctions of the Fisher information matrix for $x_e(z)$ in a given range $z_{\rm min}<z<z_{\rm max}$ from cosmic variance limited $C_\ell^{EE}$ measurements 
+%
+\beq
+F_{ij} = \sum_l \frac{1}{\sigma_l^2} \frac{\partial C_l^{EE}}{\partial x_e(z_i)}\frac{\partial C_l^{EE}}{\partial x_e(z_j)} = \sum_a S_a(z_i) \sigma_a^{-2} S_a(z_j),
+\eeq
+%
+where we have discretized the redshift space with $\delta z= 0.25$, and where $\sigma_a^2$ are the variances of the PCs. We have rank-ordered the PCs from low to high variance, so that for the range $z_{min} = 6$ (to be consistent with Ly$\alpha$ forest constraints, e.g. \cite{Becker:2015lua}) and $z_{\rm max} = 30$, only the first 5 components are needed to describe all the information on $x_e$ carried by $C_\ell^{EE}$ to cosmic variance limit. In the work that follows, we therefore truncate the sum at $a = 1 .. n_{\rm{PC}}$, where $n_{\rm{PC}} = 5$ for $z_{\rm max} = 30$ and $n_{\rm{PC}} = 7$ for $z_{\rm max} = 50$.
+[Maybe insert reference to a plot of all five PCs (we might refer to its shapes later)]
+Note that the $n_{\rm PC}$ PCs are a complete representation of the \textit{observable impact} of $x_e(z)$ on the $C_\ell^{EE}$, rather than the ionization history itself. In other words, 
+given any $x_e^{\rm true}(z)$, we can project it onto the $n_{\rm PC}$ PC basis through
+\begin{equation}
+m_{a}=
+  \int _{\zmin}^{\zmax} dz\, \frac{S_{a}(z) [x_e^{\rm true}(z)-\xef(z)]}{\zmax-\zmin},
+\label{eq:xetommu}
+\end{equation}
+%
+where the reconstructed $x_e(z)$ through Eq.~(\ref{eq:mmutoxe}) with truncated PCs will not reproduce the true ionization history $x_e(z) \neq x_e^{\rm true}(z)$, but rather it is the observed $C_\ell^{EE}$ that is reproduced to cosmic variance precision. We reiterate therefore, that the PC analysis is not a tool for reconstructing the ionization history from observations, but rather a forward-modeling tool which, by reducing the dimensionality of the model space to $n_{\rm PC}$, allows us to constrain all possible ionization histories between $z_{\rm min}<z<z_{\rm max}$ in a single analysis.
+[rephrase this paragraph:]
+``For the Planck data set, most of the information in the ionization history is carried by the
+first two modes and therefore relates to the amount of high vs.~low redshift optical depth. We keep all 5 PCs  for completeness in representing the observable
+impact of a given ionization history and to marginalize uncertainties that they introduce."
+We follow Ref.~\cite{Heinrich:2018btc} to compute the CMB power spectra with PCs using a modified version of CAMB\footnote{CAMB: \url{http://camb.info}}~\cite{Lewis:1999bs, Howlett:2012mh}, where the PCs were discretized at $\delta z = 0.25$, and computed at the fiducial model $x_e^{\rm fid} = 0.15$. Note that following Ref.~\cite{Heinrich:2018btc}, we have updated the $\zmax = 30$ PCs to be computed with Planck 2015 rather than WMAP best-fit parameters, which results in minor differences between the PC functions used in Ref.~\cite{Heinrich:2016ojb} and here. For $z<6$, we follow camb to assume fully ionized hydrogen and singly ionized helium and for $z\leq 3.5$~\cite{Becker:2010cu}, doubly ionized helium~\cite{Becker:2010cu} with a width  $\Delta z = 0.5$. 
+ 
+We also put constraints on the cumulative Thomson optical depth derived parameters 
+\begin{equation}
+\tau(z,z_{\rm max}) = n_{\rm H}(0) \sigma_T \int_z^{z_{\rm max}} dz \frac{x_e(z) (1+z)^{2} }{H(z)},
+\label{eq:cumtau}
+\end{equation}
+where $n_{\rm H}(0)$ is the hydrogen number density at $z=0$, $\sigma_T$ is the Thomson scattering cross-section and $H(z)$ is the Hubble parameter. Because the optical depth is more directly related to the CMB observables than the ionization history itself, it allows us to make meaningful comparisons between the PC results and those with a specific prior in model space such as those admitting a particular functional form.
+For example, the standard steplike model adopted in CAMB uses a tanh function to parameterize the hydrogen and singly ionized helium reionization
+ \begin{equation}
+x_e^{\rm true}(z) = \frac{1+f_{\rm He}}{2}\left\{  1+ \tanh\left[ \frac{y(z_*)-y(z)}{\Delta y} \right] \right\},
+ \label{eqn:tanh}
+ \end{equation}
+ where $y(z)=(1+z)^{3/2}$, $\Delta y=(3/2)(1+z)^{1/2}\Delta z$, and $\Delta z = 0.5$,
+and has an implicit prior in model space that excludes finite ionization above its transition redshift.
+ 
+The PCs on the other hand, allow for arbitrary values of $x_e(z)$ when no prior constraints on the mode amplitudes $m_a$ are imposed. When showing results, however, we do impose a physicality prior derived from the condition $0<x_e<x_e^{\rm max}$ following Ref.~\cite{Mortonson:2008rx}
+%
+\begin{equation}
+\sum_{a=1}^5 m_a^2 \le (x_e^{\rm max}-x_e^{\rm fid})^2,
+\end{equation}
+where $x_e^{\rm fid}=0.15$ and $m_a^{-} \le m_a \le m_a^{+}$ with
+\begin{equation}
+m_a^{\pm} = \int_{z_{\rm min}}^{z_{\rm max} } dz \frac{S_a(z)[x_e^{\rm max} -2 x_e^{\rm fid}(z)]
+\pm x_e^{\rm max} | S_a(z)|}{2(z_{\rm max}-z_{\rm min})}.
+\label{eq:individualprior}
+\end{equation}
+%
+Note that the original $0<x_e<x_e^{\rm max}$ condition cannot be strictly enforced here because we do not keep all but the first $n_{\rm PC}$ PCs, so these priors in $m_a$ are necessary but not sufficient conditions for physicality. They are however noninformative priors when the PC constraints are being used for evaluating the likelihood of a series of physical models, which we will now describe in the next section.
+%we employ the smoothed $x_e$ which formally has support beyond the bounds. 
+% We include this small correction by integrating
+% slightly past $z_{\rm max}$ in practice.  Here $n_{\rm H}(0)$ is the hydrogen number density at $z=0$.
+   %Consequently we smooth the ionization history in Eq.~(\ref{eq:mmutoxe}) with a 
+%Gaussian in $\mathrm{ln}(1+z)$ of width $\sigma_{\mathrm{ln}(1+z)} = 0.015$.   
+\subsection{Effective Likelihood from PCs -- Kernel Density Estimate}
+\label{sec:KDE}
+The completeness property of the PCs enables us to turn PC chains obtained from a MCMC run into an effective likelihood. In the following, we briefly recap the kernel density estimate technique used to build this likelihood and refer the readers to Ref.~\cite{Heinrich:2016ojb} for more details.
+The PC chains are composed of $N_{\rm sample}$ samples of discrete values of $\mathbf{m}_i = \{m_1, \ldots, m_5\}$ along with multiplicities $w_i$ for $i = 1$...$N_{\rm sample}$. Given any physical ionization history $x_e(z)$, we first obtain its PC representation $\mathbf{m}$ using Eq.~\ref{eq:xetommu}. Since $\mathbf{m}$ could take any continuous value, we approximate its effective likelihood with a kernel density estimate
+\beq
+{\cal L}_{\rm PC}\left({\rm data}|\mathbf{m} \right)  = \sum_{i = 1}^{N_{\rm sample}} w_i K_f(\mathbf{m}-\mathbf{m}_i),
+\eeq
+where the overall normalization is arbitrary, and where we have chosen the smoothing kernel $K_f$ to be a  multivariate Gaussian with mean zero and covariance $f\mathbf{C}$, where $\mathbf{C}$ is the $N_{\rm PC} \times N_{\rm PC}$ covariance matrix estimated from the PC chains (see Table~\ref{tab:PC_stats}) and $f$ is a fraction smaller than 1.
+For a Gaussian posterior, increasing the covariance by $1+f$ corresponds to increasing the standard deviation by approximately $1+f/2$. To minimize the amount of smoothing needed while still maintaining good accuracy in the tail of the distribution for any physical models, we oversample the PC distributions by running the PC chains far beyond convergence for about $N_{\sample} \approx XX \times 10^{X}$ [to fill] chain samples. For this $N_{\sample}$, a fraction of $f = 0.14$ should be sufficient. Note also that we employ PC chains without the physicality priors allowing the smoothing kernel to cross over these priors. 
+Evaluating the posterior distribution of model parameters $\bf p$ using the effective likelihood
+\begin{equation}
+P({\bf p}| {\rm data}) \propto {\cal L}_{\rm PC}\left[ {\rm data}|\mathbf{m}(\bf p) \right] P(\bf p),
+\end{equation}
+we demonstrate a successful recovery of the posterior distributions from direct MCMC analyses (using the Planck likelihood and varying all cosmological parameters) with significantly less computational time. We show these results in sections~\ref{sec:example1} and~\ref{sec:example2} for two example models: the standard steplike model and a two-step model allowing for high-redshift ionization. 
+%Therefore, the PC-based effective likelihood allows one to easily explore different models of ionization history while providing a much faster convergence in the MCMC analysis.
+\section{Planck 2018 PC Results}
+\label{sec:results}
+We now present the complete reionization constraints obtained from the Planck 2018 likelihoods using the principle components.
+\subsection{Constraints on Principle Components}
+We use the official Planck likelihoods [add citation] \texttt{plik\_lite} for the high-$\ell$ $TT$, $TE$ and $EE$ as well as \texttt{lowl} for the low-$\ell$ $TT$ throughout this paper. We have tested that our results do not change if in lieu of \texttt{plik\_lite} we used the full \texttt{plik\_full} likelihood in which the foreground parameters have not been marginalized over. For the low-$\ell$ $EE$ likelihood, we use the third-party released \texttt{srollv2} likelihood [add citation] in our official PC results and the effective likelihood code. In comparison with the official Planck-released \texttt{simall\_EE} likelihood, the \texttt{srollv2} likelihood had improved foreground cleaning, which enabled a factor of XX improvement in $\tau$ just in the steplike model [cite].
+\begin{figure*}
+\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015.png}
+\caption{Constraints from Planck data on the amplitudes of the five reionization principle components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend] [add tau trajectories] [add prior boundaries]}
+\label{fig:plot_mjs_2018_vs_2015}
+\end{figure*}
+%results/pc_results/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite.pdf
+In Fig.~\ref{fig:plot_mjs_2018_vs_2015}, we show the 1D posterior and 2D 68\% and 95\% confidence level contours for the 5 PC amplitudes that describe ionization models up to $\zmax=30$. The box boundaries correspond to the physicality priors shown in Eq.~\ref{eq:individualprior} and include all physical models along with some unphysical models. Results using the Planck 2018 data are shown in blue. While all five PC amplitudes are being constrained by Planck, the first two are particularly well-constrained. Contrary to the Planck 2015 results of Ref.~\cite{Heinrich:2016ojb} shown in red, the 2018 data prefers a much smaller amplitude for the first PC, leading to a reduced optical depth.
+The trajectories shown in black lines are the steplike models of instantaneous reionization allowed by the Planck 2015 data with the arrow pointing in the direction of increasing optical depth. Clearly, these steplikes models are only a part of the allowed physical model space. By construction, they miss any high-redshift ionization component by assuming neglibile ionization levels before the transition redshift $z_{\rm re}$. 
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wGaussEllipse.png}
+\caption{A zoomed-in of Fig.~\ref{fig:plot_mjs_2018_vs_2015} on the best constrained $\zmax=30$ PC plane, $m_1-m_2$ plane, comparing Planck 2018 (blue) vs 2015 results (red). The black solid line indicates the steplike models with the arrow pointing in the direction of increasing $\tau$. The dashed lines indicate the contours corresponding a Gaussian likelihood (Eq.~\ref{eq:gaussian}) using the PC covariance from the Planck 2018 chains. [add Gaussian covariance legend?] [add tau trajectories here?]
+}
+\label{fig:plot_m1m2_2015_vs_2018}
+\end{figure}
+\begin{table}[b]
+\centering
+\caption{[Placeholder, need to fill in real numbers] PC chain means $\bar m_a$, standard deviations $\sigma(m_a)$, and correlation matrix $R_{ab}$.}
+\label{tab:PC_stats}
+\begin{tabular}{|r | r r@{\hskip 0.06in}|r r r r r|}
+\hline
+		
+			  &  \multicolumn{1}{c}{$\bar m_a$} & \multicolumn{1}{c}{$\sigma(m_a)$}	 & \multicolumn{1}{|c}{$m_1$} & \multicolumn{1}{c}{$m_2$} & \multicolumn{1}{c}{$m_3$} & \multicolumn{1}{c}{$m_4$} & \multicolumn{1}{c|}{$m_5$} 
+		\\ \hline
+$m_1$ 
+	& 0.002 & 0.053 & 1.000 & 0.450 & $-$0.432 & 0.273 & $-$0.073 \\ 
+$m_2$ 
+	& $-$0.030 &  0.101 & 0.450 & 1.000 & $-$0.262 & 0.055 & 0.072 \\ 
+$m_3$ 
+	& 0.019 &  0.128 & $-$0.432 & $-$0.262 &1.000 & $-$0.417 & 0.155 \\
+$m_4$  
+	& $-$0.012 & 0.143 &  0.273 & 0.055 & $-$0.417 & 1.000 & $-$0.428 \\ 
+$m_5$ 
+	& 0.026 & 0.143 & $-$0.073 & 0.072 & 0.155 & $-$0.428 & 1.000\\ \hline
+\end{tabular}
+\end{table}
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{plots/plot_m1_m2_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.png}
+\caption{Same as Fig.~\ref{fig:plot_mjs_2018_vs_2015} but comparing the Planck 2018 results using two different low-$\ell$ $EE$ likelihoods: the official \texttt{simall\_EE} likelihood and the \texttt{srollv2} likelihood which has better foreground removal (shown throughout this work). [Comments on shift m1-m2 plane].
+}
+\label{fig:plot_m1m2_lowE_vs_srollv2}
+\end{figure}
+We show a zoomed version of the $m_1-m_2$ plane in Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, where we show beyond the physicality prior with the shaded area. [Discuss how the ellipse moved in the direction of lower tanh by going to lower m1.] 
+In Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, we also show using the PC chain covariance $\bf C$ (black dashed lines) what corresponds to an even simpler effective likelihood, which approximates the $m_a$ posterior as a multivariate Gaussian with mean $\bar{\bf m}$ and covariance $\bf C$ (also shown in Table~\ref{tab:PC_stats}:
+\begin{equation}
+ {\cal L}_{\rm gauss}\left({\rm data}|\mathbf{m} \right) = \frac{ e^{-\frac{1}{2} ({\bf m}-\bar{\bf m})^T {\bf C}^{-1} ({\bf m}-\bar{\bf m}) } }{\sqrt{(2\pi)^{N_{\rm PC}} | \mathbf{C}| }}.
+ \label{eq:gaussian}
+ \end{equation}
+ This Gaussian approximation agrees well with the actual PC constraints, unlike in the Planck 2015 data where some differences were still visible on top of good agreement. The Gaussian likelihood is even faster than the kernel density estimate, and may be used to sample well-constrained models near the peak of the PC distributions, while becoming possibly less accurate near the tails of the distributions.
 
 In Fig.~\ref{fig:plot_m1m2_lowE_vs_srollv2} we also compare the Planck 2018 results with two different low-$\ell$ $EE$ likelihoods: \texttt{simall\_EE} and \texttt{srollv2}. The \texttt{srollv2} contours are shrunk nearly directly along the lines of constant optical depth $\tau$ ($\tau_{12} = \tau_1 m_1 + \tau_2 m_2$) [wanna show this]? [Might be nice to overlay the tanh trajectories, no 1 sigma, 2 sigma business]. 
 
@@ -202,32 +337,44 @@ Here we show that we find a less stringent upper limit using the PC method $\tau
 
 \subsection{A note on priors}
 
-In Ref.~\cite{Millea:2018bko} (hereafter MB18)  a concern was raised that the physicality prior we take for the PC analysis in Ref.~\cite{Heinrich:2016ojb} correspond to a particular shape of prior that is not flat in of $\tau$ and would bias the PC result. The authors also proposed a method for flattening the prior by multiplying its inverse at each point in the multidimensional PC space. They claim that the choice of the physicality prior used here and in Ref.~\cite{Heinrich:2016ojb} contributed to the a large fraction of the shift in the $\tau$ posterior between the steplike and PC method. 
+In Ref.~\cite{Millea:2018bko} (hereafter MB18)  a concern was raised that the physicality prior we take for the PC analysis in Ref.~\cite{Heinrich:2016ojb} implies a non-flat prior in $\tau$ and introduces bias to the PC result. The authors also proposed a method to flatten the $\tau$ prior by multiplying its inverse at each point in the multidimensional PC space. They claim that adopting the physicality prior used here and in Ref.~\cite{Heinrich:2016ojb} contributed to the a large fraction of the shift in the $\tau$ posterior between the steplike and PC method in the Planck 2015 data. 
 
-In Planck 2018 paper on cosmological parameters, the shift between the steplike model and the PC result in $\tau$ was attributed mostly to the reduction of HFI systematics, with subdominant contribution from priors. We therefore would like to clarify the impacts of the priors we choose and illustrate explicitly that there is no bias with this choice, whereas the flattening method proposed in MB18 is actually at risk of creating a non-flat prior and biasing results.
+In the Planck 2018 paper on cosmological parameters, the reduction of optical depth from the PC results seen in the Planck 2018 data compared to the Planck 2015 data was attributed to the reduction of HFI systematics, with subdominant contribution from priors. We therefore would like to clarify the impacts of the priors we choose and illustrate explicitly that there is no bias with this choice, whereas the flattening method proposed in MB18 is actually at risk of creating a non-flat prior and biasing results.
 
-Recap our appendix from Planck 2015 on the issue of prior:
-\begin{itemize}
-    \item {describe tau prior issue raised by MB18: claimed that prior not flat in tau so bias PC; proposed to flatten by multiplying the inverse of prior point-by-point in the PC space; claim that this flattening removes a shift between tanh and PC results. }
-    \item {summarize that we pointed it out the flaw in the logic in appendix of \cite{Heinrich:2018btc}.}
-    \item{reproduce a few tests here: 1) tau12 posterior (no need to show again, point to appendix); 2) show prior boxes in m1-m2 plane (done in Fig.4) - repeat the length of lines of constant tau12 within the box describe the prior distribution. Make the point that though the line rises, the Planck data is more informative than priors in m1, m2 makes no impact on the posterior. However when inverting the prior, introduces a bias in tau.}
-    \item{show test of explicitly constructing a prior that's locally flat in m1-m2, show posterior almost doesn't change. (only change is low-z enhancement, due to prior cut off at $z>6$. between our two priors, things don't change as much (might want to reproduce this result for this Planck 2018 results. And marius version too?}
-    \item{inversion method should not be used on future dataset, since data is more informative than prior.}
-\end{itemize}
+In the following, we will use $\tau \approx \tau_{12}$ in order to illustrate the impacts of the priors more easily. We first note that by virtue of Eq.~\ref{eq:mmutoxe}, the total optical depth receives contribution from all PCs
+\beq
+\tau = \tau_{\rm fid} + \sum_a m_a \tau_a,
+\eeq
+where $\tau_a$ is the contribution from a unit amplitude PC and $\tau_{\rm fid}$, that from the fiducial model. Because most of the contributions to $\tau$ comes from the first two components as shown in Fig. 7 of Ref.~\cite{Heinrich:2018btc} in the appendix, we can approximate it as
+\beq
+\tau_{12} = \tau_{\rm fid} + m_1 \tau_1 + m_2 \tau_2 \approx \tau.
+\eeq
+We also show it here in Fig.~\ref{fig:tau12} where the posterior of $\tau_{12}$ and $\tau$ (with five PCs) are compared for the Planck 2018 data.
 
+In Fig.~\ref{fig:prior_box}, we show the Planck 2018 constraints in the $m_1-m_2$ plane along with constant lines of $\tau_{12}$ (light gray). The solid blue box corresponds to the physicality prior, whereas the dashed blue box is constructed to be aligned with the directions of the constant $\tau_{12}$ lines, so that when projected onto the $\tau_{12}$ directions, gives a true flat $\tau_{12}$ prior. The physicality prior upon projection would correspond to a linearly rising prior in $\tau_{12}$ over the region where the posterior has support. One would be eager to conclude that this produces a biased constraint on $\tau_{12}$. However, because the Planck data is more constraining than the prior in $m_1$ and $m_2$, (the ellipse occupying a much smaller area in one part of the prior box), the value of the prior at high $\tau_{12}$ becomes irrelevant for the posterior.
 
+Using the procedure proposed by Ref.~\cite{Millea:2018bko}, inverting the prior value at each point in the PC space, would actually up-weight the high $\tau_{12}$ regions that are not supported by data, while down-weighting the regions that are. This produces an actual bias in the $\tau_{12}$ posterior toward lower optical depth.
+
+We compare the three priors in Fig.~\ref{fig:tau12_posterior_compare_priors} by showing their corresponding $\tau_{12}$ posteriors. Compared to the explicitly flat prior (dashed box in Fig.~\ref{fig:prior_box}) as the ground truth, the posterior from using the physicality prior shifts negligibly. The main difference is a slightly lower posterior at very low $\tau_{12}$, which is due to the fact that the physicality constraints restricts hydrogen to be fully ionized at $z \leq 6$ (part of the ellipse is outside of the box in Fig.~\ref{fig:prior_box}. A similar effect would be observed between two steplike models with and without restricting the reionization redshift to $z>6$. In comparison, inverting the prior to make it flat globally ends up biasing the tau posterior. [show in figure?]
+
+Therefore we conclude that the prior inversion procedure proposed in Ref.~\cite{Millea:2018bko} should not be used where data is more constraining than prior, which includes the Planck 2015, Planck 2018 and possible future datasets.  
  \begin{figure}
-          \includegraphics[width=0.9\columnwidth]{paper/plots/plot_rotated_box_flat_tau_prior_fac_0p8.pdf}
+          \includegraphics[width=0.9\columnwidth]{paper/plots/pl18_pc_zmax30_pliklite_srollv2_plot_rotated_box_flat_tau_prior_fac_0.8.png}
           \caption
           {[Placeholder right now (Planck 2015 plot)] Priors on the $m_1-m_2$ parameter space: the original HMH16 prior (inset square, solid lines) and a prior that is flat in
           both $\tau_{12}$ and $m_1-m_2$ (rotated rectangle, dashed lines) whose sides are aligned with lines of
           constant $\tau_{12}$ (light gray lines).   The HMH16 prior allows more parameter space at high vs low $\tau_{12}$ but this
           is not relevant since the data constraints (ellipses) exclude this region.  In the allowed region, the only difference is that the HMH16 prior clips the low $m_1$ edge of the allowed region due to physicality and the assumption that reionization occurs at
-          $z\ge 6$. [add in text the comparison of priors, and how tau is not biased, and for KDE physical models determine the priors]}  \label{fig:prior_box}
+          $z\ge 6$. [add in text the comparison of priors, and how tau is not biased, and for KDE physical models determine the priors]} 
+          \label{fig:prior_box}
 \end{figure}
 
+\begin{itemize}
+    \item{Plot: add plot for $\tau(>z)$ contours for the 2 parameter model vs PC; direct integration first}
+    \item{Might also want to address this statement in Planck 2018 paper: ``The TANH result gives slightly higheroptical  depth  than  the  others,  which  is  primarily driven  by  the  fixed  duration  of  reionization assumed.” Is this true? Then transition to the following point}
+    \item {Make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.}
+\end{itemize}
 
-[Plot: add plot for $\tau(>z)$ contours for the 2 parameter model vs PC; direct integration first]
 
 \begin{figure}
 \includegraphics[width=0.40\textwidth]{plots/plot_tau_gtz.pdf}
@@ -245,22 +392,21 @@ Recap our appendix from Planck 2015 on the issue of prior:
 \end{figure}
 
 
-\begin{itemize}
-    \item{Might also want to address this statement in Planck 2018 paper: ``The TANH result gives slightly higheroptical  depth  than  the  others,  which  is  primarily driven  by  the  fixed  duration  of  reionization assumed.” Is this true? Then transition to the following point}
-    \item {Make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.}
-\end{itemize}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Effective Likelihood}
 \label{sec:effective_likelihood}
 
-\subsection{Code description}
-\label{sec:code}
+[One paragraph intro to effective likelihood code, and overview of comparison given in this section].
 
 \subsection{Example 1: tanh model}
 \label{sec:example1}
+
+\begin{itemize}
+    \item Show posteriors of tanh model from direct MCMC vs KDE. Give timing improvement. Comment on differences. State f = 0.14 used.
+    \item (here?) Make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.
+\end{itemize}
 
 In Fig.~\ref{fig:reion_models}, we show the fiducial ionization history (thick blue) and contrast it with
 the standard approach of CAMB (thin black) that takes hydrogen and singly ionized helium reionization to be given by
@@ -276,6 +422,14 @@ x_e^{\rm true}(z) = \frac{1+f_{\rm He}}{2}\left\{  1+ \tanh\left[ \frac{y(z_*)-y
 
 \subsection{Example 2: high-z model}
 \label{sec:example2}
+
+\begin{itemize}
+    \item Define 2 step model (record differences compared to previous paper)
+    \item Show 2D posterior plots between direct MCMC and KDE
+    \item Note timing differences (quote number of samples to convergence if needed)
+    \item Comment on any differences. Note f = 0.14 (any additional study of varying f). 
+\end{itemize}
+
 [rewording needed]
 Our example is a two-step model 
  \bea
@@ -315,10 +469,19 @@ The $\chi^2 = \sum_{2}^{l_{\rm max}} (\Delta C_l^{EE})^2 / \mathrm{Cov}_l = 0.03
 \label{fig:two_parameter_model_2D_plot}
 \end{figure}
 
-
 \section{Conclusion}
 \label{sec:conclusion}
 
+\begin{itemize}
+    \item Summarize what we did in one paragraph.
+    \item Give main conclusions in bullet format
+    \item main results from PCs: PC constraints, tau, $tau(>z)$.  
+    \item comparison w/ Planck 
+    \item note on priors
+    \item likelihood code, comparisons
+    \item other interesting points to discuss and add 
+    \item future outlook
+\end{itemize}
 
 \bibliography{rei.bib}
 
