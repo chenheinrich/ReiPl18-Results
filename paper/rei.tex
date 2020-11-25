@@ -237,17 +237,21 @@ Note that the original $0<x_e<x_e^{\rm max}$ condition cannot be strictly enforc
 We now present the complete reionization constraints obtained from the Planck 2018 likelihoods using the principal components.
 \subsection{Constraints on Principal Components}
 We use the official Planck likelihoods [add citation] \texttt{plik\_lite} for the high-$\ell$ $TT$, $TE$ and $EE$ as well as \texttt{lowl} for the low-$\ell$ $TT$ throughout this paper. We have tested that our results do not change if in lieu of \texttt{plik\_lite} we used the full \texttt{plik\_full} likelihood in which the foreground parameters have not been marginalized over. For the low-$\ell$ $EE$ likelihood, we use the third-party released \texttt{srollv2} likelihood [add citation] in our official PC results and the effective likelihood code. In comparison with the official Planck-released \texttt{simall\_EE} likelihood, the \texttt{srollv2} likelihood had improved foreground cleaning, which enabled a factor of XX improvement in $\tau$ just in the steplike model [cite].
+
+
 \begin{figure*}
-\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015.png}
-\caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend] [add tau trajectories] [add prior boundaries] \wh{I wonder if for pedagogy we should show the full range and just put a box around the physical region for the $m_1$'s?}}
+\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML.png}
+\caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend] [Add text: The black solid line indicates the steplike models varying $\tau$. make point that tanh ML is now within the the center of PC constraints]}
 \label{fig:plot_mjs_2018_vs_2015}
 \end{figure*}
 %results/pc_results/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite.pdf
+%
 In Fig.~\ref{fig:plot_mjs_2018_vs_2015}, we show the 1D posterior and 2D 68\% and 95\% confidence level contours for the 5 PC amplitudes that describe ionization models up to $\zmax=30$. The box boundaries correspond to the physicality priors shown in Eq.~\ref{eq:individualprior} and include all physical models along with some unphysical models. Results using the Planck 2018 data are shown in blue. While all five PC amplitudes are being constrained by Planck, the first two are particularly well-constrained. Contrary to the Planck 2015 results of Ref.~\cite{Heinrich:2016ojb} shown in red, the 2018 data prefers a much smaller amplitude for the first PC, leading to a reduced optical depth.
 The trajectories shown in black lines are the steplike models of instantaneous reionization allowed by the Planck 2015 data with the arrow pointing in the direction of increasing optical depth. Clearly, these steplikes models are only a part of the allowed physical model space. By construction, they miss any high-redshift ionization component by assuming neglibile ionization levels before the transition redshift $z_{\rm re}$. 
+
 \begin{figure}
-\includegraphics[width=0.4\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wGaussEllipse.png}
-\caption{A zoomed-in of Fig.~\ref{fig:plot_mjs_2018_vs_2015} on the best constrained $\zmax=30$ PC plane, $m_1-m_2$ plane, comparing Planck 2018 (blue) vs 2015 results (red). The black solid line indicates the steplike models with the arrow pointing in the direction of increasing $\tau$. The dashed lines indicate the contours corresponding a Gaussian likelihood (Eq.~\ref{eq:gaussian}) using the PC covariance from the Planck 2018 chains. [add Gaussian covariance legend?] [add tau trajectories here?]
+\includegraphics[width=0.40\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
+\caption{A zoomed-in of Fig.~\ref{fig:plot_mjs_2018_vs_2015} on the best constrained $\zmax=30$ PC plane, the $m_1-m_2$ plane, comparing Planck 2015 (gray) vs Planck 2018 results using two different low-$\ell$ $EE$ likelihoods: the \texttt{simall\_EE} likelihood (red) vs the \texttt{srollv2} likelihood (blue), the latter had better foreground removal and is the one we show as our fiducial results throughout this paper.
 }
 \label{fig:plot_m1m2_2015_vs_2018}
 \end{figure}
@@ -298,12 +302,6 @@ $m_5$
 \end{table}
 
 
-\begin{figure}
-\includegraphics[width=0.4\textwidth]{plots/plot_m1_m2_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.png}
-\caption{Same as Fig.~\ref{fig:plot_mjs_2018_vs_2015} but comparing the Planck 2018 results using two different low-$\ell$ $EE$ likelihoods: the official \texttt{simall\_EE} likelihood and the \texttt{srollv2} likelihood which has better foreground removal (shown throughout this work). [Comments on shift m1-m2 plane].
-}
-\label{fig:plot_m1m2_lowE_vs_srollv2}
-\end{figure}
 We show a zoomed version of the $m_1-m_2$ plane in Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, where we show beyond the physicality prior with the shaded area. [Discuss how the ellipse moved in the direction of lower tanh by going to lower m1.] 
 In Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, we also show using the PC chain covariance $\bf C$ (black dashed lines) what corresponds to an even simpler effective likelihood, which approximates the $m_a$ posterior as a multivariate Gaussian with mean $\bar{\bf m}$ and covariance $\bf C$ (also shown in Table~\ref{tab:PC_stats}:
 \begin{equation}
