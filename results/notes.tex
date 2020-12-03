@@ -418,8 +418,31 @@ The above changes are implemented in the branch chen/debug\_cl\_nan.
 \end{figure}
 
 
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_oversampled_1D_smooth_scale_1D_2_num_bins_1D_1600_post_bug_fix.png}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_oversampled_1D_smooth_scale_1D_2_num_bins_1D_800_post_bug_fix.png}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_oversampled_1D_smooth_scale_1D_2_num_bins_1D_100_post_bug_fix.png}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/pl18_relike_tanh_tau_dz0p5_oversampled_1D_smooth_scale_1D_2_num_bins_1D_50_post_bug_fix.png}
+\label{fig:}
+\caption{Oversampled tanh tau posterior after fixing bug and with even more samples than previously. Changing num\_bins = 1600, 800, 100, 50 for the Fortran/cosmomc KDE w/ f = 0.14, which entirely recovers (for num\_bins = 100) close to the python KDE line w/ the same f which is computed as a an evaluation of the effective likelihood at 100 $\tau$ values rather than MCMC sampling. This shows that the discrepancy seen previously between the two was only due to smoothing applied by getdist on the MCMC samples when very few samples were present in the chains.
+} 
+\end{figure}
 
 
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{ cosmomc_kde/pl18_relike_tanh_tau_dz0p5_oversampled_1D_smooth_scale_1D_2_num_bins_1D_100_post_bug_fix_wGauss.png}
+\caption{Same as previous figure for num\_bins = 100, but adding also the posterior obtained from the Gaussian likelihood using directly the covariance and mean of the PC chains.
+}
+\label{fig:}
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{cosmomc_kde/plot_ellipse.png}
+\caption{Examining the variation in the ellipse area expected when a mock covariance is multiplied by 1.0, 1.14 and 1.28.
+}
+\label{fig:}
+\end{figure}
 
 \bibliography{rei.bib}
 
