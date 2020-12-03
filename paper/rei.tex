@@ -303,7 +303,8 @@ $m_5$
 
 
 We show a zoomed version of the $m_1-m_2$ plane in Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, where we show beyond the physicality prior with the shaded area. [Discuss how the ellipse moved in the direction of lower tanh by going to lower m1.] 
-In Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, we also show using the PC chain covariance $\bf C$ (black dashed lines) what corresponds to an even simpler effective likelihood, which approximates the $m_a$ posterior as a multivariate Gaussian with mean $\bar{\bf m}$ and covariance $\bf C$ (also shown in Table~\ref{tab:PC_stats}:
+In Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, we also show using the PC chain covariance $\bf C$ (black dashed lines) what corresponds to an even simpler effective likelihood, which approximates the $m_a$ posterior as a multivariate Gaussian with mean $\bar{\bf m}$ and covariance $\bf C$ (also shown in Table~\ref{tab:PC_stats}.
+
 \begin{equation}
  {\cal L}_{\rm gauss}\left({\rm data}|\mathbf{m} \right) = \frac{ e^{-\frac{1}{2} ({\bf m}-\bar{\bf m})^T {\bf C}^{-1} ({\bf m}-\bar{\bf m}) } }{\sqrt{(2\pi)^{N_{\rm PC}} | \mathbf{C}| }}.
  \label{eq:gaussian}
@@ -314,7 +315,127 @@ In Fig.~\ref{fig:plot_m1m2_lowE_vs_srollv2} we also compare the Planck 2018 resu
 
 \wh{I wonder if the order should be reversed and talk about the model testing and KDE first, then the model independent cumulative optical depth?  That way the model stuff could all be introduced here and simulaneously compared with the fiducal results?  The flow could be that we first show more high z optical depth is allowed in the two step model but not FlexKnot and then talk about it being a model independent PC result, concluding that we are more robust than FlexKnot?  Of course I'm assuming that the 2 step model shows this...}
 
-\subsection{Implications for optical depth}
+\section{Effective Likelihood}
+\label{sec:effective_likelihood}
+
+As described in ~\refsec{KDE}, we turn the PC constraints from the Planck 2018 into an effective likelihood code to constrain arbitrary models of ionization history between $6 \leq z \leq \zmax$. This code is downloadable on Github at \url{} [give URL]. The initial release is offered for the Planck 2018 $\textsc{plik\_lite\_ TTTTTE} + \textsc{lowl} + \textsc{srollv2}$ likelihood combination with $\zmax = 30$. 
+
+To obtain posteriors of model parameters from the corresponding Planck likelihoods, simply specify the functional form for $x_e(z)$ in the code, and run a MCMC analysis using the extension we provide to a MCMC sampler (currently supporting CosmoMC). Note that the likelihood cannot distinguish the effects of the model parameters that impact $z \sim 6$, where the Universe is assumed to be fully ionized. Furthermore, transitions faster than $\Delta z \sim 0.1$ between $6 < z < 6.25$ may not be fully captured because of how PC functions are discretized with $\delta z = 0.25$ and are linearly interpolated within this bin size. [review this statement] To avoid over-smoothing parameter posteriors while maintaining accuracy during the KDE operation, we suggest using the default value of $f = 0.14$. Finally, you may choose to run the chains at a different cosmological model than that of the default Planck 2018 best-fit model, provided it is close enough. 
+
+We demonstrate successful recovery of parameter posteriors using the effective likelihood code by comparing them to a direct MCMC analysis for two examples: 1) The tanh model, which is the standard approach used in CAMB; 2) a two-step toy model which has an one additional parameter to model the high-$z$ ionization as a plateau in $x_e$ before the transition to full ionization happens in the standard tanh model.
+
+\subsection{Example 1: tanh model}
+\label{sec:example1}
+
+\begin{figure}
+\includegraphics[width=0.40\textwidth]{plots/pl18_pc_zmax30_pliklite_srollv2_1015_tau_posterior_fraccov_1p0_burnin_10000_yes_norm_gaussian0p1_0p12_0p14.pdf}
+\caption{Posterior of total optical depth $\tau$: full likelihood (solid) vs effective likelihood (dotted) with f = 0.14 [remove more curves?]. The results agree well; the effective likelihood gives a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$.
+}
+\label{fig:tanh_}
+\end{figure}
+
+The steplike model used as the standard approach in CAMB describes the hydrogen and singly ionized helium reionization as a tanh function:
+
+ \begin{equation}
+x_e(z) = \frac{1+f_{\rm He}}{2}\left\{  1+ \tanh\left[ \frac{y(z_{\rm re})-y(z)}{\Delta y} \right] \right\} + x_e^{\rm rec},
+ \label{eqn:tanh_1D}
+ \end{equation}
+ 
+ with $y(z)=(1+z)^{3/2}$, $\Delta y=(3/2)(1+z)^{1/2}\Delta z$, and $\Delta z = 0.5$. Here $x_e^{\rm rec}$ is the ionization history from recombination only; the helium fraction
+ \beq
+ f_{\rm He} = \frac{n_{\rm He}}{n_{H}} = \frac{m_{\rm H}}{m_{\rm He}} \frac{Y_p}{1 - Y_p}, 
+ \eeq
+ is the ratio of the helium to hydrogen number density, where $Y_p$ is the helium mass fraction, chosen to be consistent with big bang nucleosynthesis for a given baryon density. In addition, the doubly ionized helium reionization is parameterized by an additional tanh function in redshift centered at $z_{\rm He} = 3.5$ with width $\Delta z = 0.5$.
+
+In \reffig{tanh_1D} we show the posterior distribution of the $\tau$ for the effective likelihood results, in which the only sampled parameter is $\tau$ (all other cosmological parameters are fixed at the Planck best-fit model), vs the full likelihood results in which all six $\Lambda$CDM parameters were varied including $\tau$. The posteriors agree well; the effective likelihood gives a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing. We expect the smoothing to be at roughly the $\sim$7\% level in the parameter posterior corresponding to a smoothing factor of $1+f = 1.14$ applied to the covariance of the PCs used for smoothing kernel during KDE.
+
+\begin{itemize}
+    \item (here?) Make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.
+    \item{Might also want to address this statement in Planck 2018 paper: ``The TANH result gives slightly higher optical  depth  than  the  others,  which  is  primarily driven  by  the  fixed  duration  of  reionization assumed.” Is this true? Then transition to the following point}
+\end{itemize}
+
+
+ %We take here $z_{\rm re}= 9.85$, corresponding the chain maximum likelihood (ML) model ($\tau = 0.0765$) from \S \ref{sec:MCMC},  for illustrative purposes.   Projected onto 5 PCs and resummed into $x_e(z)$, Eq.~(\ref{eq:mmutoxe}) yields a poor reconstruction of the ionization history itself.
+ %Nonetheless as we shall see in Fig.~\ref{fig:clee}, the PC decomposition provides an excellent representation of the polarization power spectrum.
+ 
+
+\subsection{Example 2: high-z model}
+\label{sec:example2}
+
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_xez_taulo_0p04_tauhi_0p02.png}
+\caption{Ionization history $x_e(z)$ of the two-step model $(\taulo, \tauhi) = (0.04, 0.02)$ for the hydrogen and singly ionized helium.
+}
+\label{fig:two_step_model}
+\end{figure}
+ 
+ 
+The second example is a two-step model, where an additional step is used to give a high-$z$ ionization plateau: 
+ \bea
+x_e&(z)&\,= \frac{1+f_{\rm He} - \xemin}{2}\left\{  1+ \tanh\left[ \frac{y(z_{\rm re})-y(z)}{\Delta y} \right] \right\} \notag \\
+&+& \frac{\xemin - x_e^{\rm rec}}{2}\left\{  1+ \tanh\left[ \frac{z_{\rm t}-z}{\Delta z_{2}} \right] \right\} + x_e^{\rm rec},
+ \label{eqn:tanh_highz}
+ \eea
+where $y(z)=(1+z)^{3/2}$, $\Delta y=(3/2)(1+z)^{1/2}\Delta z_1$ as in the first example, but now we choose $\Delta z_1 = 0.015\, (1+z_{\rm re})$ instead of the usual $\Delta z_1 = 0.5$, to provide sharper distinctions between the two steps.
+We choose the second step at $z_{\rm t}=28$ with $\Delta z_2 = 1.0$, since the effective likelihood is limited to models with ionization below $\zmax=30$. 
+We recover the standard tanh model in the limit when $\xemin$ approaches the negligible recombination value $x_e^{\rm rec}$.
+Therefore this model adds a single parameter $\xemin$ to control the high-$z$ ionization plateau for $z_{\rm re} \lesssim z \lesssim z_t$. We show an example
+of this two-step model in Fig.~\ref{fig:two_step_model}.
+
+\begin{figure}[t]
+\includegraphics[width=0.47\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
+\caption{Marginalized posteriors for $\tauhi$ and $\taulo$ in the two-step model described in \refssec{example2}: effective reionization likelihood with f = 0.14 (red) agrees very well with the full likelihood results (blue). 
+}
+\label{fig:two_parameter_model_2D}
+\end{figure}
+
+To obtain posterior distributions with flat $\tau$ priors, we convert the model to be parameterized by low and high-redshift optical depth, $\taulo(\zre, \xemin)$ and $\tauhi(\zre, \xemin)$, 
+each defined as in Eq.~\refeq{cumtau} but with the boundaries $[0, z_{\rm split}]$ and $[\tau(z_{\rm split}, \infty]$ respectively. We choose the split to be $z_{\rm split} = \zre + \Delta z_2$ to be conservative on the preference of $\tauhi$ in the data. 
+We sample in the $(\taulo, \tauhi)$ parameter space and the corresponding ($\zre, \xemin$) is found through an iterative search similar to that used for finding $\zre$ given total $\tau$ in the canonical tanh model. 
+The priors are chosen to be $\taulo, \tauhi, \tau_{\rm tot} \in [0, \tau_{\rm max}]$ where $\tau_{\rm max} = 0.35$, and $\tau_{\rm tot} = \taulo + \tauhi$ is the total optical depth for both the effective and full likelihood runs, 
+except that we have chosen $\taulo \in [0.03, \tau_{\rm max}]$ for the effective likelihood run. 
+Note that $\taulo \lesssim 0.038$ roughly corresponds to $\zre < 6$ in the canonical tanh model. For the two-step model, the correspondence between $\xemin$ and $\zre$ is not one-to-one and depends on the value of $\tauhi$. 
+So to make the comparison apples-to-apples, we further apply a prior cut in $\zre$ space to keep models with $\zre > 6.1$ for both the effective reionization likelihood chains and the full likelihood chains.
+
+In ~\reffig{two_parameter_model_2D}, we compare the posteriors of $\taulo$ and $\tauhi$ obtained with these two likelihood codes, which show good agreement. Again we used $f = 0.14$ here for the KDE computation. [add timing results here?] Note that the truncation of the 2D constraint ellipses on the lower end of $\taulo$ is curved cut rather than a straight line, because $\zre$ cut we performed corresponds to a different value of $\taulo$ for a different $\tauhi$. 
+
+The marginalized 1D constraints are $\taulo = XX \pm XX$, $\tauhi = XX \pm XX$ for both runs. The 95\% C.L. upper limit on $\tauhi$ is $\tauhi < XX$ is consistent with the $\tau(15, 30) < XX$ results we got from the PC constraints. [is it? double check] This model of course do not capture the larger space of physical models with high-$z$ ionization like the FlexKnot or PC methods would, but consists of a subset of models for which the high-redshift optical depth results must still be consistent with the constraints from these more general methods. 
+
+To test this, we take the best-fit two-parameter model $(\taulo, \tauhi) = (XX, XX)$ and show its cumulative optical depth $\tau(z, \zmax)$ in ~\reffig{plot_taugtz_two_step_best_fit}. Compared to the PC constraints (shaded regions), this model is within the 95\% upper limit at all redshifts. According to the FlexKnots constraints in Ref.~\cite{}, however, this model would have been ruled out given that $\tau(15, 30) < 0.007$ (95\% C.L.) with the FlexKnots results. [provide comment ...; any further discussion on literature results with FlexKnots?]
+
+[add a conclusive paragraph or sentence]
+
+%Plot: add plot for $\tau(>z)$ contours for the 2 parameter model vs PC; direct integration first?
+
+
+
+\begin{figure}[t]
+\includegraphics[width=0.450\textwidth]{plots/plot_tau_gtz.pdf}
+\caption{Same as \reffig{plot_taugtz_PC_vs_tanh}, but superimposed with the cumulative optical depth $\tau(z, \zmax)$ of the best-fit two-step model. The two-step model is a toy model that adds a high-$z$ ionization plateau to the standard tanh model with one additional parameter. Compared to the cumulative $\tau$ distributions from PCs, the best-fit step-model model is within the 95\% upper limit of the cumulative $\tau$ constraints at all redshifts. 
+}
+\label{fig:plot_taugtz_two_step_best_fit}
+\end{figure}
+
+
+%\begin{figure}
+%\includegraphics[width=0.5\textwidth]{results/direct_mcmc/two_parameter_model/tauhi_taulo_chains/pl18_tanh_highz_test2_run1_tri.png}
+%\caption{Direct MCMC chains of the two-parameter model with \tauhi and \taulo: triangle plot of \tauhi and \taulo. The marginalized 1D constraints are \taulo = $0.0516 \pm 0.0076$, \tauhi = $0.0100 \pm   0.0066$. The ML model is \taulo = 0.0543 and \tauhi = 0.0054 corresponding to $z_{\rm re} = 7.68$ and $x_{e, \mathrm{min}} = 0.021$.
+}
+%\label{fig:two_parameter_model_2D_plot}
+%\end{figure}
+
+
+%\begin{figure}
+%\includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_cls_taulo_0p04_tauhi_0p02.png}
+%\caption{Testing \taulo prior -- testing that \taulo $\geq$ 0.04 as \taulo prior is OK, by calculating $\chi^2$ between $C_l$ from full $x_e(z)$ vs PC decomposition of the model (\taulo, \tauhi) = (0.04, 0.02). 
+%The $\chi^2 = \sum_{2}^{l_{\rm max}} (\Delta C_l^{EE})^2 / \mathrm{Cov}_l = 0.03$ where $\mathrm{Cov}_l = 2 (C_l^{EE})^2/(2l+1)$. } 
+%\label{fig:taulo_prior_test_cl}
+%\end{figure}
+
+\section{Implications for optical depth}
+
+\subsection{Cumulative optical depth}
 
 We continue the comparison in the space of cumulative optical depth $\tau(z, \zmax)$, which is a better quantity for visualizing and comparing PC results than the ionization history $x_e$ itself because of it is the quantity most closely related to observables. Recall that these truncated PCs provide only accurate descriptions of the models in terms of their \textit{observable} impact, and are not tools for reconstructing the precise ionization history.
 
@@ -440,123 +561,7 @@ We conclude that the prior inversion procedure proposed in Ref.~\cite{Millea:201
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Effective Likelihood}
-\label{sec:effective_likelihood}
 
-As described in ~\refsec{KDE}, we turn the PC constraints from the Planck 2018 into an effective likelihood code to constrain arbitrary models of ionization history between $6 \leq z \leq \zmax$. This code is downloadable on Github at \url{} [give URL]. The initial release is offered for the Planck 2018 $\textsc{plik\_lite\_ TTTTTE} + \textsc{lowl} + \textsc{srollv2}$ likelihood combination with $\zmax = 30$. 
-
-To obtain posteriors of model parameters from the corresponding Planck likelihoods, simply specify the functional form for $x_e(z)$ in the code, and run a MCMC analysis using the extension we provide to a MCMC sampler (currently supporting CosmoMC). Note that the likelihood cannot distinguish the effects of the model parameters that impact $z \sim 6$, where the Universe is assumed to be fully ionized. Furthermore, transitions faster than $\Delta z \sim 0.1$ between $6 < z < 6.25$ may not be fully captured because of how PC functions are discretized with $\delta z = 0.25$ and are linearly interpolated within this bin size. [review this statement] To avoid over-smoothing parameter posteriors while maintaining accuracy during the KDE operation, we suggest using the default value of $f = 0.14$. Finally, you may choose to run the chains at a different cosmological model than that of the default Planck 2018 best-fit model, provided it is close enough. 
-
-We demonstrate successful recovery of parameter posteriors using the effective likelihood code by comparing them to a direct MCMC analysis for two examples: 1) The tanh model, which is the standard approach used in CAMB; 2) a two-step toy model which has an one additional parameter to model the high-$z$ ionization as a plateau in $x_e$ before the transition to full ionization happens in the standard tanh model.
-
-\subsection{Example 1: tanh model}
-\label{sec:example1}
-
-\begin{figure}
-\includegraphics[width=0.40\textwidth]{plots/pl18_pc_zmax30_pliklite_srollv2_1015_tau_posterior_fraccov_1p0_burnin_10000_yes_norm_gaussian0p1_0p12_0p14.pdf}
-\caption{Posterior of total optical depth $\tau$: full likelihood (solid) vs effective likelihood (dotted) with f = 0.14 [remove more curves?]. The results agree well; the effective likelihood gives a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$.
-}
-\label{fig:tanh_}
-\end{figure}
-
-The steplike model used as the standard approach in CAMB describes the hydrogen and singly ionized helium reionization as a tanh function:
-
- \begin{equation}
-x_e(z) = \frac{1+f_{\rm He}}{2}\left\{  1+ \tanh\left[ \frac{y(z_{\rm re})-y(z)}{\Delta y} \right] \right\} + x_e^{\rm rec},
- \label{eqn:tanh_1D}
- \end{equation}
- 
- with $y(z)=(1+z)^{3/2}$, $\Delta y=(3/2)(1+z)^{1/2}\Delta z$, and $\Delta z = 0.5$. Here $x_e^{\rm rec}$ is the ionization history from recombination only; the helium fraction
- \beq
- f_{\rm He} = \frac{n_{\rm He}}{n_{H}} = \frac{m_{\rm H}}{m_{\rm He}} \frac{Y_p}{1 - Y_p}, 
- \eeq
- is the ratio of the helium to hydrogen number density, where $Y_p$ is the helium mass fraction, chosen to be consistent with big bang nucleosynthesis for a given baryon density. In addition, the doubly ionized helium reionization is parameterized by an additional tanh function in redshift centered at $z_{\rm He} = 3.5$ with width $\Delta z = 0.5$.
-
-In \reffig{tanh_1D} we show the posterior distribution of the $\tau$ for the effective likelihood results, in which the only sampled parameter is $\tau$ (all other cosmological parameters are fixed at the Planck best-fit model), vs the full likelihood results in which all six $\Lambda$CDM parameters were varied including $\tau$. The posteriors agree well; the effective likelihood gives a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing. We expect the smoothing to be at roughly the $\sim$7\% level in the parameter posterior corresponding to a smoothing factor of $1+f = 1.14$ applied to the covariance of the PCs used for smoothing kernel during KDE.
-
-\begin{itemize}
-    \item (here?) Make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.
-    \item{Might also want to address this statement in Planck 2018 paper: ``The TANH result gives slightly higher optical  depth  than  the  others,  which  is  primarily driven  by  the  fixed  duration  of  reionization assumed.” Is this true? Then transition to the following point}
-\end{itemize}
-
-
- %We take here $z_{\rm re}= 9.85$, corresponding the chain maximum likelihood (ML) model ($\tau = 0.0765$) from \S \ref{sec:MCMC},  for illustrative purposes.   Projected onto 5 PCs and resummed into $x_e(z)$, Eq.~(\ref{eq:mmutoxe}) yields a poor reconstruction of the ionization history itself.
- %Nonetheless as we shall see in Fig.~\ref{fig:clee}, the PC decomposition provides an excellent representation of the polarization power spectrum.
- 
-
-\subsection{Example 2: high-z model}
-\label{sec:example2}
-
-
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_xez_taulo_0p04_tauhi_0p02.png}
-\caption{Ionization history $x_e(z)$ of the two-step model $(\taulo, \tauhi) = (0.04, 0.02)$ for the hydrogen and singly ionized helium.
-}
-\label{fig:two_step_model}
-\end{figure}
- 
- 
-The second example is a two-step model, where an additional step is used to give a high-$z$ ionization plateau: 
- \bea
-x_e&(z)&\,= \frac{1+f_{\rm He} - \xemin}{2}\left\{  1+ \tanh\left[ \frac{y(z_{\rm re})-y(z)}{\Delta y} \right] \right\} \notag \\
-&+& \frac{\xemin - x_e^{\rm rec}}{2}\left\{  1+ \tanh\left[ \frac{z_{\rm t}-z}{\Delta z_{2}} \right] \right\} + x_e^{\rm rec},
- \label{eqn:tanh_highz}
- \eea
-where $y(z)=(1+z)^{3/2}$, $\Delta y=(3/2)(1+z)^{1/2}\Delta z_1$ as in the first example, but now we choose $\Delta z_1 = 0.015\, (1+z_{\rm re})$ instead of the usual $\Delta z_1 = 0.5$, to provide sharper distinctions between the two steps.
-We choose the second step at $z_{\rm t}=28$ with $\Delta z_2 = 1.0$, since the effective likelihood is limited to models with ionization below $\zmax=30$. 
-We recover the standard tanh model in the limit when $\xemin$ approaches the negligible recombination value $x_e^{\rm rec}$.
-Therefore this model adds a single parameter $\xemin$ to control the high-$z$ ionization plateau for $z_{\rm re} \lesssim z \lesssim z_t$. We show an example
-of this two-step model in Fig.~\ref{fig:two_step_model}.
-
-\begin{figure}[t]
-\includegraphics[width=0.47\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
-\caption{Marginalized posteriors for $\tauhi$ and $\taulo$ in the two-step model described in \refssec{example2}: effective reionization likelihood with f = 0.14 (red) agrees very well with the full likelihood results (blue). 
-}
-\label{fig:two_parameter_model_2D}
-\end{figure}
-
-To obtain posterior distributions with flat $\tau$ priors, we convert the model to be parameterized by low and high-redshift optical depth, $\taulo(\zre, \xemin)$ and $\tauhi(\zre, \xemin)$, 
-each defined as in Eq.~\refeq{cumtau} but with the boundaries $[0, z_{\rm split}]$ and $[\tau(z_{\rm split}, \infty]$ respectively. We choose the split to be $z_{\rm split} = \zre + \Delta z_2$ to be conservative on the preference of $\tauhi$ in the data. 
-We sample in the $(\taulo, \tauhi)$ parameter space and the corresponding ($\zre, \xemin$) is found through an iterative search similar to that used for finding $\zre$ given total $\tau$ in the canonical tanh model. 
-The priors are chosen to be $\taulo, \tauhi, \tau_{\rm tot} \in [0, \tau_{\rm max}]$ where $\tau_{\rm max} = 0.35$, and $\tau_{\rm tot} = \taulo + \tauhi$ is the total optical depth for both the effective and full likelihood runs, 
-except that we have chosen $\taulo \in [0.03, \tau_{\rm max}]$ for the effective likelihood run. 
-Note that $\taulo \lesssim 0.038$ roughly corresponds to $\zre < 6$ in the canonical tanh model. For the two-step model, the correspondence between $\xemin$ and $\zre$ is not one-to-one and depends on the value of $\tauhi$. 
-So to make the comparison apples-to-apples, we further apply a prior cut in $\zre$ space to keep models with $\zre > 6.1$ for both the effective reionization likelihood chains and the full likelihood chains.
-
-In ~\reffig{two_parameter_model_2D}, we compare the posteriors of $\taulo$ and $\tauhi$ obtained with these two likelihood codes, which show good agreement. Again we used $f = 0.14$ here for the KDE computation. [add timing results here?] Note that the truncation of the 2D constraint ellipses on the lower end of $\taulo$ is curved cut rather than a straight line, because $\zre$ cut we performed corresponds to a different value of $\taulo$ for a different $\tauhi$. 
-
-The marginalized 1D constraints are $\taulo = XX \pm XX$, $\tauhi = XX \pm XX$ for both runs. The 95\% C.L. upper limit on $\tauhi$ is $\tauhi < XX$ is consistent with the $\tau(15, 30) < XX$ results we got from the PC constraints. [is it? double check] This model of course do not capture the larger space of physical models with high-$z$ ionization like the FlexKnot or PC methods would, but consists of a subset of models for which the high-redshift optical depth results must still be consistent with the constraints from these more general methods. 
-
-To test this, we take the best-fit two-parameter model $(\taulo, \tauhi) = (XX, XX)$ and show its cumulative optical depth $\tau(z, \zmax)$ in ~\reffig{plot_taugtz_two_step_best_fit}. Compared to the PC constraints (shaded regions), this model is within the 95\% upper limit at all redshifts. According to the FlexKnots constraints in Ref.~\cite{}, however, this model would have been ruled out given that $\tau(15, 30) < 0.007$ (95\% C.L.) with the FlexKnots results. [provide comment ...; any further discussion on literature results with FlexKnots?]
-
-[add a conclusive paragraph or sentence]
-
-%Plot: add plot for $\tau(>z)$ contours for the 2 parameter model vs PC; direct integration first?
-
-
-
-\begin{figure}[t]
-\includegraphics[width=0.450\textwidth]{plots/plot_tau_gtz.pdf}
-\caption{Same as \reffig{plot_taugtz_PC_vs_tanh}, but superimposed with the cumulative optical depth $\tau(z, \zmax)$ of the best-fit two-step model. The two-step model is a toy model that adds a high-$z$ ionization plateau to the standard tanh model with one additional parameter. Compared to the cumulative $\tau$ distributions from PCs, the best-fit step-model model is within the 95\% upper limit of the cumulative $\tau$ constraints at all redshifts. 
-}
-\label{fig:plot_taugtz_two_step_best_fit}
-\end{figure}
-
-
-%\begin{figure}
-%\includegraphics[width=0.5\textwidth]{results/direct_mcmc/two_parameter_model/tauhi_taulo_chains/pl18_tanh_highz_test2_run1_tri.png}
-%\caption{Direct MCMC chains of the two-parameter model with \tauhi and \taulo: triangle plot of \tauhi and \taulo. The marginalized 1D constraints are \taulo = $0.0516 \pm 0.0076$, \tauhi = $0.0100 \pm   0.0066$. The ML model is \taulo = 0.0543 and \tauhi = 0.0054 corresponding to $z_{\rm re} = 7.68$ and $x_{e, \mathrm{min}} = 0.021$.
-}
-%\label{fig:two_parameter_model_2D_plot}
-%\end{figure}
-
-
-%\begin{figure}
-%\includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_cls_taulo_0p04_tauhi_0p02.png}
-%\caption{Testing \taulo prior -- testing that \taulo $\geq$ 0.04 as \taulo prior is OK, by calculating $\chi^2$ between $C_l$ from full $x_e(z)$ vs PC decomposition of the model (\taulo, \tauhi) = (0.04, 0.02). 
-%The $\chi^2 = \sum_{2}^{l_{\rm max}} (\Delta C_l^{EE})^2 / \mathrm{Cov}_l = 0.03$ where $\mathrm{Cov}_l = 2 (C_l^{EE})^2/(2l+1)$. } 
-%\label{fig:taulo_prior_test_cl}
-%\end{figure}
 
 \section{Conclusion}
 \label{sec:conclusion}
