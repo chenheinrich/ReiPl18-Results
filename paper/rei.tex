@@ -240,7 +240,9 @@ We use the official Planck likelihoods [add citation] \texttt{plik\_lite} for th
 
 
 \begin{figure*}
-\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML.png}
+%\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML.png}
+\includegraphics[width=1.0\textwidth]{paper/plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
+
 \caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend] [Add text: The black solid line indicates the steplike models varying $\tau$. make point that tanh ML is now within the the center of PC constraints]}
 \label{fig:plot_mjs_2018_vs_2015}
 \end{figure*}
@@ -417,6 +419,12 @@ To test this, we take the best-fit two-parameter model $(\taulo, \tauhi) = (XX, 
 \label{fig:plot_taugtz_two_step_best_fit}
 \end{figure}
 
+\begin{figure}
+\includegraphics[width=0.40\textwidth]{plots/pl18_tanh_highz_kde_f0p14_tau_z_to_zstart_plot_tau_gtz_dz0p1.pdf}
+\caption{
+}
+\label{fig:plot_taugtz_two_step_contours}
+\end{figure}
 
 %\begin{figure}
 %\includegraphics[width=0.5\textwidth]{results/direct_mcmc/two_parameter_model/tauhi_taulo_chains/pl18_tanh_highz_test2_run1_tri.png}
