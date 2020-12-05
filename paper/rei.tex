@@ -241,7 +241,7 @@ We use the official Planck likelihoods [add citation] \texttt{plik\_lite} for th
 
 \begin{figure*}
 %\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML.png}
-\includegraphics[width=1.0\textwidth]{paper/plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
+\includegraphics[width=0.8\textwidth]{paper/plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
 
 \caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend] [Add text: The black solid line indicates the steplike models varying $\tau$. make point that tanh ML is now within the the center of PC constraints]}
 \label{fig:plot_mjs_2018_vs_2015}
@@ -333,7 +333,15 @@ We demonstrate successful recovery of parameter posteriors using the effective l
 \includegraphics[width=0.40\textwidth]{plots/pl18_pc_zmax30_pliklite_srollv2_1015_tau_posterior_fraccov_1p0_burnin_10000_yes_norm_gaussian0p1_0p12_0p14.pdf}
 \caption{Posterior of total optical depth $\tau$: full likelihood (solid) vs effective likelihood (dotted) with f = 0.14 [remove more curves?]. The results agree well; the effective likelihood gives a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$.
 }
-\label{fig:tanh_}
+\label{fig:tanh}
+\end{figure}
+
+
+\begin{figure}[ht]
+\includegraphics[width=0.5\textwidth]{results/direct_mcmc/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_plikfull_and_pl18_tanh_post_plikfull.pdf}
+\caption{Tanh chains with plik\_full\_TTTEEE for the high-l likelihood. [remove PC zmax curve; add PC filtered version]
+}
+\label{fig:plot_taugtz_PC_vs_tanh}
 \end{figure}
 
 The steplike model used as the standard approach in CAMB describes the hydrogen and singly ionized helium reionization as a tanh function:
@@ -411,17 +419,17 @@ To test this, we take the best-fit two-parameter model $(\taulo, \tauhi) = (XX, 
 %Plot: add plot for $\tau(>z)$ contours for the 2 parameter model vs PC; direct integration first?
 
 
-
-\begin{figure}[t]
-\includegraphics[width=0.450\textwidth]{plots/plot_tau_gtz.pdf}
-\caption{Same as \reffig{plot_taugtz_PC_vs_tanh}, but superimposed with the cumulative optical depth $\tau(z, \zmax)$ of the best-fit two-step model. The two-step model is a toy model that adds a high-$z$ ionization plateau to the standard tanh model with one additional parameter. Compared to the cumulative $\tau$ distributions from PCs, the best-fit step-model model is within the 95\% upper limit of the cumulative $\tau$ constraints at all redshifts. 
-}
-\label{fig:plot_taugtz_two_step_best_fit}
-\end{figure}
+%PC w/ ML model from 2parameter model (tauhi>0.02)
+%\begin{figure}[t]
+%\includegraphics[width=0.450\textwidth]{plots/plot_tau_gtz.pdf}
+%\caption{Same as \reffig{plot_taugtz_PC_vs_tanh}, but superimposed with the cumulative optical depth $\tau(z, \zmax)$ of the best-fit two-step model. The two-step model is a toy model that adds a high-$z$ ionization plateau to the standard tanh model with one additional parameter. Compared to the cumulative $\tau$ distributions from PCs, the best-fit two-step model is within the 95\% upper limit of the cumulative $\tau$ constraints at all redshifts. 
+%}
+%\label{fig:plot_taugtz_two_step_best_fit}
+%\end{figure}
 
 \begin{figure}
 \includegraphics[width=0.40\textwidth]{plots/pl18_tanh_highz_kde_f0p14_tau_z_to_zstart_plot_tau_gtz_dz0p1.pdf}
-\caption{
+\caption{The 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ for the two-step model, which allows for high-redshift ionization up to $\zmax =30$. note that a physical model with $\tau(15, \zmax) = 0.02$ is still allowed at the 95\% C.L. whereas the Planck FlexKnot analysis would have ruled it out with their $\tau(15, \zmax) < 0.007$ 95\% upper limit. [add not PC filtered version]
 }
 \label{fig:plot_taugtz_two_step_contours}
 \end{figure}
@@ -497,13 +505,6 @@ and
 \label{fig:plot_taugtz_lowE_vs_srollv2}
 \end{figure}
 
-
-\begin{figure}[ht]
-\includegraphics[width=0.5\textwidth]{results/direct_mcmc/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_plikfull_and_pl18_tanh_post_plikfull.pdf}
-\caption{PC zmax = 30 vs tanh chains with plik\_full\_TTTEEE for the high-l likelihood.
-}
-\label{fig:plot_taugtz_PC_vs_tanh}
-\end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.45\textwidth]{results/direct_mcmc/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_pliklite_srollv2_0930_and_pl18_pc_zmax50_pliklite_srollv2.pdf}
