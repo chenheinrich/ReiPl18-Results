@@ -230,6 +230,7 @@ Therefore, when determining cumulative optical depth constraints as opposed to u
 %
 \begin{equation}
 \sum_{a=1}^5 m_a^2 \le (x_e^{\rm max}-x_e^{\rm fid})^2,
+\label{eq:prior_sum}
 \end{equation}
 where $x_e^{\rm fid}=0.15$ and $m_a^{-} \le m_a \le m_a^{+}$ with
 \begin{equation}
@@ -237,8 +238,9 @@ m_a^{\pm} = \int_{z_{\rm min}}^{z_{\rm max} } dz \frac{S_a(z)[x_e^{\rm max} -2 x
 \pm x_e^{\rm max} | S_a(z)|}{2(z_{\rm max}-z_{\rm min})}.
 \label{eq:individualprior}
 \end{equation}
+\ch{It turns out that in practice the prior on the sum of squares in Eq.~\ref{eq:prior_sum} is weaker than the individual priors in Eq.~\ref{eq:individualprior} for the Planck 2018 data.}
 \wh{comment on the sum prior?  we don't seem to talk about it later - is it applied and is it always weaker in practice?}
-\ch{I think it is always weaker, let me double check.}
+\ch{CH: The sum prior is applied at all times; I also checked  (for the zmax = 30 chains this year) that it is weaker than the prior on individual m's just as in Planck 2015.}
 %
 Note that the original $0\le x_e \le x_e^{\rm max}$ condition cannot be strictly enforced here because we do not keep all but the first $n_{\rm PC}$ PCs, so these priors in $m_a$ are necessary but not sufficient conditions for physicality.  
 In other words, no physical model is excluded by these priors but some unphysical models are included.  In \S \ref{sec:note_on_priors} we further explore the role of these and other choices of PC priors, and in \S\ref{sec:effective_likelihood} we test PC constraints against direct constraints for two example models.  
@@ -405,7 +407,7 @@ Instead of the effective likelihood, we can alternately use its Gaussian approxi
 %and amounts to one evaluation of the multi-variate Gaussian function per sample in the reionization model parameter space. 
 We obtain for the tanh model $\tau = 0.0594 \pm 0.0063$. While it is a good approximation (the mean and standard deviation are similar to those from the full likelihood and the effective likelihood using KDE), we see in Fig.~\ref{fig:tanh} that the peak of the distribution for the Gaussian likelihood is offset from the other two. This is because the Gaussian likelihood is by definition symmetric in the PC space and so it cannot capture any skewness in the PC distribution. As a result the tanh $\tau$ constraints are mostly symmetric too, $\tau = 0.0594_{-0.0064}^{+0.0064}$ if we consider the 68\% lower and upper limits, whereas the full KDE result $\tau = 0.0588_{-0.0072}^{+0.0060}$ is able to capture the skewness in the distribution $\Delta \tau \sim 0.0012$, a level consistent with shifts in the peaks seen in Fig.~\ref{fig:tanh}.
 
-\ch{[double check all these numbers again, write script to output in a table automatically]}.
+\ch{[double check all these numbers again (some chains are longer now)]}.
 
 [Make a point that dz = 0.5 for tanh may not be sufficient for experiments after Planck. This was for higher tau, so transition happens at higher redshift. Now tau is much lower.] 
 
