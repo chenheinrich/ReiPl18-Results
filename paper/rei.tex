@@ -123,9 +123,19 @@ Extending PCs to cover up to $z_{\rm max} = 50$,we verified that there is no hin
 ~\cite{Millea:2018bko} and ends up penalizing lower optical depth models. [quote difference in tau(15, 30) or total tau possibly attributed to this treatment]. %We follow the appendix of Ref.~\cite{Heinrich:2018btc} for the Planck 2015 data
 
 The paper is structured as follows. We first describe in section~\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in section~\ref{sec:results}, we describe the PC results using the Planck 2018 + \texttt{srollv2} likelihood, and compare with previous results in literature. Then in section~\ref{sec:effective_likelihood}, we present the effective likelihood code, and demonstrate its fidelity with two examples, 1) the standard steplike model, and 2) a two-parameter model where a plateau of ionization at high-$z$ is added to the standard one-step model for illustration purposes. Finally, we summarize our results and conclude in section~\ref{sec:conclusion}.
+
+%
+%
+%
+%
+%
+
 \section{Background}
 \label{sec:background}
 The principal component technique for constraining reionization using the large-angle $C_\ell^{EE}$ polarization spectrum was first introduced in Ref.~\cite{Hu:2003gh}. We now briefly summarize the PC technique in section~\ref{sec:PC}, as well as the kernel density estimate technique for building the effective likelihood in section~\ref{sec:KDE}. We refer the readers to Refs.~\cite{Hu:2003gh, Mortonson:2008rx, Mortonson:2007hq, Heinrich:2018btc}[pick 1-2] and Refs.~\cite{Heinrich:2016ojb} respectively for a more complete description on these topics.
+
+%
+%
 \subsection{Reionization Principal Components}
 \label{sec:PC}
 We begin by parametrizing $x_e(z)$, the ionization fraction relative to the fully ionized hydrogen at redshift $z$, into its principal components $S_{a}(z)$ with respect to the CMB $E$-mode polarization:
@@ -164,8 +174,18 @@ its tilt $n_s$.  We take flat uninformative
 priors in $m_a$ but discuss additional priors imposed by
 removing demonstrably  unphysical ionization histories in \S \ref{sec:cumulative}.
 
-
+ \begin{figure}
+          \includegraphics[width=0.95\columnwidth]{paper/plots/pl18_plot_pub_xe_basis_tau_basis_zmax30_heinrich.pdf}
+          \caption{Reionization PCs for $\zmax = 30$.} 
+          \label{fig:xe}
+\end{figure}
  
+
+%
+%
+%
+%
+
 \subsection{Effective PC Likelihood}
 \label{sec:KDE}
 The completeness property of the PCs enables us to turn PC chains obtained from a MCMC run into an effective likelihood that can be used to test any reionization model with the CMB without a cumbersome reanalysis at the level of power spectra data. In the following, we briefly recap the kernel density estimate technique used to build this likelihood and refer the readers to Ref.~\cite{Heinrich:2016ojb} for more details.
@@ -262,7 +282,7 @@ which enables stronger reionization constraints, especially for the low multipol
 %\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML.png}
 \includegraphics[width=0.8\textwidth]{paper/plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
 
-\caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend] [Add text: The black solid line indicates the steplike models varying $\tau$. make point that tanh ML is now within the the center of PC constraints]}
+\caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries. [TODO: update legend] [Add text: The black solid line indicates the steplike models varying $\tau$. make point that tanh ML is now within the the center of PC constraints][say that Planck 2015 point is chain ML, whereas Plnack 2018 point is from minimizer, also is a different tanh model (w/ dz = 0.015(1+z), not dz = 0.5)]}
 \label{fig:plot_mjs_2018_vs_2015}
 \end{figure*}
 %results/pc_results/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite.pdf
@@ -644,7 +664,6 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
           both $\tau_{12}$ and $m_1-m_2$ (rotated rectangle, dashed lines) which are aligned with lines of constant $\tau_{12}$ (light gray lines). Note that although the physicality prior allows for more parameter space at higher $\tau_{12}$, that is also the region excluded by the data constraints (ellipses). The only difference in the allowed region is that the physicality prior clips the low $m_1$ portion of the allowed region due to the physicality condition and the assumption that reionization occurs at $z\ge 6$.} 
           \label{fig:prior_box}
 \end{figure}
-
 
 \subsection{Cumulative optical depth}
 
