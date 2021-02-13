@@ -395,8 +395,8 @@ Next we demonstrate the use and the successful recovery of parameter posteriors 
 
 
 \begin{figure}[ht]
-\includegraphics[width=0.5\textwidth]{results/direct_mcmc/pl18_plots_zmax30/plot_pub_tau_gtz_dz_0p1_pl18_pc_zmax30_plikfull_and_pl18_tanh_post_plikfull.pdf}
-\caption{Tanh chains with plik\_full\_TTTEEE for the high-l likelihood. [remove PC zmax curve; add PC filtered version]
+\includegraphics[width=0.5\textwidth]{paper/plots/pl18_taugtz_tanh_direct_vs_kde_vs_gaussian.pdf}
+\caption{Cumulative optical depth for the tanh model from direct MCMC chains, KDE chians and Gaussian likelihood chains. 
 }
 \label{fig:plot_taugtz_PC_vs_tanh}
 \end{figure}
@@ -446,6 +446,20 @@ We also show in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh} the cumulative optical dep
 }
 \label{fig:two_step_model}
 \end{figure}
+
+\begin{figure}[t]
+\includegraphics[width=0.47\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
+\caption{Marginalized posteriors for $\tauhi$ and $\taulo$ in the two-step model described in \refssec{example2}: effective reionization likelihood with f = 0.14 (red) agrees very well with the full likelihood results (blue). 
+}
+\label{fig:two_parameter_model_2D}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{plots/pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian_dz_auto_zre_prior_6p1.pdf}
+\caption{The 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ for the two-step model, which allows for high-redshift ionization up to $\zmax =30$. note that a physical model with $\tau(15, \zmax) = 0.02$ is still allowed at the 95\% C.L. whereas the Planck FlexKnot analysis would have ruled it out with their $\tau(15, \zmax) < 0.007$ 95\% upper limit. [add not PC filtered version]
+}
+\label{fig:plot_taugtz_two_step_contours}
+\end{figure}
  
  
 The second example is a two-step model, where an additional step is used to give a high-$z$ ionization plateau: 
@@ -459,12 +473,7 @@ We choose the second step at $z_{\rm t}=28$ with $\Delta z_2 = 1.0$, since the e
 In comparison to tanh, a single parameter $\xemin$ is added in this model to control the high-$z$ ionization plateau for $z_{\rm re} \lesssim z \lesssim z_t$. We would recover the standard tanh as $\xemin$ approaches the negligible recombination value $x_e^{\rm rec}$. We show an example
 of this two-step model in Fig.~\ref{fig:two_step_model}.
 
-\begin{figure}[t]
-\includegraphics[width=0.47\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
-\caption{Marginalized posteriors for $\tauhi$ and $\taulo$ in the two-step model described in \refssec{example2}: effective reionization likelihood with f = 0.14 (red) agrees very well with the full likelihood results (blue). 
-}
-\label{fig:two_parameter_model_2D}
-\end{figure}
+
 
 In practice, we parameterize the model by $\taulo(\zre, \xemin)$ and $\tauhi(\zre, \xemin)$.  They are defined as in \refeq{cumtau} but with the boundaries $[0, z_{\rm split}]$ and $[\tau(z_{\rm split}, \infty]$ for $\taulo$ and $\tauhi$ respectively, where the split is chosen as $z_{\rm split} = \zre + \Delta z_2$ to be conservative on the preference of $\tauhi$ in the data. [double check this too.]
 Given a model $(\taulo, \tauhi)$, we find the corresponding ($\zre, \xemin$) through an iterative search similar to that used in the canonical tanh model for finding $\zre$ given total optical depth $\tau$. 
@@ -505,12 +514,6 @@ With this in mind, we will now turn to the model-independent constraints derived
 %\label{fig:plot_taugtz_two_step_best_fit}
 %\end{figure}
 
-\begin{figure}
-\includegraphics[width=0.40\textwidth]{plots/pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian_dz_auto_zre_prior_6p1.pdf}
-\caption{The 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ for the two-step model, which allows for high-redshift ionization up to $\zmax =30$. note that a physical model with $\tau(15, \zmax) = 0.02$ is still allowed at the 95\% C.L. whereas the Planck FlexKnot analysis would have ruled it out with their $\tau(15, \zmax) < 0.007$ 95\% upper limit. [add not PC filtered version]
-}
-\label{fig:plot_taugtz_two_step_contours}
-\end{figure}
 
 %\begin{figure}
 %\includegraphics[width=0.5\textwidth]{results/direct_mcmc/two_parameter_model/tauhi_taulo_chains/pl18_tanh_highz_test2_run1_tri.png}
