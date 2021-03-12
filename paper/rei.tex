@@ -137,7 +137,7 @@ The paper is structured as follows. We first describe in section~\ref{sec:backgr
 %
 %
 
-\section{Background}
+\section{PC Technique}
 \label{sec:background}
 The principal component technique for constraining reionization using the large-angle $C_\ell^{EE}$ polarization spectrum was first introduced in Ref.~\cite{Hu:2003gh}. We now briefly summarize the PC technique in section~\ref{sec:PC}, as well as the kernel density estimate technique for building the effective likelihood in section~\ref{sec:KDE}. We refer the readers to Refs.~\cite{Hu:2003gh, Mortonson:2008rx, Mortonson:2007hq, Heinrich:2018btc}[pick 1-2] and Refs.~\cite{Heinrich:2016ojb} respectively for a more complete description on these topics.
 
@@ -145,7 +145,7 @@ The principal component technique for constraining reionization using the large-
 %
  \begin{figure}
           \includegraphics[width=0.95\columnwidth]{paper/plots/pl18_plot_pub_xe_basis_tau_basis_zmax30_heinrich.pdf}
-          \caption{\textit{Top}: Rank-ordered CMB reionization principal components $S_a$ for $a = 1..5$ for $\zmax = 30$. We assume full ionized Universe at $z < 6$. \textit{Bottom}: The cumulative optical depth resulting from a unit amplitude PC.} 
+          \caption{\textit{Top}: Rank-ordered CMB reionization principal components $S_a$ for $a = 1..5$ for $\zmax = 30$. We assume fully ionized Universe at $z < 6$. \textit{Bottom}: The cumulative optical depth resulting from a unit amplitude PC. \ch{plot done}} 
           \label{fig:xe}
 \end{figure}
  
@@ -191,7 +191,7 @@ m_{a}=
 \end{equation}
 %
 where the reconstructed $x_e(z)$ through Eq.~(\ref{eq:mmutoxe}) with truncated PCs will not reproduce the true ionization history $x_e(z) \neq x_e^{\rm true}(z)$, but rather it is the observed $C_\ell^{EE}$ that is reproduced to cosmic variance precision. We reiterate therefore, that the PC analysis is not a tool for reconstructing the ionization history from observations, but rather a forward-modeling tool which, by reducing the dimensionality of the model space to $n_{\rm PC}$, allows us to constrain all possible ionization histories between $z_{\rm min}<z<z_{\rm max}$ in a single analysis.
-For the Planck data set, most of the information on the ionization history comes from the first two modes which probe the amount of low vs.\ high redshift optical depth.   However all 5 PCs for $z_{\rm max}=30$ carry some constraint, with the higher modes controlling finer variations in redshift.
+For the Planck data set, most of the information on the ionization history comes from contraints on the first two modes which probe the amount of low vs.\ high redshift optical depth.   However all 5 PCs for $z_{\rm max}=30$ carry some constraint, with the higher modes controlling finer variations in redshift.
 
 We follow Ref.~\cite{Heinrich:2018btc} to compute the CMB power spectra with PCs using a modified version of CAMB\footnote{CAMB: \url{http://camb.info}}~\cite{Lewis:1999bs, Howlett:2012mh}. 
 For $z<6$, we follow CAMB and assume fully ionized hydrogen and singly ionized helium and for $z\leq 3.5$~\cite{Becker:2010cu}, doubly ionized helium~\cite{Becker:2010cu} with a transition width $\Delta z = 0.5$ (see also \S \ref{sec:example1}).
@@ -254,7 +254,7 @@ Although reionization PCs are mainly a tool for model testing using complete inf
 \label{eq:cumtau}
 \end{equation}
 where $n_{\rm H}(0)$ is the hydrogen number density at $z=0$, $\sigma_T$ is the Thomson scattering cross-section and $H(z)$ is the Hubble parameter.  
-\wh{Possibly add a few words on the PC version and refer to the
+\wh{Possibly add a few words on the PC version, list $\tau_a = \tau_a(z_{\rm min},z_{\rm max})$ in an equation or table, and refer to the
 bottom panel of Fig.~\ref{fig:xe}}
 The underlying reason is that CMB observables probe the optical depth and whether it is weighted toward high or low redshift through the amplitude and shape of 
 $C_\ell^{EE}$ -- the higher the redshift, the
@@ -288,7 +288,7 @@ m_a^{\pm} = \int_{z_{\rm min}}^{z_{\rm max} } dz \frac{S_a(z)[x_e^{\rm max} -2 x
 In practice the prior on the sum of squares in Eq.~(\ref{eq:prior_sum}) is strictly weaker than the individual priors in Eq.~(\ref{eq:individualprior}) for
 % I think it can't depend on the data but does depend on the truncation
 %the Planck 2018 data \wh{and
-our fiducial analysis.  Henceforth we refer to Eq.~(\ref{eq:individualprior}) as the physicality prior.}
+our fiducial analysis.  Henceforth we refer to Eq.~(\ref{eq:individualprior}) as the physicality prior.
 
 %
 Note that the original $0\le x_e \le x_e^{\rm max}$ condition cannot be strictly enforced here because we do not keep all but the first $n_{\rm PC}$ PCs, so these priors in $m_a$ are necessary but not sufficient conditions for a physical ionization history.  
@@ -311,11 +311,11 @@ which enables stronger reionization constraints, especially for the low multipol
 %\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML.png}
 \includegraphics[width=0.8\textwidth]{paper/plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
 
-\caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries and the unshaded region for $m_1$. The black solid line indicates the tanh models with varying $\tau$. The red and black crosses indicate the best-fit tanh models from Planck 2015 and 2018 respectively. Note that the best-fit tanh model has moved to a lower $\tau$ in Planck 2018, and in particular, is now within the 68\% C.L. contours of the constraints. 
-\wh{double check relative sign on the definition of $m_i$ between 2015-18 - seems like some correlations have flipped, e.g. $m_4$.} }
+\caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show in red the Planck 2015 and the improved Planck 2018 contours in blue which uses the low-$\ell$ $EE$ likelihood \texttt{srollv2}. The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle. The physicality priors on the ionization history used in this work are delineated by the box boundaries and the unshaded region for $m_1$. The black solid line indicates the tanh models with varying $\tau$. The red and black crosses indicate the best-fit tanh models from Planck 2015 and 2018 respectively. Note that the best-fit tanh model has moved to a lower $\tau$ in Planck 2018, and in particular, is now within the 68\% C.L. contours of the constraints. \ch{plot done}
+}
 \label{fig:plot_mjs_2018_vs_2015}
 \end{figure*}
-%results/pc_results/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite.pdf
+%
 %
 In Fig.~\ref{fig:plot_mjs_2018_vs_2015}, we show the 1D posterior and 2D 68\% and 95\% confidence level contours for the 5 PC amplitudes that describe ionization models up to $\zmax=30$
 %
@@ -363,6 +363,21 @@ $m_5$ & 0.066 & 0.145 & 0.067 & 0.142 & $-$0.018 & $-$0.195 & 1.000 \\
 \end{tabular}
 \end{table}
 
+\begin{table}[b]
+\centering
+\caption{$\tau_a$}
+\label{tab:PC_stats}
+%\begin{tabular}{|r | r r r r r r|}
+\begin{tabular}{|c | c | c | c | c | c|}
+\hline
+$\tau_{\rm fid}$ & $\tau_1$  & $\tau_2$ & $\tau_3$ & $\tau_4$ & $\tau_5$ \\ \hline
+0.08626 & 0.29403 & $-$0.11227 & 0.04506 & $-$0.01898 & 0.00960 \\
+\hline
+\end{tabular}
+\end{table}
+% all digits without flipping m3, m4:
+%tau_fid 0.08625526676478058
+%taumj [ 0.29403315 -0.11227135 -0.04505736  0.0189787   0.00960184
 \begin{table}[b]
 \centering
 \caption{Planck 2015 results (with Mortonson PCs) [Will not be in the paper, just for us to compare] }
@@ -475,7 +490,7 @@ We also show in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh} the cumulative optical dep
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_xez_taulo_0p04_tauhi_0p02.png}
-\caption{Example ionization history $x_e(z)$ for the high-$z$ model of \refsec{example2}. In addition to a tanh transition at low-redshift as in \refsec{example1}, there is an additional ionization plateau at high redshifts with a fixed transition at $z_t = 28$ and $\Delta z = 1$. This is a toy model constructed for illustration purposes only. Here we show the best-fit model in the Planck 2018 data $(\taulo, \tauhi) = (XX, XX)$, as well as  a model at the 95\% C.L. $(\taulo, \tauhi) = (XX, XX)$ (see also Fig.~\ref{two_parameter_model_2}). \ch{Include 2nd helium in the plot.}
+\caption{Example ionization history $x_e(z)$ for the high-$z$ model of \refsec{example2}. In addition to a tanh transition at low-redshift as in \refsec{example1}, there is an additional ionization plateau at high redshifts with a fixed transition at $z_t = 28$ and $\Delta z = 1$. This is a toy model constructed for illustration purposes only. Here we show the best-fit model in the Planck 2018 data $(\taulo, \tauhi) = (XX, XX)$, as well as  a model at the 95\% C.L. $(\taulo, \tauhi) = (XX, XX)$ (see also Fig.~\ref{two_parameter_model_2}  \wh{place x's on the models plotted in that plot}). \ch{Include 2nd helium in the plot.}
 }
 \label{fig:two_step_model}
 \end{figure}
@@ -555,7 +570,7 @@ With this in mind, we will now turn to the model-independent constraints derived
 %\begin{figure}
 %\includegraphics[width=0.5\textwidth]{results/direct_mcmc/two_parameter_model/tauhi_taulo_chains/pl18_tanh_highz_test2_run1_tri.png}
 %\caption{Direct MCMC chains of the two-parameter model with \tauhi and \taulo: triangle plot of \tauhi and \taulo. The marginalized 1D constraints are \taulo = $0.0516 \pm 0.0076$, \tauhi = $0.0100 \pm   0.0066$. The ML model is \taulo = 0.0543 and \tauhi = 0.0054 corresponding to $z_{\rm re} = 7.68$ and $x_{e, \mathrm{min}} = 0.021$.
-}
+%}
 %\label{fig:two_parameter_model_2D_plot}
 %\end{figure}
 
@@ -621,6 +636,13 @@ the first two components
 \beq
 \tau_{12} = \tau_{\rm fid} + m_1 \tau_1 + m_2 \tau_2 \approx \tau.
 \eeq
+\wh{possibly redefine
+\beq
+\tau_{12} =  m_1 \tau_1 + m_2 \tau_2 +
+\left(\sum_{a=3}^5 \bar m_a \tau_a + \tau_{\rm fid}\right) \approx \tau.
+\eeq
+where the term in parentheses is a fixed quantity (refer to eqns/table where tau's and mbars are defined) whose purpose is to remove offsets due to the arbitrary choice of fiducial model.
+}
 %
 % Therefore, while retaining all physical models, they also includes some unphysical models. The authors of Ref.~\cite{Millea:2018bko} (hereafter MB18) raised a concern that these PC priors implies a non-flat prior in $\tau$ and claimed that it biases the PC result of  Ref.~\cite{Heinrich:2016ojb} and accounts for most of the shift between the tanh and PC $\tau$ posteriors. In Ref.~\cite{Heinrich:2018btc}, we showed that the use of our physicality prior does not cause bias for data that is constraining, which includes the Planck 2015 dataset. On the other hand, we showed in Ref.~\cite{Heinrich:2016ojb} that if one adopts the method proposed in Ref.~\cite{Millea:2018bko}. in an attempt to flatten the $\tau$ prior (by multiplying its inverse at each point in the multidimensional PC space), one would actually end up with a biased $\tau$ constraint for the Planck 2015 data. 
 %
@@ -639,8 +661,9 @@ the implicit prior from $m_1,m_2$ is already nearly flat. \ch{CH: need to ask a 
 
 Ref.~\cite{Millea:2018bko} raised a potential objection regarding more general models.  As illustrated in Fig.~\ref{fig:prior_box}, lines of constant $\tau_{12}$ are rotated compared with the $m_1$,
 $m_2$ axis.  Therefore, the range-bound flat prior in $m_1,m_2$ (blue square) considered {\it alone} corresponds to a prior that is not flat in $\tau_{12}$ due to the extent  of the allowed parameter space
-for each of its values, e.g. at $\tau_{12}=0.018$
-than at $\tau_{12} = 0.125$.   Ref.~\cite{Millea:2018bko} suggest 
+for each of its values, e.g. at  left corners (Fig.~\ref{fig:prior_box} solid square or lowest $m_1$) of the range $\tau_{12}=0.018$
+than at $\tau_{12} = 0.125$ \wh{revise numbers} and the implied prior increases linearly from zero between the two.
+   Ref.~\cite{Millea:2018bko} suggest 
 inverting this prior point-by-point in the $m_a$ parameter space by dividing by the implied prior $P(\tau_{\rm PC}) [ \approx P(\tau_{12})]$ and this reweighting was implemented in the \ch{Planck 2018 paper on cosmological parameters~\cite{Aghanim:2018eyx}}.
 First notice that this inversion would in fact then produce a non-flat prior on $\tau$ for the tanh model
 that disfavors high values.   This is because
@@ -655,12 +678,14 @@ rotated one.  \ch{CH: will try rephrasing.}
 
 The real impact of our range-bound $m_1,m_2$ priors comes from the fact that with the Planck 2018 data, the physicality prior on $m_1$
 removes nearly half of the space that would otherwise be allowed by the
-data at 95\% CL.  This is in contrast to the Planck 2015 data where only a very small region is removed (see Fig.~\ref{fig:plot_m1m2_2015_vs_2018}).  \wh{Maybe add to the $\tau$ vs $\tau_{12}$ figure a version that does not have this $\tau_{12}$ cut.  Discuss more if the difference significant}.
+data at 95\% CL.  This is in contrast to the Planck 2015 data where only a very small region is removed (see Fig.~\ref{fig:plot_m1m2_2015_vs_2018}).  \wh{Maybe add to the $\tau$ vs $\tau_{12}$ figure a version that does not have this $\tau_{12}$ cut.  Discuss more if the difference significant - also mention that even in the direct tanh constraints, the impact of taking $z\gtrsim 6$ has the effect of removing some of the low $\tau$ region.}.
 
 As discussed in \S \ref{sec:cumulative}, our range-bound priors 
-are conservative in the sense that all the models that are excluded are definitely unphysical but some of the models that are included
-may also be unphysical since their physicality depends on higher order PC components that are explicitly truncated in the analysis.  On the other hand the tanh model provides an explicitly physical example whose trajectory runs nearly parallel to the our physicality prior and so we do not expect the bias incurred by 
-including these models to be large. \ch{CH: sorry, what do we mean by these models here?}  In any case, using PCs to 
+are conservative in the sense that all the cases that are excluded are definitely unphysical but some of the cases that are included
+may also be unphysical since their physicality depends on higher order PC components that are explicitly truncated in the analysis.  On the other hand the tanh model provides an explicitly physical example whose trajectory runs close  and nearly parallel to the our physicality prior in the allowed region and so we do not expect the bias incurred by 
+including these possibly \wh{unphysical cases} to be large. 
+%\ch{CH: sorry, what do we mean by these models here?}  
+In any case, using PCs to 
 test explicitly physical models as in \S \ref{sec:example1} and
 \ref{sec:example2} cannot be affected by our conservative physicality
 cut.
@@ -702,8 +727,18 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
  \begin{figure}
           \includegraphics[width=0.9\columnwidth]{paper/plots/pl18_pc_zmax30_pliklite_srollv2_1015_plot_rotated_box_flat_tau_prior_fac_0.8.pdf}
           \caption {Priors on the $m_1-m_2$ parameter space: the physicality prior (inset square, solid lines) and a flat prior in
-          both $\tau_{12}$ and $m_1-m_2$ (rotated rectangle, dashed lines) \ch{CH: [why is this flat in m1 and m2?]} which are aligned with lines of constant $\tau_{12}$ (light gray lines). Note that although the physicality prior allows for more parameter space at higher $\tau_{12}$, that is also the region excluded by the data constraints (ellipses). The only difference in the allowed region is that the physicality prior clips the low $m_1$ portion of the allowed region due to the physicality condition and the assumption that reionization occurs at $z\ge 6$.} 
+           $\tau_{12}$ and \wh{range-bound flat - also if we change $\tau_{12}$ definitions change the numbers in the labels here} in $m_1-m_2$ (rotated rectangle, dashed lines) 
+           %\ch{CH: [why is this flat in m1 and m2?]} 
+           % flat in 2D or locally flat
+           which are aligned with lines of constant $\tau_{12}$ (light gray lines). Note that although the physicality prior allows for more parameter space at higher $\tau_{12}$, that is also the region excluded by the data constraints (ellipses). The only difference in the allowed region is that the physicality prior clips the low $m_1$ portion of the allowed region due to the physicality condition and the assumption that reionization occurs at $z\ge 6$.} 
           \label{fig:prior_box}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.5\textwidth]{paper/plots/pl18_taugtz_pc_zmax30_pl18_srollv2_with_and_without_physicality_prior.pdf}
+\caption{$\tau_{12,new}$}
+}
+\label{fig:tau12}
 \end{figure}
 
 \subsection{Cumulative optical depth}
@@ -769,6 +804,10 @@ For the high-redshift optical depth, we also obtain consistent upper limits
 \includegraphics[width=0.5\textwidth]{paper/plots/pl18_taugtz_pc_zmax30_pl18_srollv2_with_and_without_physicality_prior.pdf}
 \caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ from PC chains with (shaded) and without (black) applying the physicality prior. While the lower limits on $\tau(z, \zmax)$ are lowered when more unphysical models are included, the upper limits do not vary significantly (slightly lowered).  The total $\tau$ distribution is broadened only toward the lower $\tau$. \ch{Discuss in text the small difference in upper limits at $\tau(15, \zmax)$ is such that if one could remove unphysical models inside our current prior range, $\tau(15, \zmax)$ upper limit would be only slightly looser.}
 }
+% no prior: 95\% C.L.  = [-0.01935756790924691, 0.021029019067727237]
+% with prior: {'z': 15, 'mean': 0.00694422689213187, 'std': 0.007568921831067864, 'limit68': [-0.0007215571045808687, 0.014684826477572082], 'limit95': [-0.006316156744039184, 0.02284538046347211]}
+%
+%}
 \label{fig:plot_taugtz_2018_with_vs_without_physicality_prior}
 \end{figure}
 
@@ -829,8 +868,12 @@ We clarified some confusion raised in the literature on the effects of applying 
 
 The Planck collaboration has released constraints on the total optical depth $\tau$ with a steplike model parameterized by the tanh function, which has evolved from $\tau = 0.067 \pm 0.022$ (Planck 2015) to $\tau = 0.055 \pm 0.009$ (Planck 2016), then to $\tau = 0.0506 \pm 0.0086$ (Planck 2018) [cite papers]. The major improvement comes from clean-up of systematics in the High Frequency Instrument (HFI) data. 
 
-In Planck 2018 VI, using only lowE data and fixing all cosmological parameters including $A_s e^{-2\tau}$, the optical depth constraints was found to be $\tau = 0.0519^{+0.0030}_{-0.0079}$ for the tanh model, $\tau = 0.0504^{+0.0050}
-_{-0.0079}$ for the FlexKnot method (with flat $\tau$ prior) and $\tau = 0.0487^{+0.0038}_{−0.0081}$ for the PC method but using the prior inversion procedure discussed Section~\ref{sec:note_on_priors} and attributed to the slightly lower central value from the PC method to the fact that the priors contain unphysical models. [do we want to check whether the prior inversion procedure could cause a shift at this level? do we want to evaluate this statement?]
+In Planck 2018 VI, using only lowE data and fixing all cosmological parameters including $A_s e^{-2\tau}$, the optical depth constraints was found to be $\tau = 0.0519^{+0.0030}_{-0.0079}$ for the tanh model, 
+$\tau = 0.0504^{+0.0050}_{-0.0079}$ 
+for the FlexKnot method (with flat $\tau$ prior) and 
+$\tau = 0.0487^{+0.0038}_{-0.0081}$
+for the PC method but using the prior inversion procedure
+discussed Section~\ref{sec:note_on_priors} and attributed to the slightly lower central value from the PC method to the fact that the priors contain unphysical models. [do we want to check whether the prior inversion procedure could cause a shift at this level? do we want to evaluate this statement?]
 
 They also found the upper limit on high-redshift optical depth to be: $\tau(15, 30) < 0.006$ for the FlexKnot method with a flat $\tau(15, 30)$ prior or $<0.007$ with a flat knot prior. The PC result for the upper limit was not computed. 
 
@@ -902,7 +945,7 @@ Here lowE means lowE data only, fixing all other cosmological parameters includi
 -0.0079$ (lowE; flat $\tau$ prior; FlexKnot)(68\%); \\
 
 \item $\tau = 0.0487+0.0038
-−0.0081$ (lowE; flat $\tau$ prior; PCA)(68\%).
+-0.0081$ (lowE; flat $\tau$ prior; PCA)(68\%).
 
 \end{itemize}
 
@@ -915,9 +958,9 @@ $\tau(15, 30) < 0.007$ (lowE, flat knot, FlexKnot).\\
 Statements to address:
 
 \begin{enumerate}
-    \item {\textbf{Statement on prior in Planck 2018}:  ``Heinrich & Hu (2018) construct a prior that is uniform on τ, but which increases the allowed unphysical parameter space and is chosen a posteriori. Here we instead use the flat prior constructed by the procedure described in Millea & Bouchet (2018) and Handley & Millea (2019), which does not admit extra unphysical models and gives the most generic prior that leaves the prior on $\tau$ uniform."}
+    \item {\textbf{Statement on prior in Planck 2018}:  ``Heinrich \& Hu (2018) construct a prior that is uniform on $\tau$, but which increases the allowed unphysical parameter space and is chosen a posteriori. Here we instead use the flat prior constructed by the procedure described in Millea \& Bouchet (2018) and Handley \& Millea (2019), which does not admit extra unphysical models and gives the most generic prior that leaves the prior on $\tau$ uniform."}
     
-    \item {Is this statement on tanh in Planck 2018 paper correct?} `` The TANH result gives slightly higher optical depth than the others, which is primarily driven by the fixed duration of reionization assumed."} \\
+    \item {Is this statement on tanh in Planck 2018 paper correct?} ``The TANH result gives slightly higher optical depth than the others, which is primarily driven by the fixed duration of reionization assumed." \\
     
     \item{\textbf{Other comments on our PC prior giving higher optical depth}: ``The PCA result is slightly lower, and is partly affected by the imperfect physicality priors that allow unphysical negative ionization fractions." and ``Millea \& Bouchet showed that the majority of this (2$\sigma$) preference disappeared when using the lower-noise Planck HFI SimLow likelihood (intermediate results reduction of systematics), with an additional sub-dominant effect due to the choice of prior."}
     
@@ -932,7 +975,6 @@ How likelihoods and systematics evolved over time:
 
 
 [high redshift going away should be attributed to better control of systematics in HFI polarization data (changes in the SimAll likelihood compared to SimLow) [cite Planck 2018 results cp]]
-
 
 \end{document}
 
