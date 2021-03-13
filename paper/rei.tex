@@ -344,7 +344,7 @@ from switching to the \texttt{srollv2} likelihood mainly strengthens the upper b
 
 \begin{table}[b]
 \centering
-\caption{PC chain means $\bar m_a$, standard deviations $\sigma(m_a)$, and correlation matrix $R_{ab}$.}
+\caption{PC chain means $\bar m_a$, standard deviations $\sigma(m_a)$, and correlation matrix $R_{ab}$. \ch{transpose this table and add a row for taumj, and quote taufid in the caption}}
 \label{tab:PC_stats}
 \begin{tabular}{|r | r r@{\hskip 0.06in}|r r r r r|}
 \hline
@@ -487,6 +487,7 @@ We also show in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh} the cumulative optical dep
 \subsection{Example 2: high-z model}
 \label{sec:example2}
 
+\wh{pick a consistent name for this model and use it for the section title, discussion, figure captions and labels - much of the discussion uses ``two step" which would be fine and may be better than high-z}
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{results/cosmomc_kde/taulo_prior_test/plot_xez_taulo_0p04_tauhi_0p02.png}
@@ -501,7 +502,7 @@ We also show in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh} the cumulative optical dep
 \begin{figure}[t]
 %\includegraphics[width=0.47\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
 \includegraphics[width=0.47\textwidth]{paper/plots/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.pdf}
-\caption{\ch{Need to fix this plot.}   Comparison of the marginalized posteriors and the 2D 68\% and 95\% C.L. contours for the two-step model described in \refsec{example2} between different likelihoods: The full Planck likelihoods (shaded), the effective likelihoods in the KDE mode with f = 0.14 (blue solid) and in the Gaussian approximation mode (black dashed). The results agree well with each other. As in Fig.~\ref{fig:tanh}, both the KDE and Gaussian modes agree very well with the full likelihood results, with the KDE  contours being slightly broader as expected.
+\caption{\ch{Need to fix this plot.}   Comparison of the marginalized posteriors and the 2D 68\% and 95\% C.L. contours for the two-step model  described in \refsec{example2} between different likelihoods: The full Planck likelihoods (shaded), the effective likelihoods in the KDE mode with f = 0.14 (blue solid) and in the Gaussian approximation mode (black dashed). The results agree well with each other. As in Fig.~\ref{fig:tanh}, both the KDE and Gaussian modes agree very well with the full likelihood results, with the KDE  contours being slightly broader as expected.
 }
 \label{fig:two_parameter_model_2D}
 \end{figure}
@@ -678,7 +679,9 @@ rotated one.  \ch{CH: will try rephrasing.}
 
 The real impact of our range-bound $m_1,m_2$ priors comes from the fact that with the Planck 2018 data, the physicality prior on $m_1$
 removes nearly half of the space that would otherwise be allowed by the
-data at 95\% CL.  This is in contrast to the Planck 2015 data where only a very small region is removed (see Fig.~\ref{fig:plot_m1m2_2015_vs_2018}).  \wh{Maybe add to the $\tau$ vs $\tau_{12}$ figure a version that does not have this $\tau_{12}$ cut.  Discuss more if the difference significant - also mention that even in the direct tanh constraints, the impact of taking $z\gtrsim 6$ has the effect of removing some of the low $\tau$ region.}.
+data at 95\% CL.  This is in contrast to the Planck 2015 data where only a very small region is removed (see Fig.~\ref{fig:plot_m1m2_2015_vs_2018}).  \wh{Maybe add to the $\tau$ vs $\tau_{12}$ figure a version that does not have this $\tau_{12}$ cut.  Mention that even in the direct tanh constraints, the impact of taking $z\gtrsim 6$ also has the effect of removing some of the low $\tau$ region.}
+
+\wh{But it looks like from our conversation (3/12) that this is a small effect on tanh tau with srollv2.  So instead discuss the impact of our priors - mostly it seems to remove negative tau contributions at high $z$ (from looking at the internal Fig 11) and the shifts relative to tanh tau are mostly just the ability to add a small amount of high z ionization that tanh excludes by its form.  Rework this discussion below but I think it is compatible with our conclusion that that our conservative inclusion of some unphysical cases is not biasing our model independent results and instead it is the tanh model that carries a small bias due to its assumed form that excludes the small amount of high-z ionization that is still allowed by the data.}.
 
 As discussed in \S \ref{sec:cumulative}, our range-bound priors 
 are conservative in the sense that all the cases that are excluded are definitely unphysical but some of the cases that are included
@@ -736,13 +739,19 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
 
 \begin{figure}[ht]
 \includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/plot_taumj_decomposition_apply_cut_False_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
-\caption{$\tau_{12,new}$}
+\caption{$\tau_{12,new}$ - \wh{this is an internal plot - leave in for now but also make a version for the paper: just $\tau_{12}$ vs $\tau_{\rm PC}$ in our new convention with and without prior either as a single or separate panel whichever is clearer.}}
+\label{fig:tau12}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.5\textwidth]{/paper/plots/plot_tau12_new_apply_cut_False_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
+\caption{$\tau_{12,new}$ (no prior), with prior version is coming}
 \label{fig:tau12}
 \end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/pl18_taugtz_pc_decomposition_68_only.pdf}
-\caption{$\tau_{12,new}$}
+\caption{$\tau$ decomposition (68\% C.L. only) \wh{this is a temporary plot for internal purposes - what I'm seeing here is that without the physicality cut the high $z$ side goes unphysically negative.  I think this is consistent with our description and the $S_1$ curve.}}
 \label{fig:tau12}
 \end{figure}
 
