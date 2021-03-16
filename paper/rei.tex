@@ -448,17 +448,29 @@ Next we demonstrate the use and the successful recovery of parameter posteriors 
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]
-%{plots/pl18_pc_zmax30_pliklite_srollv2_1015_tau_posterior_fraccov_1p0_burnin_10000_yes_norm_gaussian0p1_0p12_0p14.pdf}
-{paper/plots/pl18_tau_posterior_tanh.pdf}
-\caption{Comparison of the total optical depth posterior for the tanh model in \refsec{example1} between the full Planck likelihoods (solid), our effective likelihood in the kernel density estimate mode with $f = 0.14$ (dotted), and in the Gaussian approximation mode (dashed) \ch{tune plot and line styles}. The KDE mode agree well with the full results, while giving a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$. The Gaussian likelihood works well too, with no extra broadening of the posterior, but a negligible shift in the mean ($\sim XX\%$ of the error in $\tau$). This posterior is symmetric and does not capture the small skewness found in the full and KDE chains. \ch{might need to rephrase. \ch{This is plot is done. (might want to remove text label about zre, or add tanh in legend to mimick legend of Fig. 5)}}
+%normalized by area
+%{results/tau_posterior_comparisons/pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_area.pdf}
+%normalized by max
+{results/tau_posterior_comparisons/pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
+\caption{Comparison of the total optical depth posterior for the tanh model in \refsec{example1} between the full Planck likelihoods (solid), our effective likelihood in the kernel density estimate mode with $f = 0.14$ (dotted), and in the Gaussian approximation mode (dashed) \ch{tune plot and line styles}. The KDE mode agree well with the full results, while giving a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$. The Gaussian likelihood works well too, with no extra broadening of the posterior, but a negligible shift in the mean ($\sim XX\%$ of the error in $\tau$). This posterior is symmetric and does not capture the small skewness found in the full and KDE chains. \ch{might need to rephrase. \ch{This plot is done. Changed convention to normalization by max; to restore figure normalized by area, see comments in latex.}}
 }
 \label{fig:tanh}
-\end{figure}
 
+\end{figure}
+\begin{figure}[ht]
+\includegraphics[width=0.48\textwidth]
+%normalized by area
+%{results/tau_posterior_comparisons/pl18_tau_posterior_tanh_vs_tanh_highz_vs_pc_dz_auto_zre_prior_6p1_normalized_by_area.pdf}
+%normalized by max
+{results/tau_posterior_comparisons/pl18_tau_posterior_tanh_vs_tanh_highz_vs_pc_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
+\caption{\ch{P(tau) PC (with and without prior) vs tanh vs tanh highz (normalized by max)}}
+%double check plot, upper and lower limits seem to cross?
+\label{fig:plot_tau_posterior_PC_vs_tanh_vs_tanh_highz}
+\end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_tanh_direct_vs_kde_vs_gaussian.pdf}
-\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth in the tanh model (described in \refsec{example1}) between the full Planck likelihoods (shaded bands), our effective likelihoods in the KDE mode (blue solid) and Gaussian mode (black dashed). The effective likelihoods results oscillate around zero at high-z because of the truncated representation of the models at 5 PCs (enough to represent any observable effects in the data). While the Gaussian approximation performs fairly well, the more complete KDE mode gives a slightly more accurate 95\% limits on the total optical depth.}
+\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth in the tanh model (described in \refsec{example1}) between the full Planck likelihoods (shaded bands), our effective likelihoods in the KDE mode (blue solid) and Gaussian mode (black dashed). The effective likelihoods results oscillate around zero at high-z because of the truncated representation of the models at 5 PCs (enough to represent any observable effects in the data). While the Gaussian approximation performs fairly well, the more complete KDE mode gives a slightly more accurate 95\% limits on the total optical depth. \ch{add numbers in caption: 95\% (0.039, 0.02), best-fit (0.05290344, 0.005859431)}}
 %double check plot, upper and lower limits seem to cross?
 \label{fig:plot_taugtz_PC_vs_tanh}
 \end{figure}
