@@ -249,18 +249,31 @@ for two example models: the standard steplike model and a two-step model allowin
 \label{sec:cumulative}
 
 Although reionization PCs are mainly a tool for model testing using complete information from CMB polarization, as they do not reconstruct $x_e(z)$ itself, in particular the its rapidly  aspects, they do provide model-independent constraints on redshift integrated quantities such as  the cumulative Thomson optical depth
-\begin{equation}
-\tau(z,z_{\rm max}) = n_{\rm H}(0) \sigma_T \int_z^{z_{\rm max}} dz \frac{x_e(z) (1+z)^{2} }{H(z)},
-\label{eq:cumtau}
+\begin{align}
+\tau(z,z_{\rm max}) & = n_{\rm H}(0) \sigma_T \int_z^{z_{\rm max}} dz \frac{x_e(z) (1+z)^{2} }{H(z)}.
+\end{align}
+where $n_{\rm H}(0)$ is the hydrogen number density at $z=0$, $\sigma_T$ is the Thomson scattering cross-section and $H(z)$ is the Hubble parameter.   \wh{Given the tight constraints on cosmological parameters in the $\Lambda$CDM model, this quantity is well approximated by
+\begin{align}
+\tau_{\rm PC}(z,z_{\rm max})& = \sum_{a=1}^5 m_a \tau_a(z,z_{\rm max}) + \tau_{\rm fid}(z,z_{\rm max}),
+\label{eq:cumtauPC}
+\end{align}
+where
+\begin{align}
+    \tau_a(z,z_{\rm max}) &= 
+    n_{\rm H}^{\rm fid}(0) \sigma_T \int_z^{z_{\rm max}} dz \frac{S_a(z) (1+z)^{2} }{H_{\rm fid}(z)}, \nonumber\\
+    \tau_{\rm fid}(z,z_{\rm max}) &= 
+    n_{\rm H}^{\rm fid}(0) \sigma_T \int_z^{z_{\rm max}} dz \frac{x_e^{\rm fid}(z) (1+z)^{2} }{H_{\rm fid}(z)},
 \end{equation}
-where $n_{\rm H}(0)$ is the hydrogen number density at $z=0$, $\sigma_T$ is the Thomson scattering cross-section and $H(z)$ is the Hubble parameter.  
-\wh{Possibly add a few words on the PC version, list $\tau_a = \tau_a(z_{\rm min},z_{\rm max})$ in an equation or table, and refer to the
-bottom panel of Fig.~\ref{fig:xe}}
-The underlying reason is that CMB observables probe the optical depth and whether it is weighted toward high or low redshift through the amplitude and shape of 
-$C_\ell^{EE}$ -- the higher the redshift, the
-larger the relative contribution at higher $\ell$.
+ where ``fid" refers to evaluation in the fiducial cosmology.   When we omit the redshift arguments, we implicitly mean the total range, e.g. $\tau_{\rm PC}=\tau_{\rm PC}(0,z_{\rm max})$. }
+ 
+ \wh{
+ In Fig.~\ref{fig:xe}, we display $\tau_a(z,z_{\rm max})$.
+ Notice that positive values of the first component $m_1$ mainly provides the optical depth that is accumulated at high redshift whereas {\it negative} values of $m_2$ provides the same for low redshift.    Since these two are the best measured components, the CMB mainly determines the amount of low vs.~high redshift ionization.
+The underlying reason is that in $C_l^{EE}$ the higher the redshift, the
+larger the relative contribution at higher $l$ due to the size of the horizon when the photons scattered.  For the less well measured PCs with $a>2$, the contributions to the total optical depth rapidly diminish and represent finer distinctions in redshift for the cumulative optical depth.}
 
-Specific models essentially place an implicit prior on the redshift dependence of the cumulative optical depth.  
+\wh{
+In the usual approach to constraining reionization in $\Lambda$CDM, one places an implicit prior on the shape of the cumulative optical depth by choosing a model like a near step function reionization and then extracts a single constraint on the total optical depth.}
 %For example, the standard steplike model adopted in CAMB uses a tanh function to parameterize the hydrogen and singly ionized helium reionization
 % \begin{equation}
 %x_e^{\rm true}(z) = \frac{1+f_{\rm He}}{2}\left\{  1+ \tanh\left[ \frac{y(z_*)-y(z)}{\Delta y} \right] \right\},
@@ -285,6 +298,7 @@ m_a^{\pm} = \int_{z_{\rm min}}^{z_{\rm max} } dz \frac{S_a(z)[x_e^{\rm max} -2 x
 \pm x_e^{\rm max} | S_a(z)|}{2(z_{\rm max}-z_{\rm min})}.
 \label{eq:individualprior}
 \end{equation}
+\wh{Here we take $x_e^{\rm max} = 1+ n_{\rm He}/n_{\rm H}$ to account for the contribution of singly ionized helium.}
 In practice the prior on the sum of squares in Eq.~(\ref{eq:prior_sum}) is strictly weaker than the individual priors in Eq.~(\ref{eq:individualprior}) for
 % I think it can't depend on the data but does depend on the truncation
 %the Planck 2018 data \wh{and
@@ -728,7 +742,7 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
 %They also proposed a method to flatten the $\tau$ prior by multiplying its inverse at each point in the multidimensional PC space. The authors claim that adopting the physicality priors in Ref.~\cite{Heinrich:2016ojb} contributed to a large fraction of the shift in the $\tau$ posterior between the tanh and the PC results in the Planck 2015 data. 
 
  \begin{figure}
-          \includegraphics[width=0.9\columnwidth]{paper/plots/pl18_pc_zmax30_pliklite_srollv2_1015_plot_rotated_box_flat_tau_prior_fac_0.8.pdf}
+          \includegraphics[width=0.9\columnwidth]{paper/plots/pl18_pc_zmax30_pliklite_srollv2_1015_plot_rotated_box_flat_tau12.pdf}
           \caption {Priors on the $m_1-m_2$ parameter space: the physicality prior (inset square, solid lines) and a flat prior in
            $\tau_{12}$ and \wh{range-bound flat - also if we change $\tau_{12}$ definitions change the numbers in the labels here} in $m_1-m_2$ (rotated rectangle, dashed lines) 
            %\ch{CH: [why is this flat in m1 and m2?]} 
@@ -744,8 +758,21 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
 \end{figure}
 
 \begin{figure}[ht]
-\includegraphics[width=0.5\textwidth]{/paper/plots/plot_tau12_new_apply_cut_False_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
-\caption{$\tau_{12,new}$ (no prior), with prior version is coming}
+\includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/plot_taumj_decomposition_apply_cut_True_pl18_pc_zmax30_pliklite_srollv2_1015.pdf
+}
+\caption{Internal (with prior version)}
+\label{fig:tau12}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/pl18_taugtz_pc_decomposition_68_only_apply_cut_True.pdf}
+\caption{Internal (with prior version)}
+\label{fig:tau12}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.5\textwidth]{/project2/whu5/chenhe/git/ReiPl18-Results/paper/plots/plot_tau12_new_apply_cut_False_vs_True_pl18_pc_zmax30_pliklite_srollv2_1015_two_panels.pdf}
+\caption{$\tau_{12,new}$ \ch{(took out the cosmology part, only shrunk all posteriors very slightly and shifted them a bit to the left ); with prior version now added, it uses the mean from m3, m4, m5 that are computed from the chains with prior as well.}}
 \label{fig:tau12}
 \end{figure}
 
