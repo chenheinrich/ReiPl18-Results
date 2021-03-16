@@ -369,7 +369,7 @@ from switching to the \texttt{srollv2} likelihood mainly strengthens the upper b
 
 $m_1$ & $-$0.116 & 0.030 & 1.000 & 0.657 & $-$0.208 & $-$0.094 & 0.067 \\
 $m_2$ & $-$0.016 & 0.063 & 0.657 & 1.000 & 0.048 & $-$0.273 & 0.142 \\
-$m_3$ & $$0.078 & 0.098 & $-$0.208 & 0.048 & 1.000 & 0.064 & $-$0.018 \\
+$m_3$ & $$0.078 & 0.098 & $-$0.208 & 0.048 & 1.000 & 0.064 & $-$ \\
 $m_4$ & $-$0.077 & 0.131 & $-$0.094 & $-$0.273 & 0.064 & 1.000 & $-$0.195 \\
 $m_5$ & 0.066 & 0.145 & 0.067 & 0.142 & $-$0.018 & $-$0.195 & 1.000 \\
 
@@ -449,7 +449,7 @@ Next we demonstrate the use and the successful recovery of parameter posteriors 
 \begin{figure}
 \includegraphics[width=0.40\textwidth]
 %{plots/pl18_pc_zmax30_pliklite_srollv2_1015_tau_posterior_fraccov_1p0_burnin_10000_yes_norm_gaussian0p1_0p12_0p14.pdf}
-{plots/plot_tanh_gaussian_MCMC.png}
+{paper/plots/pl18_tau_posterior_tanh.pdf}
 \caption{Comparison of the total optical depth posterior for the tanh model in \refsec{example1} between the full Planck likelihoods (solid), our effective likelihood in the kernel density estimate mode with $f = 0.14$ (dotted), and in the Gaussian approximation mode (dashed) \ch{tune plot and line styles}. The KDE mode agree well with the full results, while giving a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$. The Gaussian likelihood works well too, with no extra broadening of the posterior, but a negligible shift in the mean ($\sim XX\%$ of the error in $\tau$). This posterior is symmetric and does not capture the small skewness found in the full and KDE chains. \ch{might need to rephrase.}
 }
 \label{fig:tanh}
@@ -524,7 +524,7 @@ We also show in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh} the cumulative optical dep
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{plots/pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian_dz_auto_zre_prior_6p1.pdf}
 \caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ for the two-step model, which allows for high-redshift ionization up to $\zmax =30$. Note that a physical model with $\tau(15, \zmax) = 0.02$ is still allowed at the 95\% C.L. whereas it is ruled with the Planck official results using the FlexKnot method $\tau(15, \zmax) < 0.007$. Here again, the KDE and Gaussian likelihoods agree well with the full likelihoods, with better 95\% C.L. limits on the total optical depth. The truncation at 5 PCs causes wiggles at higher redshifts, but these cause negligible differences at most redshifts.
-}
+\ch{CH: plot is done}}
 \label{fig:plot_taugtz_two_step_contours}
 \end{figure}
  
@@ -618,12 +618,14 @@ at $z<z_{\rm max}=30$.   In this section we present these model-independent resu
 
 
 Using Eqs.~(\ref{eq:mmutoxe}) and (\ref{eq:cumtau}), we can derive constraints on the total optical
-depth $\tau=\tau(0,z_{\rm max})$ with the physicality priors of Eq.~\ref{eq:individualprior}.  These are shown in Fig.~XX \wh{figure could include $\tau$, $\tau_{12}$ and possibly $\tau_{12}$ without physicality priors?} and correspond to
+depth $\tau=\tau(0,z_{\rm max})$ with the physicality priors of Eq.~\ref{eq:individualprior}.  These are shown in Fig.~XX 
+
+\wh{figure could include $\tau_{\rm PC}$, tanh tau and 2 step}
+and correspond to
 \beq
 \tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068} \;\; (\texttt{srollv2}),
 \label{eq:tau_pc_zmax30}
 \eeq  
-\wh{comment on comparison to tanh tau, flexknot etc.}
 Notice that the PC mean, while still compatible with the tanh 
 tau derived constraints, is almost $0.5\sigma$ higher...
 
@@ -676,8 +678,8 @@ the implicit prior from $m_1,m_2$ is already nearly flat. \ch{CH: need to ask a 
 
 Ref.~\cite{Millea:2018bko} raised a potential objection regarding more general models.  As illustrated in Fig.~\ref{fig:prior_box}, lines of constant $\tau_{12}$ are rotated compared with the $m_1$,
 $m_2$ axis.  Therefore, the range-bound flat prior in $m_1,m_2$ (blue square) considered {\it alone} corresponds to a prior that is not flat in $\tau_{12}$ due to the extent  of the allowed parameter space
-for each of its values, e.g. at  left corners (Fig.~\ref{fig:prior_box} solid square or lowest $m_1$) of the range $\tau_{12}=0.018$
-than at $\tau_{12} = 0.125$ \wh{revise numbers} and the implied prior increases linearly from zero between the two.
+for each of its values, e.g. at  left corners (Fig.~\ref{fig:prior_box} solid square or lowest $m_1$) of the range $\tau_{12}=0.023$
+than at $\tau_{12} = 0.130$ and the implied prior increases linearly from zero between the two.
    Ref.~\cite{Millea:2018bko} suggest 
 inverting this prior point-by-point in the $m_a$ parameter space by dividing by the implied prior $P(\tau_{\rm PC}) [ \approx P(\tau_{12})]$ and this reweighting was implemented in the \ch{Planck 2018 paper on cosmological parameters~\cite{Aghanim:2018eyx}}.
 First notice that this inversion would in fact then produce a non-flat prior on $\tau$ for the tanh model
@@ -744,10 +746,10 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
  \begin{figure}
           \includegraphics[width=0.9\columnwidth]{paper/plots/pl18_pc_zmax30_pliklite_srollv2_1015_plot_rotated_box_flat_tau12.pdf}
           \caption {Priors on the $m_1-m_2$ parameter space: the physicality prior (inset square, solid lines) and a flat prior in
-           $\tau_{12}$ and \wh{range-bound flat - also if we change $\tau_{12}$ definitions change the numbers in the labels here} in $m_1-m_2$ (rotated rectangle, dashed lines) 
+           $\tau_{12}$ and in $m_1-m_2$ (rotated rectangle, dashed lines) 
            %\ch{CH: [why is this flat in m1 and m2?]} 
            % flat in 2D or locally flat
-           which are aligned with lines of constant $\tau_{12}$ (light gray lines). Note that although the physicality prior allows for more parameter space at higher $\tau_{12}$, that is also the region excluded by the data constraints (ellipses). The only difference in the allowed region is that the physicality prior clips the low $m_1$ portion of the allowed region due to the physicality condition and the assumption that reionization occurs at $z\ge 6$.} 
+           which are aligned with lines of constant $\tau_{12}$ (light gray lines). Note that although the physicality prior allows for more parameter space at higher $\tau_{12}$, that is also the region excluded by the data constraints (ellipses). The only difference in the allowed region is that the physicality prior clips the low $m_1$ portion of the allowed region due to the physicality condition and the assumption that reionization occurs at $z\ge 6$. \ch{CH: numbers changed according to new definition with mean of m3, m4, m5 obtained from chains with priors (shifted numbers by about 0.005 in tau.} \ch{CH: this plot is done}} 
           \label{fig:prior_box}
 \end{figure}
 
@@ -758,21 +760,15 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
 \end{figure}
 
 \begin{figure}[ht]
-\includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/plot_taumj_decomposition_apply_cut_True_pl18_pc_zmax30_pliklite_srollv2_1015.pdf
-}
-\caption{Internal (with prior version)}
+\includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/plot_taumj_decomposition_apply_cut_True_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
+\caption{ \ch{CH: this is the same as above but with priors; also tested that $\tau_{12, new}$ with mean of m3, m4, m5 computed from chains with prior applied performs better here (as expected) from chains without prior.}}
 \label{fig:tau12}
 \end{figure}
 
 \begin{figure}[ht]
-\includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/pl18_taugtz_pc_decomposition_68_only_apply_cut_True.pdf}
-\caption{Internal (with prior version)}
-\label{fig:tau12}
-\end{figure}
-
-\begin{figure}[ht]
-\includegraphics[width=0.5\textwidth]{/project2/whu5/chenhe/git/ReiPl18-Results/paper/plots/plot_tau12_new_apply_cut_False_vs_True_pl18_pc_zmax30_pliklite_srollv2_1015_two_panels.pdf}
-\caption{$\tau_{12,new}$ \ch{(took out the cosmology part, only shrunk all posteriors very slightly and shifted them a bit to the left ); with prior version now added, it uses the mean from m3, m4, m5 that are computed from the chains with prior as well.}}
+\includegraphics[width=0.5\textwidth]{paper/plots/plot_tau12_new_apply_cut_False_vs_True_pl18_pc_zmax30_pliklite_srollv2_1015_two_panels.pdf}
+\caption{$\tau_{12}$ \ch{(CH: Official version used for paper; plot is done.\\
+More details: took out the cosmology part, only shrunk posteriors very slightly and shifted them a bit to the left for the top panel; with prior version now added in the bottom panel, it uses the mean from m3, m4, m5 that are computed from the chains with prior as well.)}}
 \label{fig:tau12}
 \end{figure}
 
@@ -782,6 +778,17 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
 \label{fig:tau12}
 \end{figure}
 
+\begin{figure}[ht]
+\includegraphics[width=0.5\textwidth]{results/tau_pc_decomposition/pl18_taugtz_pc_decomposition_68_only_apply_cut_True.pdf}
+}
+\caption{\ch{Internal for now (with prior version)}}
+\label{fig:tau12}
+\end{figure}
+
+
+%
+%
+%
 \subsection{Cumulative optical depth}
 
 The differences between model dependent and model independent approaches are larger for the allowed cumulative optical depth $\tau(z, \zmax)$ at high $z$
@@ -843,7 +850,7 @@ For the high-redshift optical depth, we also obtain consistent upper limits
 
 \begin{figure}[ht]
 \includegraphics[width=0.5\textwidth]{paper/plots/pl18_taugtz_pc_zmax30_pl18_srollv2_with_and_without_physicality_prior.pdf}
-\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ from PC chains with (shaded) and without (black) applying the physicality prior. While the lower limits on $\tau(z, \zmax)$ are lowered when more unphysical models are included, the upper limits do not vary significantly (slightly lowered).  The total $\tau$ distribution is broadened only toward the lower $\tau$. \ch{Discuss in text the small difference in upper limits at $\tau(15, \zmax)$ is such that if one could remove unphysical models inside our current prior range, $\tau(15, \zmax)$ upper limit would be only slightly looser.}
+\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ from PC chains with (shaded) and without (black) applying the physicality prior. While the lower limits on $\tau(z, \zmax)$ are lowered when more unphysical models are included, the upper limits do not vary significantly (slightly lowered).  The total $\tau$ distribution is broadened only toward the lower $\tau$. \ch{Discuss in text the small difference in upper limits at $\tau(15, \zmax)$ is such that if one could remove unphysical models inside our current prior range, $\tau(15, \zmax)$ upper limit would be only slightly looser.} \ch{CH: plot is done}
 }
 % no prior: 95\% C.L.  = [-0.01935756790924691, 0.021029019067727237]
 % with prior: {'z': 15, 'mean': 0.00694422689213187, 'std': 0.007568921831067864, 'limit68': [-0.0007215571045808687, 0.014684826477572082], 'limit95': [-0.006316156744039184, 0.02284538046347211]}
@@ -855,7 +862,7 @@ For the high-redshift optical depth, we also obtain consistent upper limits
 
 \begin{figure}[ht]
 \includegraphics[width=0.45\textwidth]{paper/plots/pl18_taugtz_pc_zmax30_pl15_vs_pl18_simallEE_vs_pl18_srollv2.pdf}
-\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth with different Planck likelihoods. \textit{Top}: The Planck 2015 vs Planck 2018 likelihoods, the latter including the official low-$\ell$ $EE$ likelihood $\texttt{simallEE}$. \textit{Bottom}: The Planck 2018 likelihoods using $\texttt{simallEE}$ for the low-$\ell$ $EE$ likelihood vs \texttt{srollv2} which has better foreground cleaning. Both yield consistent high-redshift constraints, whereas the \texttt{srollv2} likelihood tightens the lower limit on the low-$z$ contribution, resulting on a tighter lower limit and higher mean for the total $\tau$.
+\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth with different Planck likelihoods. \textit{Top}: The Planck 2015 vs Planck 2018 likelihoods, the latter including the official low-$\ell$ $EE$ likelihood $\texttt{simallEE}$. \textit{Bottom}: The Planck 2018 likelihoods using $\texttt{simallEE}$ for the low-$\ell$ $EE$ likelihood vs \texttt{srollv2} which has better foreground cleaning. Both yield consistent high-redshift constraints, whereas the \texttt{srollv2} likelihood tightens the lower limit on the low-$z$ contribution, resulting on a tighter lower limit and higher mean for the total $\tau$. \ch{CH: plot is done}
 }
 \label{fig:plot_taugtz_2015_vs_2018_simallEE_vs_2018_srollv2}
 \end{figure}
@@ -863,7 +870,7 @@ For the high-redshift optical depth, we also obtain consistent upper limits
 
 \begin{figure}[ht]
 \includegraphics[width=0.45\textwidth]{paper/plots/pl18_taugtz_pl18_srollv2_pc_zmax30_vs_zmax50.pdf}
-\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth from PC chains with $\zmax = 30$ vs $\zmax = 50$ using the Planck 2018 likelihoods. The constraints on the cumulative high-redshift optical depth are shown to be robust to $\zmax$. Both the low-redshift constraints and the high-redshift upper limits agree well.
+\caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth from PC chains with $\zmax = 30$ vs $\zmax = 50$ using the Planck 2018 likelihoods. The constraints on the cumulative high-redshift optical depth are shown to be robust to $\zmax$. Both the low-redshift constraints and the high-redshift upper limits agree well. \ch{CH: plot is done}
 }
 \label{fig:plot_taugtz_zmax30_vs_zmax50}
 \end{figure}
