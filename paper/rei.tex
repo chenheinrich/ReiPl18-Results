@@ -462,13 +462,8 @@ Next we demonstrate the use and the successful recovery of parameter posteriors 
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]
-%normalized by area
-%{results/tau_posterior_comparisons/pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_area.pdf}
-%normalized by max
-{results/tau_posterior_comparisons/pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
-\caption{Comparison of the total optical depth posterior for the tanh model in \refsec{example1} between the full Planck likelihoods (shaded), our effective likelihood in the kernel density estimate mode with $f = 0.14$ (blue solid), and in the Gaussian approximation mode (black dashed). The KDE mode agree well with the full results, while giving a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$. The Gaussian likelihood works well too, with no extra broadening of the posterior, but a negligible shift in the mean ($\sim XX\%$ of the error in $\tau$). This posterior is symmetric and does not capture the small skewness found in the full and KDE chains. \ch{might need to rephrase. 
-\wh{drop f=0.14 label? it's the default - add a label that this is tanh} \ch{add text label for tanh, two step ... ; also add x, y axis label with tau tanh etc}
-}
+{paper/plots/pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
+\caption{Comparison of the total optical depth posterior for the tanh model in \refsec{example1} between the exact likelihood (shaded) and our effective likelihoods in the kernel density estimate (KDE) mode (blue solid) and the Gaussian approximation mode (black dashed). The KDE mode agree well with the exact results, while giving a slightly broader posterior because the kernel density estimate in the PC space introduces smoothing at roughly $\sim$7\% level in the parameter posterior corresponding to $f = 0.14$. The Gaussian likelihood works well too, with no extra broadening of the posterior, but a negligible shift in the mean ($\sim XX\%$ of the error in $\tau$). This posterior is symmetric and does not capture the small skewness found in the exact and KDE chains. \ch{might need to rephrase.} 
 }
 \label{fig:tanh}
 
@@ -555,7 +550,8 @@ we can see that the  tanh model does not allow for high redshift ionization by c
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.48\textwidth]{plots/pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian_dz_auto_zre_prior_6p1.pdf}
+\includegraphics[width=0.48\textwidth]
+{paper/plots/pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian.pdf}
 \caption{Comparison of the 68\% and 95\% C.L. constraints on the cumulative optical depth $\tau(z, \zmax)$ for the two-step model, which allows for high-redshift ionization up to $\zmax =30$. Note that a physical model with $\tau(15, \zmax) = 0.02$ is still allowed at the 95\% C.L. whereas it is ruled with the Planck official results using the FlexKnot method $\tau(15, \zmax) < 0.007$. Here again, the KDE and Gaussian likelihoods agree well with the full likelihoods, with better 95\% C.L. limits on the total optical depth. The truncation at 5 PCs causes wiggles at higher redshifts, but these cause negligible differences at most redshifts.}
 \label{fig:plot_taugtz_two_step_contours}
 \end{figure}
