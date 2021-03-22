@@ -93,9 +93,9 @@ pdfsubject={}
 
 We publish Relike, an fast and accurate effective likelihood code based on constraints from the latest Planck 2018 data on the CMB reionization principal components (PC). This code allows one to constrain arbitrary global ionization history $x_e(z)$ between $6 < z < 30$ with Planck without having to modify CAMB each time a different model is tested. We tested the code on two example models
 %: 1) the tanh model with a single transition redshift, and 2) a two-parameter model with two transitions allowing for a high-redshift ionization plateau. 
-which showed good agreement with directly 
+which showed good agreement with
 %The Relike chains converged 300$\times$ and 100$\times$ faster for model 1 and 2 respectively, and showed good agreement compared to directly
-sampling the original Planck likelihoods.
+sampling the exact Planck likelihoods.
 We also find that contrary to the Planck 2015, the Planck 2018 PC posteriors are well approximated by a Gaussian in PC amplitude space, this allows us to replace the kernel density estimate (KDE) evaluation of the PC chains in the code with an even faster Gaussian evaluation. We supply both the KDE and Gausisan modes of the likelihood in a CosmoMC implementation, and the Gaussian mode alone in an easy-to-use standalone python likelihood package that can be connected to any other sampler. We expect the code release to dramatically reduce the time for testing individual ionization models, and to provide consistent yet fast way of modeling the ionization history in joint analyses of Planck with other reionization datasets such as 21cm, luminosity function, star formation history, etc.
 %We expect the code release to be useful for individual model testing as the user would not need to modify CAMB every time a different ionization history model is needed; the effective likelihood code also makes it easier to perform joint constraints of the Planck data with other reionization data such as 21cm, luminosity functions, star formation rate measurements, etc.
 Finally, we derive model-independent constraints: $\tau_{\rm PC} = ...$ and $\tau_{\rm PC}(15, 30) < XX $ (95\% C.L.). The upper limits on high-redshift optical depth is at least a factor of 2 looser those reported in the Planck 2018 cosmological parameter paper using the FlexKnot method; we demonstrate robustness of our results by explicitly recovering  $\tau_{\rm PC}(15, 30) < XX $ (95\% C.L.) using a  two-parameter toy model without using PCs.  
@@ -255,7 +255,7 @@ P({\bf p}| {\rm data}) \propto {\cal L}_{\rm PC}\left[ {\rm data}|\mathbf{m}(\bf
 \end{equation}
 with PC\,=\,KDE or Gaussian.
 This approach obviates the need to implement specific reionization models into CAMB and conduct separate COSMOMC sampling for each, thereby significantly reducing both human and computational effort.
-In \S~\ref{sec:effective_likelihood} we test the effective KDE and Gaussian approaches against a direct implementation
+In \S~\ref{sec:effective_likelihood} we test the effective KDE and Gaussian likelihoods against an exact implementation
 for two example models: the standard steplike model and a two-step model allowing for high-redshift ionization.
 
 
@@ -455,7 +455,7 @@ To obtain reionization model parameter posteriors, one samples this likelihood w
 We have also provided an MCMC sampler for models of high dimension (currently in CosmoMC). Note that the model parameters or priors must be arranged to explicitly satisfy 
 full ionization below $z=6$. To avoid over-smoothing parameter posteriors while maintaining accuracy during the KDE operation, we suggest using the default value of $f = 0.14$. \wh{Is Gaussian part of this package or a separate package? either way should mention this too.}
 
-Next we demonstrate the use and the successful recovery of parameter posteriors using the effective likelihood code by comparing them to a direct MCMC analysis for two examples: 1) The tanh model, which is the standard approach used in CAMB; 2) a two-step toy model which has one additional parameter modeling a high-$z$ ionization plateau before the transition to full ionization in the canonical tanh model.
+Next we demonstrate the use and the successful recovery of parameter posteriors using the effective likelihood code by comparing them to an exact MCMC analysis for two examples: 1) The tanh model, which is the standard approach used in CAMB; 2) a two-step toy model which has one additional parameter modeling a high-$z$ ionization plateau before the transition to full ionization in the canonical tanh model.
 
 \subsection{Example 1: tanh model}
 \label{sec:example1}
@@ -504,7 +504,7 @@ Instead of the effective likelihood, we can alternately use its Gaussian approxi
 %and amounts to one evaluation of the multi-variate Gaussian function per sample in the reionization model parameter space. 
 We obtain for the tanh model $\tau = 0.0594 \pm 0.0063$. While it is a good approximation (the mean and standard deviation are similar to those from the full likelihood and the effective likelihood using KDE), we see in Fig.~\ref{fig:tanh} that the peak of the distribution for the Gaussian likelihood is offset from the other two. This is because the Gaussian likelihood is by definition symmetric in the PC space and so it cannot capture any skewness in the PC distribution. As a result the tanh $\tau$ constraints are mostly symmetric too, $\tau = 0.0594_{-0.0064}^{+0.0064}$ if we consider the 68\% lower and upper limits, whereas the full KDE result $\tau = 0.0588_{-0.0072}^{+0.0060}$ is able to capture the skewness in the distribution
 \wh{seems like we should quote the direct results to make the claim that it is correctly capturing skewness - also,  is there a reason why we start with symmetric errors instead of just giving these as the main results (maybe also a displayed equation to highlight)? if it's to quote the effect of 7\% smoothing we could still do that on the average of + and - errors.}
-$\Delta \tau \sim 0.0012$, a level consistent with shifts in the peaks seen in Fig.~\ref{fig:tanh}. \ch{Add $\tau(15,\zmax)$ 95\% upper limit for tanh direct MCMC and KDE.} \ch{Change direct MCMC to exact everywhere in text and plots.}
+$\Delta \tau \sim 0.0012$, a level consistent with shifts in the peaks seen in Fig.~\ref{fig:tanh}. \ch{Add $\tau(15,\zmax)$ 95\% upper limit for tanh direct MCMC and KDE.} 
 
 \ch{[double check all these numbers again (some chains are longer now)]}.
 
@@ -518,7 +518,7 @@ Notice that because of the truncation of the PC expansion at $a=5$, this represe
 }
 
 \wh{
-In the direct or in the effective likelihood approaches (ignoring these oscillations),
+In the exact or in the effective likelihood approaches (ignoring these oscillations),
 we can see that the  tanh model does not allow for high redshift ionization by construction.   As we shall next see in the next example the data themselves do allow for a small amount of high redshift ionization when the form of the model permits them.
 %As we shall see in \S \ref{sec:modelindependent} this is also captured in our model independent approach to cumulative optical depth constraints. 
 }
@@ -527,8 +527,6 @@ we can see that the  tanh model does not allow for high redshift ionization by c
 
 \subsection{Example 2: the two-step model}
 \label{sec:example2}
-
-\ch{need to label tanh highz as two step now in plots.}
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]{paper/plots/plot_xe_tanh_highz.pdf}
@@ -576,7 +574,7 @@ For both the full likelihood and effective likelihood runs, we adopt the flat pr
 %except that $\taulo \in [0.03, \tau_{\rm max}]$ for the effective likelihood run. [not sure if this last sentence is needed; since we put a zre prior anyways.]
 We further apply a prior cut in $\zre$ space to keep models with $\zre > 6.1$ for both the full and effective likelihood chains as in the tanh model. Here we used again $f = 0.14$ in the KDE computation. \wh{if we never show anything but $f=0.14$ we could just say it's always this value in the method section}
 
-In ~\reffig{two_parameter_model_2D}, we compare the 1D and 2D marginalized posteriors of $\taulo$ and $\tauhi$.\wh{The direct, KDE and Gaussian PC treatments again agree very well.} 
+In ~\reffig{two_parameter_model_2D}, we compare the 1D and 2D marginalized posteriors of $\taulo$ and $\tauhi$.\wh{The exact, KDE and Gaussian PC treatments again agree very well.} 
 Note that in the canonical tanh model $\taulo \lesssim 0.04$ roughly corresponds to $\zre < 6$ so that the posteriors distort near this value.
 The models in Fig.~\ref{fig:two_step_model} are represented by the star and cross symbols for the best fit case and a model allowed at the 95\% CL.
 
@@ -834,7 +832,7 @@ As with the tanh model, the \texttt{srollv2} likelihood provides tighter constra
           \label{fig:prior_box}
 \end{figure}
 
-
+\ch{Might need to change all simallEE labels to lowE in plots and in text}
 
 
 
@@ -936,7 +934,7 @@ For the high-redshift optical depth, we also obtain consistent upper limits
 
 In conclusion, we used constraints on reionization principal components with respect to the large-scale $EE$ data to produce a fast and accurate effective likelihood for the final release of Planck 2018 data. In lieu of the official $\texttt{simall\_EE}$ likelihood for low-$\ell$ $EE$ we used the independent later release of the $\texttt{srollv2}$ likelihood in 2019 which has better foreground cleaning allowing for slightly improved parameter constraints. Our effective likelihood code package is called $\textsc{Relike}$ [to be changed] and is available publicly on Github. This code is beneficial for the community for the purpose of testing \textit{any} global ionization history between $6 < z < 30$ with the Planck data without having to modify CAMB which can be very cumbersome to do. The convergence time to reach the Gilman-Rubin criteria $R_{-1} < 0.01$ is about 300 times less with the Relike code than with a traditional MCMC sampling of the Planck likelihood for the one-parameter canonical tanh model. 
 
-To test this effective Planck likelihood code, we used two examples: 1) a canonical tanh model with a single transition redshift, and 2) a two-parameter model consisting of two tanh transitions allowing in addition for a high-redshift ionization plateau compared to the first example. We demonstrated accuracy of the Relike code for both examples by comparing the constraints on the reionization model parameters with those obtained from directly sampling the full Planck likelihood and using a modified CAMB code. We also showed great agreement between the confidence levels of the cumulative optical depth evolution between the 5-PC representation and the exact ionization model.
+To test this effective Planck likelihood code, we used two examples: 1) a canonical tanh model with a single transition redshift, and 2) a two-parameter model consisting of two tanh transitions allowing in addition for a high-redshift ionization plateau compared to the first example. We demonstrated accuracy of the Relike code for both examples by comparing the constraints on the reionization model parameters with those obtained from sampling the exact Planck likelihoods and using a modified CAMB code. We also showed great agreement between the confidence levels of the cumulative optical depth evolution between the 5-PC representation and the exact ionization model.
 
 Besides conducting explicit model testing with the Relike code, we also obtained model-independent constraints on the reionization history using the PC chains themselves. We summarize these results below.
 
