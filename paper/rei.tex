@@ -80,7 +80,7 @@ pdfsubject={}
 
 \begin{document}
 	
-\title{\ch{\textsc{RELIKE}}: Reionization Effective Likelihood from Planck 2018 Data (?)} 
+\title{\ch{RELIKE}: Reionization Effective Likelihood from Planck 2018 Data (?)} 
 
 \author{Chen Heinrich}\email{chenhe@caltech.edu}
 \affiliation{California Institute of Technology, Pasadena, California 91109, USA}
@@ -93,7 +93,7 @@ pdfsubject={}
 
 \begin{abstract}
 
-We publish \textsc{RELIKE} (Reionization Effective Likelihood), an fast and accurate effective likelihood code based on constraints from the latest Planck 2018 data on the CMB reionization principal components (PC). This code allows one to constrain arbitrary global ionization history $x_e(z)$ between $6 < z < 30$ with Planck without having to modify CAMB each time a different model is being tested. We tested the code on two example models which showed good agreement with sampling the exact Planck likelihoods.
+We publish RELIKE (Reionization Effective Likelihood), an fast and accurate effective likelihood code based on constraints from the latest Planck 2018 data on the CMB reionization principal components (PC). This code allows one to constrain arbitrary global ionization history $x_e(z)$ between $6 < z < 30$ with Planck without having to modify CAMB each time a different model is being tested. We tested the code on two example models which showed good agreement with sampling the exact Planck likelihoods.
 We also find that contrary to Planck 2015, the Planck 2018 PC posteriors are well approximated by a Gaussian in PC amplitude space, this allows us to replace the kernel density estimate (KDE) evaluation of the PC chains in the code with an even faster Gaussian evaluation. We supply both the KDE and Gausisan modes of the likelihood in a CosmoMC implementation, and the Gaussian mode alone in an easy-to-use standalone python likelihood package that can be connected to any other sampler. We expect the code release to dramatically reduce the time for testing individual \ch{global} ionization models, and to provide consistent yet fast way of modeling the ionization history in joint analyses of Planck with other reionization datasets such as 21cm, luminosity function, star formation history, etc.
 Finally, we derive model-independent constraints: $\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068}$ and $\tau_{\rm PC}(15, 30) < 0.023 $ (95\% C.L.). The upper limits on high-redshift optical depth is at least a factor of 2 looser than those reported in the Planck 2018 cosmological parameter paper using the FlexKnot method; we demonstrate robustness of our results by explicitly recovering  \ch{$\tau_{\rm 2step}(15, 30) < 0.013 $ (95\% C.L.)} using a  two-step toy model without using PCs.}  
 
@@ -378,7 +378,7 @@ from switching to the \texttt{SRoll2} likelihood mainly strengthens the upper bo
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
-\caption{Changes in the best constrained $m_1-m_2$ PC plane between Planck 2015 (\wh{red}), Planck 2018 (blue, \texttt{SRoll2}  \wh{decide whether to have this labeled}), and Planck 2018 but with the \texttt{SimAll} likelihood (\wh{green?}).   With Planck 2018, the \texttt{SRoll2} likelihood moderately improves the best constrained direction and raises the optical depth.  }
+\caption{Changes in the best constrained $m_1-m_2$ PC plane between Planck 2015 (\wh{red}), Planck 2018 (blue, \texttt{SRoll2}  \wh{decide whether to have this labeled}), and Planck 2018 but with the \texttt{SimAll} likelihood (\wh{green?}) \ch{CH: ok will not label; taking a while since I can't plot a square anymore, figuring out aspect ratio}.   With Planck 2018, the \texttt{SRoll2} likelihood moderately improves the best constrained direction and raises the optical depth.  }
 \label{fig:plot_m1m2_2015_vs_2018}
 \end{figure}
 
@@ -465,7 +465,7 @@ Next we demonstrate the use and the successful recovery of parameter posteriors 
 {paper/plots/pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
 \caption{Total optical depth $\tau_{\rm tanh}$ posterior for the tanh model in \refsec{example1} for the exact (Planck 2018) likelihood (shaded), KDE PC 
 (blue solid) and KDE Gaussian (black dashed)
-effective likelihood. The overall agreement is excellent and the KDE results even capture the small skewness of the exact result. \wh{maybe $\tau_{\rm tanh}$ }
+effective likelihood. The overall agreement is excellent and the KDE results even capture the small skewness of the exact result.
 }
 \label{fig:tanh}
 
@@ -574,7 +574,8 @@ suggested change in model - or find another reason for plotting the currently ch
 \begin{figure}
 \includegraphics[width=0.48\textwidth]
 {paper/plots/pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian.pdf}
-\caption{Cumulative optical depth in the two step model (as in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh}).  Agreement between the exact, KDE PC and Gaussian PC likelihoods is again excellent and show that a small amount of high-$z$ ionization is allowed.  \wh{The form of the model requires that the cumulative optical depth steadily declines above the first step at $z_1 \sim 6-7$ especially for $z\gtrsim 15$.} \wh{Maybe $\tau_{\rm 2step}$}  }
+\caption{Cumulative optical depth in the two step model (as in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh}).  Agreement between the exact, KDE PC and Gaussian PC likelihoods is again excellent and show that a small amount of high-$z$ ionization is allowed. The form of the model requires that the cumulative optical depth steadily declines above the first step at $z_1 \sim 6-7$ especially for $z\gtrsim 15$.
+}
 \label{fig:plot_taugtz_two_step_contours}
 \end{figure}
  
@@ -923,7 +924,7 @@ cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ to changes from the default $
 \section{Conclusion}
 \label{sec:conclusion}
 
-In conclusion, we used constraints on reionization principal components with respect to the large-scale $EE$ data to produce a fast and accurate effective likelihood for the final release of Planck 2018 data. In lieu of the official $\texttt{SimAll}$ likelihood for low-$\ell$ $EE$ we used the independent later release of the $\texttt{SRoll2}$ likelihood in 2019 which has better foreground cleaning allowing for slightly improved parameter constraints. Our effective likelihood code package is called $\textsc{Relike}$ [to be changed] and is available publicly on Github. This code is beneficial for the community for the purpose of testing \textit{any} global ionization history between $6 < z < 30$ with the Planck data without having to modify CAMB which can be very cumbersome to do. The convergence time to reach the Gilman-Rubin criteria $R_{-1} < 0.01$ is about 300 times less with the Relike code than with a traditional MCMC sampling of the Planck likelihood for the one-parameter canonical tanh model. 
+In conclusion, we used constraints on reionization principal components with respect to the large-scale $EE$ data to produce a fast and accurate effective likelihood for the final release of Planck 2018 data. In lieu of the official $\texttt{SimAll}$ likelihood for low-$\ell$ $EE$ we used the independent later release of the $\texttt{SRoll2}$ likelihood in 2019 which has better foreground cleaning allowing for slightly improved parameter constraints. Our effective likelihood code package is called Relike and is available publicly on Github. This code is beneficial for the community for the purpose of testing \textit{any} global ionization history between $6 < z < 30$ with the Planck data without having to modify CAMB which can be very cumbersome to do. The convergence time to reach the Gilman-Rubin criteria $R_{-1} < 0.01$ is about 300 times less with the Relike code than with a traditional MCMC sampling of the Planck likelihood for the one-parameter canonical tanh model. 
 
 To test this effective Planck likelihood code, we used two examples: 1) a canonical tanh model with a single transition redshift, and 2) a two-parameter model consisting of two tanh transitions allowing in addition for a high-redshift ionization plateau compared to the first example. We demonstrated accuracy of the Relike code for both examples by comparing the constraints on the reionization model parameters with those obtained from sampling the exact Planck likelihoods and using a modified CAMB code. We also showed great agreement between the confidence levels of the cumulative optical depth evolution between the 5-PC representation and the exact ionization model.
 
