@@ -123,12 +123,10 @@ In a re-analysis of the Planck 2015 data with PCs~\cite{Heinrich:2016ojb}, a com
 
 \ch{I'm here}
 Since the release of the Planck 2018 official analysis, an improved likelihood for the low-$\ell$ $E$-mode polarization was publicly released in 2019. This new likelihood,
-$\texttt{srollv2}$\footnote{SRoll2: \url{http://sroll20.ias.u-psud.fr.}}
+$\texttt{SRoll2}$\footnote{SRoll2: \url{http://sroll20.ias.u-psud.fr.}}
 ~\cite{Delouis:2019bub}, allows for improved reionization constraints with its better foreground modeling: The error bar on the optical depth $\tau$ in the tanh model is reduced by about $\sim40\%$ from XX to $\tau = 0.0566^{+0.0053}_{−0.0062}$~\cite{}.\ch{doesn't seem to be true anymore, 40\% was compared to the Planck 2018 likelihood paper result, the cosmo parameter paper seems to have similar error bars: $0.0519^{+0.0030}_{−0.0079}$.
 
-\todo{CH: might need to change all instances of \textt{srollv2} to \textt{SRoll2} as used in the original sroll2 paper; also possibly \textt{simall\_EE} to \textt{SimAll} as used in the Planck 2018 paper.}
-
-Since the Planck final release will likely be the best full-sky survey from space available to us in the next decade, it is important to extract all the information present in the data. In light of the $\texttt{srollv2}$ likelihood release, we obtain new reionization PC constraints with this latest likelihood. Enabled by the completeness property of the PCs, we also turn these constraints into an effective likelihood useful for assessing the CMB likelihood of \textit{any} reionization model out to $\zmax$ = 30, following techniques tested in Ref.~\cite{Heinrich:2016ojb}. 
+Since the Planck final release will likely be the best full-sky survey from space available to us in the next decade, it is important to extract all the information present in the data. In light of the $\texttt{SRoll2}$ likelihood release, we obtain new reionization PC constraints with this latest likelihood. Enabled by the completeness property of the PCs, we also turn these constraints into an effective likelihood useful for assessing the CMB likelihood of \textit{any} reionization model out to $\zmax$ = 30, following techniques tested in Ref.~\cite{Heinrich:2016ojb}. 
 
 \ch{write this part}
 The code is publicly available on GitHub\footnote{[give link]}. [a bit more description here]. [comment on speed]. [comment on joint likelihood].
@@ -136,7 +134,7 @@ The code is publicly available on GitHub\footnote{[give link]}. [a bit more desc
 Extending PCs to cover up to $z_{\rm max} = 50$,we verified that there is no hint of ionization beyond $z>30$ in this Planck data release. But for the high-z ionization below $z=30$, we did find a less stringent constraint on $\tau(15, 30)$, the optical depth in the redshift range 15 to 30, that is XX times less stringent than the Planck official results using Flex Knots \ch{[fill in number]} in Ref.~\cite{Aghanim:2018eyx}. Moreover, we demonstrate that the PC results of Ref.~\cite{Aghanim:2018eyx} suffers from a logical flaw in the treatment of its priors following Ref.
 ~\cite{Millea:2018bko} and ends up penalizing lower optical depth models. [quote difference in tau(15, 30) or total tau possibly attributed to this treatment]. %We follow the appendix of Ref.~\cite{Heinrich:2018btc} for the Planck 2015 data
 
-The paper is structured as follows. We first describe in \S\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in \S\ref{sec:results}, we describe the PC results using the Planck 2018 + \texttt{srollv2} likelihood, and compare with previous results in literature. Then in \S\ref{sec:effective_likelihood}, we present the effective likelihood code, and demonstrate its fidelity with two examples, 1) the standard steplike model, and 2) a two-parameter model where a plateau of ionization at high-$z$ is added to the standard one-step model for illustration purposes. Finally, we summarize our results and conclude in \S\ref{sec:conclusion}.
+The paper is structured as follows. We first describe in \S\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in \S\ref{sec:results}, we describe the PC results using the Planck 2018 + \texttt{SRoll2} likelihood, and compare with previous results in literature. Then in \S\ref{sec:effective_likelihood}, we present the effective likelihood code, and demonstrate its fidelity with two examples, 1) the standard steplike model, and 2) a two-parameter model where a plateau of ionization at high-$z$ is added to the standard one-step model for illustration purposes. Finally, we summarize our results and conclude in \S\ref{sec:conclusion}.
 
 %
 %
@@ -331,7 +329,7 @@ In other words, no physical model is excluded by these priors but some unphysica
 \label{sec:results}
 We now present the complete reionization constraints obtained from the Planck 2018 likelihoods using the principal components.
 \subsection{Constraints on Principal Components}
-We use the official Planck likelihoods [add citation] \texttt{plik\_lite} for the high-$\ell$ $TT$, $TE$ and $EE$ as well as \texttt{lowl} for the low-$\ell$ $TT$ throughout this paper. We have tested that our results do not change if in lieu of \texttt{plik\_lite} we used the full \texttt{plik\_full} likelihood in which the foreground parameters have not been marginalized over. For the low-$\ell$ $EE$ likelihood, we use the third-party released \texttt{srollv2} likelihood [add citation] in our official PC results and the effective likelihood code. In comparison with the official Planck-released \texttt{simall\_EE} likelihood, the \texttt{srollv2} likelihood improves foreground cleaning, 
+We use the official Planck likelihoods [add citation] \texttt{plik\_lite} for the high-$\ell$ $TT$, $TE$ and $EE$ as well as \texttt{lowl} for the low-$\ell$ $TT$ throughout this paper. We have tested that our results do not change if in lieu of \texttt{plik\_lite} we used the full \texttt{plik\_full} likelihood in which the foreground parameters have not been marginalized over. For the low-$\ell$ $EE$ likelihood, we use the third-party released \texttt{SRoll2} likelihood [add citation] in our official PC results and the effective likelihood code. In comparison with the official Planck-released \texttt{SimAll} likelihood, the \texttt{SRoll2} likelihood improves foreground cleaning, 
 which enables stronger reionization constraints, especially for the low multipole moments that are important for the low redshift constraints.
 
 % can add a comment about impact 
@@ -342,7 +340,7 @@ which enables stronger reionization constraints, especially for the low multipol
 %\includegraphics[width=0.7\textwidth]{plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML.png}
 \includegraphics[width=0.8\textwidth]{paper/plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
 \caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show  the 68\% and 95\% $m_a-m_b$ constraints as well as marginal constraints on individual $m_a$ for Planck 2018 in blue,
-using \texttt{srollv2} for the low-$\ell$ $EE$ likelihood, and compare that to the Planck 2015 constraints in red.  The corresponding marginal distributions for individual $m_a$ are also shown.
+using \texttt{SRoll2} for the low-$\ell$ $EE$ likelihood, and compare that to the Planck 2015 constraints in red.  The corresponding marginal distributions for individual $m_a$ are also shown.
 %The 1D posterior distributions are shown on the diagonal and the 2D 68\% and 95\% C.L. regions in the $m_a-m_b$ planes in the lower triangle.
 When deriving model independent optical depth constraints we impose an additional physicality prior that excludes the gray region in $m_1$ and regions beyond the box limits in the others.
  The black solid line indicates the trajectory of tanh models with varying $\tau$. The red and black crosses indicate the best-fit tanh models from Planck 2015 and 2018 respectively. Note that the best-fit tanh model has moved to a lower $\tau$ in Planck 2018, and in particular, is now within the 68\% C.L. contours of the constraints.
@@ -367,8 +365,8 @@ We show a zoomed version of the $m_1-m_2$ plane in Fig.~\ref{fig:plot_m1m2_2015_
 In the physicality prior excluded region (gray), the ionization and the cumulative optical depth at high redshift becomes negative.
 
 In Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, we also show
-the Planck 2018 constraints using the older \texttt{simall\_EE} likelihood.  The improvement 
-from switching to the \texttt{srollv2} likelihood mainly strengthens the upper bound in the best constrained direction in the $m_1-m_2$ plane which shifts constraints toward higher total optical depth (see also Fig.~\ref{fig:prior_box}).
+the Planck 2018 constraints using the older \texttt{SimAll} likelihood.  The improvement 
+from switching to the \texttt{SRoll2} likelihood mainly strengthens the upper bound in the best constrained direction in the $m_1-m_2$ plane which shifts constraints toward higher total optical depth (see also Fig.~\ref{fig:prior_box}).
 
 %We show a zoomed version of the $m_1-m_2$ plane in Fig.~\ref{fig:plot_m1m2_2015_vs_2018}, where we show beyond the physicality prior with the shaded area. [Discuss how the ellipse moved in the direction of lower tanh by going to lower m1.] 
 
@@ -380,7 +378,7 @@ from switching to the \texttt{srollv2} likelihood mainly strengthens the upper b
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
-\caption{Changes in the best constrained $m_1-m_2$ PC plane between Planck 2015 (\wh{red}), Planck 2018 (blue, \texttt{srollv2}  \wh{decide whether to have this labeled}), and Planck 2018 but with the \texttt{simall\_EE} likelihood (\wh{green?}).   With Planck 2018, the \texttt{srollv2} likelihood moderately improves the best constrained direction and raises the optical depth.  }
+\caption{Changes in the best constrained $m_1-m_2$ PC plane between Planck 2015 (\wh{red}), Planck 2018 (blue, \texttt{SRoll2}  \wh{decide whether to have this labeled}), and Planck 2018 but with the \texttt{SimAll} likelihood (\wh{green?}).   With Planck 2018, the \texttt{SRoll2} likelihood moderately improves the best constrained direction and raises the optical depth.  }
 \label{fig:plot_m1m2_2015_vs_2018}
 \end{figure}
 
@@ -390,7 +388,7 @@ In Fig.~\ref{fig:plot_mjs_2018_vs_2015}, we also show the constraints assuming a
 
 % This Gaussian approximation agrees well with the actual PC constraints, unlike in the Planck 2015 data where some differences were still visible on top of good agreement. The Gaussian likelihood is even faster than the kernel density estimate. As shall see in the next section for two explicit examples, the Gaussian likelihood shows generally good agreement with the full KDE result, but is unable to capture, as expected given its symmetric nature, any skewness in the PC distribution that may affect parameter constraints.
 
-%In Fig.~\ref{fig:plot_m1m2_lowE_vs_srollv2} we also compare the Planck 2018 results with two different low-$\ell$ $EE$ likelihoods: \texttt{simall\_EE} and \texttt{srollv2}. The \texttt{srollv2} contours are shrunk nearly directly along the lines of constant optical depth $\tau$ ($\tau_{12} = \tau_1 m_1 + \tau_2 m_2$) [wanna show this]? \wh{we might make this point in the context of Marius - that $\tau$ is mainly a linear function of $m_1$, $m_2$, and hence flat priors in $m's$ are locally flat in $\tau$}.
+%In Fig.~\ref{fig:plot_m1m2_lowE_vs_srollv2} we also compare the Planck 2018 results with two different low-$\ell$ $EE$ likelihoods: \texttt{SimAll} and \texttt{SRoll2}. The \texttt{SRoll2} contours are shrunk nearly directly along the lines of constant optical depth $\tau$ ($\tau_{12} = \tau_1 m_1 + \tau_2 m_2$) [wanna show this]? \wh{we might make this point in the context of Marius - that $\tau$ is mainly a linear function of $m_1$, $m_2$, and hence flat priors in $m's$ are locally flat in $\tau$}.
 
 
 
@@ -445,7 +443,7 @@ We now turn to constraining reionization models with PCs using the
 effective likelihood approach described in~\S\ref{sec:effective_likelihood}.  The benefit of this approach is that
 complete constraints on any model of the ionization history  between $6 \leq z \leq \zmax$ are obtained ahead of time and compressed into a simpler likelihood, so that when doing model testing one no longer needs to modify the $x_e(z)$ function \wh{and jointly sample the other cosmological parameters} in for example CAMB, each time a new ionization model needs to be tested. These provide savings on human time in addition to the computing speed-ups from the likelihood evaluations.
 
-\ch{Our code is available on GitHub at \url{...} [give URL]. } The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{srollv2}$ likelihoods at $\zmax = 30$. 
+\ch{Our code is available on GitHub at \url{...} [give URL]. } The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{SRoll2}$ likelihoods at $\zmax = 30$. 
 The most important part of the code release is the python package called \texttt{Relike} which \wh{provides the PC parameters for a model and also} 
 % added this since it now seemed to be emphasizing Gaussian only  - not sure that was intentional.
 implements the Gaussian effective likelihood. The user can specify a customized $x_e(z)$ function taking in reionization model parameters and use \textt{Relike} to return the effective likelihood of the model. The returned likelihood is already marginalized over cosmological parameters. 
@@ -682,7 +680,7 @@ depth $\tau_{\rm PC}=\tau_{\rm PC}(0,z_{\rm max})$ with the additional physicali
 Eq.~\ref{eq:individualprior}.  These 
 correspond to 
 \beq
-\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068} \;\; (\texttt{srollv2}),
+\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068} \;\; (\texttt{SRoll2}),
 \label{eq:tau_pc_zmax30}
 \eeq  
 and the full posterior is shown in Fig.~\ref{fig:tauPC}. 
@@ -786,13 +784,13 @@ Finally, we check that our results (Eq.~\ref{eq:tau_pc_zmax30}) are robust to
 range to
 $z_{\rm max}=50$ which is negligibly different
 \beq
-\tau_{\rm PC,\, \zmax=50} = 0.0626^{+0.0061}_{-0.0072}\;\; (\texttt{srollv2}).
+\tau_{\rm PC,\, \zmax=50} = 0.0626^{+0.0061}_{-0.0072}\;\; (\texttt{SRoll2}).
 \eeq
-Reverting the Planck 2018 likelihood to \texttt{simall\_EE} at $z_{\rm max}=30$ would give
+Reverting the Planck 2018 likelihood to \texttt{SimAll} at $z_{\rm max}=30$ would give
 \beq
-\tau_{\rm PC} = 0.0582 ^{+0.0072}_{-0.0083}\;\; (\texttt{simall\_EE}).
+\tau_{\rm PC} = 0.0582 ^{+0.0072}_{-0.0083}\;\; (\texttt{SimAll}).
 \eeq
-As with the tanh model, the \texttt{srollv2} likelihood provides tighter constraints that shift the distribution toward higher optical depth.
+As with the tanh model, the \texttt{SRoll2} likelihood provides tighter constraints that shift the distribution toward higher optical depth.
 
 
 
@@ -842,7 +840,7 @@ In Fig.~\ref{fig:plot_taugtz_2018_with_vs_without_physicality_prior}, we show th
 the 68\% and 95\% confidence level contours for  $\tau_{\rm PC}(z,z_{\rm max})$ with and without the physicality prior on $m_1$.  Notice that without the prior, a larger range of unphysically negative optical depth is allowed whereas with the prior it is mostly eliminated except for the highest redshift.  Moreover upper bounds on the optical depth at high 
 redshift are largely unchanged.   These upper limits allow some contribution at high-$z$ but do not require it.   For example
 \beq
-\tau_{\rm PC}(15, 30) < 0.023 \; (95\%\; \mathrm{C.L.})\;\;(\texttt{srollv2}).
+\tau_{\rm PC}(15, 30) < 0.023 \; (95\%\; \mathrm{C.L.})\;\;(\texttt{SRoll2}).
 \eeq
 This should be contrasted with the tanh model 
  where it is  forbidden by form of the ionization history in conjunction with the total optical depth constraint.  
@@ -861,32 +859,32 @@ In Fig.~\ref{fig:plot_taugtz_zmax30_vs_zmax50}, we show that the 68\% and 95\% C
 
 %Furthermore, their total optical depth constraints are practically identical: %
 %\beq
-%\tau_{\rm PC,\, \zmax=30} = 0.0619^{+0.0056}_{-0.0068}\;\; (\texttt{srollv2}),
+%\tau_{\rm PC,\, \zmax=30} = 0.0619^{+0.0056}_{-0.0068}\;\; (\texttt{SRoll2}),
 %\eeq
 %and
 %\beq
-%\tau_{\rm PC,\, \zmax=50} = 0.0626^{+0.0061}_{-0.0072}\;\; (\texttt{srollv2}).
+%\tau_{\rm PC,\, \zmax=50} = 0.0626^{+0.0061}_{-0.0072}\;\; (\texttt{SRoll2}).
 %\eeq
 %
-%Compared the \texttt{simall\_EE} likelihood results, 
+%Compared the \texttt{SimAll} likelihood results, 
 %\beq
-%\tau_{\rm PC,\, \zmax=30} = 0.0582 ^{+0.0072}_{-0.0083}\;\; (\texttt{simall\_EE}),
+%\tau_{\rm PC,\, \zmax=30} = 0.0582 ^{+0.0072}_{-0.0083}\;\; (\texttt{SimAll}),
 %\eeq
 %and
 %\beq
-%\tau_{\rm PC,\, \zmax=50} = 0.0582^{+0.0077}_{-0.0088}\;\; (\texttt{simall\_EE}).
+%\tau_{\rm PC,\, \zmax=50} = 0.0582^{+0.0077}_{-0.0088}\;\; (\texttt{SimAll}).
 %\eeq
-%the \texttt{srollv2} error bars on PC $\tau$ was reduced by about 20\%, and the central values rose by about half a sigma. [wanna comment more here?]
+%the \texttt{SRoll2} error bars on PC $\tau$ was reduced by about 20\%, and the central values rose by about half a sigma. [wanna comment more here?]
 %
 
 For the high-redshift optical depth, we also obtain consistent upper limits
 %\beq
-%\tau_{\rm PC}(15, 30)< 0.023 \; (95\%\; %\mathrm{C.L.})\;\;(\texttt{srollv2}),
+%\tau_{\rm PC}(15, 30)< 0.023 \; (95\%\; %\mathrm{C.L.})\;\;(\texttt{SRoll2}),
 %\eeq
 %[double check on full chain (from 10/15) this is from 09/30.]
 %and 
 \beq
-\tau_{\rm PC}(15, 50) < 0.022 \; (95\%\; \mathrm{C.L.})\;\;(\texttt{srollv2}).
+\tau_{\rm PC}(15, 50) < 0.022 \; (95\%\; \mathrm{C.L.})\;\;(\texttt{SRoll2}).
 \eeq
 
 \begin{figure}[ht]
@@ -907,8 +905,7 @@ For the high-redshift optical depth, we also obtain consistent upper limits
 %{paper/plots/pl18_taugtz_pc_zmax30_pl15_vs_pl18_simallEE_vs_pl18_srollv2.pdf}
 \caption{Changes in the
 cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ (as in Fig.~\ref{fig:plot_taugtz_2018_with_vs_without_physicality_prior}) 
-between Planck 2015 and 2018 (top panel \wh{suggest swap to srollv2}) and between 2018 
-\texttt{srollv2} (default) and $\texttt{simall\_EE}$.  Planck 2015 favored contributions at high $z$ which are disallowed in 2018 whereas the changes due to \texttt{srollv2} mainly tighten the lower limits at low $z$.
+between Planck 2015 and 2018 (top panel) and between 2018 \texttt{SRoll2} (default) and $\texttt{SimAll}$.  Planck 2015 favored contributions at high $z$ which are disallowed in 2018 whereas the changes due to \texttt{SRoll2} mainly tighten the lower limits at low $z$.
 }
 \label{fig:plot_taugtz_2015_vs_2018_simallEE_vs_2018_srollv2}
 \end{figure}
@@ -916,8 +913,8 @@ between Planck 2015 and 2018 (top panel \wh{suggest swap to srollv2}) and betwee
 
 \begin{figure}[ht]
 \includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_pl18_srollv2_pc_zmax30_vs_zmax50_do_rescale_tau_false.pdf}
-\caption{Robustness of the
-cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ to changes from the default $\zmax = 30$ to $\zmax = 50$. \wh{drop the Planck 2018 from label or at least make the $\zmax$ the prominent label}.  Upper limits at $z \lesssim 30$ are nearly unaffected whereas extending $\zmax$ allows the high-$z$ component to come from even higher-$z$.
+\caption{Robustness of the \ch{Planck 2018}
+cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ to changes from the default $\zmax = 30$ to $\zmax = 50$. Upper limits at $z \lesssim 30$ are nearly unaffected whereas extending $\zmax$ allows the high-$z$ component to come from even higher-$z$.
 }
 \label{fig:plot_taugtz_zmax30_vs_zmax50}
 \end{figure}
@@ -926,7 +923,7 @@ cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ to changes from the default $
 \section{Conclusion}
 \label{sec:conclusion}
 
-In conclusion, we used constraints on reionization principal components with respect to the large-scale $EE$ data to produce a fast and accurate effective likelihood for the final release of Planck 2018 data. In lieu of the official $\texttt{simall\_EE}$ likelihood for low-$\ell$ $EE$ we used the independent later release of the $\texttt{srollv2}$ likelihood in 2019 which has better foreground cleaning allowing for slightly improved parameter constraints. Our effective likelihood code package is called $\textsc{Relike}$ [to be changed] and is available publicly on Github. This code is beneficial for the community for the purpose of testing \textit{any} global ionization history between $6 < z < 30$ with the Planck data without having to modify CAMB which can be very cumbersome to do. The convergence time to reach the Gilman-Rubin criteria $R_{-1} < 0.01$ is about 300 times less with the Relike code than with a traditional MCMC sampling of the Planck likelihood for the one-parameter canonical tanh model. 
+In conclusion, we used constraints on reionization principal components with respect to the large-scale $EE$ data to produce a fast and accurate effective likelihood for the final release of Planck 2018 data. In lieu of the official $\texttt{SimAll}$ likelihood for low-$\ell$ $EE$ we used the independent later release of the $\texttt{SRoll2}$ likelihood in 2019 which has better foreground cleaning allowing for slightly improved parameter constraints. Our effective likelihood code package is called $\textsc{Relike}$ [to be changed] and is available publicly on Github. This code is beneficial for the community for the purpose of testing \textit{any} global ionization history between $6 < z < 30$ with the Planck data without having to modify CAMB which can be very cumbersome to do. The convergence time to reach the Gilman-Rubin criteria $R_{-1} < 0.01$ is about 300 times less with the Relike code than with a traditional MCMC sampling of the Planck likelihood for the one-parameter canonical tanh model. 
 
 To test this effective Planck likelihood code, we used two examples: 1) a canonical tanh model with a single transition redshift, and 2) a two-parameter model consisting of two tanh transitions allowing in addition for a high-redshift ionization plateau compared to the first example. We demonstrated accuracy of the Relike code for both examples by comparing the constraints on the reionization model parameters with those obtained from sampling the exact Planck likelihoods and using a modified CAMB code. We also showed great agreement between the confidence levels of the cumulative optical depth evolution between the 5-PC representation and the exact ionization model.
 
@@ -937,7 +934,7 @@ Besides conducting explicit model testing with the Relike code, we also obtained
     \item {We obtained the constraint on the total optical depth $\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068}$ (68\% C.L.) 
     using PCs and the Planck 2018 likelihoods using the \texttt{plik\_lite\_TTTEEE+lowl+srollv2} likelihood combination.}
     
-    \item {The better foreground cleaned \texttt{srollv2} likelihood allowed to tighten the PC constraint on $\tau$ and shifted it toward slightly higher values when compared with the \texttt{plik\_lite\_TTTEEE+lowl+lowE} result  $\tau_{\rm PC} = 0.0582 ^{+0.0072}_{-0.0083}$ (68\% C.L.).}
+    \item {The better foreground cleaned \texttt{SRoll2} likelihood allowed to tighten the PC constraint on $\tau$ and shifted it toward slightly higher values when compared with the \texttt{plik\_lite\_TTTEEE+lowl+lowE} result  $\tau_{\rm PC} = 0.0582 ^{+0.0072}_{-0.0083}$ (68\% C.L.).}
     
     \item {We checked the robustness of our $\zmax=30$ results by performing a PC analysis of the Planck data with $\zmax = 50$. The results are changed negligibly: $\tau(15, 50) < 0.022 $ (95\% C.L.) in comparison with $\tau(15, 30) < 0.023$ (95\% C.L.).}
     
