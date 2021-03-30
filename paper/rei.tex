@@ -443,11 +443,11 @@ We now turn to constraining reionization models with PCs using the
 effective likelihood approach described in~\S\ref{sec:effective_likelihood}.  The benefit of this approach is that
 complete constraints on any model of the ionization history  between $6 \leq z \leq \zmax$ are obtained ahead of time and compressed into a simpler likelihood, so that when doing model testing one no longer needs to modify the $x_e(z)$ function \wh{and jointly sample the other cosmological parameters} in for example CAMB, each time a new ionization model needs to be tested. These provide savings on human time in addition to the computing speed-ups from the likelihood evaluations.
 
-\ch{Our code is available on GitHub at \url{...} [give URL]. } The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{SRoll2}$ likelihoods at $\zmax = 30$. 
-The most important part of the code release is the python package called \texttt{Relike} which \wh{provides the PC parameters for a model and also} 
+Our code is available on GitHub at \todo{give URL\url{...}}. The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{SRoll2}$ likelihoods at $\zmax = 30$. 
+The most important part of the code release is the python package called RELIKE which \wh{provides the PC parameters for a model and also} 
 % added this since it now seemed to be emphasizing Gaussian only  - not sure that was intentional.
 implements the Gaussian effective likelihood. The user can specify a customized $x_e(z)$ function taking in reionization model parameters and use \textt{Relike} to return the effective likelihood of the model. The returned likelihood is already marginalized over cosmological parameters. 
-To obtain marginalized distributions more easily for high-dimensional parameter space, one may choose to sample \texttt{Relike} within a MCMC sampler such as Cobaya or Cosmosis \ch{[cite]}.
+To obtain marginalized distributions more easily for high-dimensional parameter space, one may choose to sample RELIKE within a MCMC sampler such as Cobaya or Cosmosis \ch{[cite]}.
 
 For convenience, 
 \wh{query: since this is the place where KDE is given not sure ``convenience" is the transition we want here.   Do you want to say something about KDE up front?}
@@ -475,8 +475,7 @@ effective likelihood. The overall agreement is excellent and the KDE results eve
 \begin{figure}[ht]
 \includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_tanh_direct_vs_kde_vs_gaussian.pdf}
 \caption{Cumulative optical depth in the tanh model as in Fig.~\ref{fig:tanh}
-(68\% and 95\% C.L. contours).  Overall agreement is good in regions where the contribution to $\tau_{\rm tanh}$ is high but the model form forbids high-$z$ contributions.   The KDE and Gaussian PC results  oscillate around zero at high-z because of effective low pass filter of the truncation to 5 PCs (enough to represent any observable effects in the data).  \wh{maybe $\tau_{\rm tanh}$} }
-%double check plot, upper and lower limits seem to cross?
+(68\% and 95\% C.L. contours).  Overall agreement is good in regions where the contribution to $\tau_{\rm tanh}$ is high but the model form forbids high-$z$ contributions.   The KDE and Gaussian PC results  oscillate around zero at high-z because of effective low pass filter of the truncation to 5 PCs (enough to represent any observable effects in the data). }
 \label{fig:plot_taugtz_PC_vs_tanh}
 \end{figure}
 
