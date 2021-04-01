@@ -443,7 +443,8 @@ We now turn to constraining reionization models with PCs using the
 effective likelihood approach described in~\S\ref{sec:effective_likelihood}.  The benefit of this approach is that
 complete constraints on any model of the ionization history  between $6 \leq z \leq \zmax$ are obtained ahead of time and compressed into a simpler likelihood, so that when doing model testing one no longer needs to modify the $x_e(z)$ function \wh{and jointly sample the other cosmological parameters} in for example CAMB, each time a new ionization model needs to be tested. These provide savings on human time in addition to the computing speed-ups from the likelihood evaluations.
 
-Our code is available on GitHub at \todo{give URL\url{...}}. The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{SRoll2}$ likelihoods at $\zmax = 30$. 
+Our code is available on GitHub at \todo{give URL\url{...}}. The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{SRoll2}$ likelihoods at $\zmax = 30$.  
+\wh{This is also the default analysis for all results that follow except where noted.}
 The most important part of the code release is the python package called RELIKE which \wh{provides the PC parameters for a model and also} 
 % added this since it now seemed to be emphasizing Gaussian only  - not sure that was intentional.
 implements the Gaussian effective likelihood. The user can specify a customized $x_e(z)$ function taking in reionization model parameters and use \textt{Relike} to return the effective likelihood of the model. The returned likelihood is already marginalized over cosmological parameters. 
@@ -564,8 +565,8 @@ we can see that the tanh model does not allow for high redshift ionization by co
 %\includegraphics[width=0.47\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
 \includegraphics[width=0.48\textwidth]{paper/plots/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.pdf}
 \caption{Two-step parameter constraints (marginalized posteriors and 68\% and 95\% C.L. contours).  The exact, KDE PC and Gaussian PC likelihoods again agree very well with a small contribution from high-$z$ through $\tau_{\rm hi}$ still allowed but not significantly favored.   Models of Fig.~\ref{fig:two_step_model} are marked and correspond to the best fit parameters and parameters 
-\wh{which maximize $\tau_{\rm h}$ on the 2D 95\% C.L. contour --
-suggested change in model - or find another reason for plotting the currently chosen one}. \wh{add inset ``two step"} 
+which maximize $\tau_{\rm h}$ on the 2D 95\% C.L. contour --
+suggested change in model - or find another reason for plotting the currently chosen one. \ch{updated plot coming up} \wh{add inset ``two step"} 
 }
 \label{fig:two_parameter_model_2D}
 \end{figure}
@@ -638,10 +639,7 @@ and
 $\tau_{2\text{step}}(15, 30) < 0.017$ for both effective likelihoods}
 \ch{Note also that the 95\% C.L. allowed two-step model in 
 Fig.~\ref{fig:two_step_model} has
-$\tau_{2\text{step}}(15,30)= 0.013$.} 
-\wh{possibly choose a model on the 2D contour at max imum $\tau_{\rm hi}$}
-%0.01343375 evaluated at fiducial cosmology
-
+$\tau_{2\text{step}}(15,30)= 0.017$.} 
 
 The Planck 2018 paper~\cite{Aghanim:2018eyx} also constrained $\tau(15, 30)$ in a model-independent way using the FlexKnot method, in which $x_e(z_i)$ at the $i$-th knots are varied as free parameters as well as the number of total knots. They obtained $\tau(15, 30) < 0.007$ (95\% C.L.), which would strongly rule out models that are still allowed at 95\% C.L. in this class. 
  In principle, the FlexKnot method allows for all possible physical ionization histories that increase monotonically with redshifts, and would include the two-parameter model described here. But apparently the implicit prior employed by the method disfavors optical depth at high redshift more than a flat prior in 
@@ -913,7 +911,7 @@ between Planck 2015 and 2018 (top panel) and between 2018 \texttt{SRoll2} (defau
 
 \begin{figure}[ht]
 \includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_pl18_srollv2_pc_zmax30_vs_zmax50_do_rescale_tau_false.pdf}
-\caption{Robustness of the \ch{Planck 2018}
+\caption{Robustness of the \ch{Planck 2018} \wh{decide on convention - in many places the default analysis isn't labeled, only changes from the default}
 cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ to changes from the default $\zmax = 30$ to $\zmax = 50$. Upper limits at $z \lesssim 30$ are nearly unaffected whereas extending $\zmax$ allows the high-$z$ component to come from even higher-$z$.
 }
 \label{fig:plot_taugtz_zmax30_vs_zmax50}
