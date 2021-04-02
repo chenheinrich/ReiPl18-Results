@@ -552,9 +552,9 @@ we can see that the tanh model does not allow for high redshift ionization by co
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]{paper/plots/plot_xe_tanh_highz.pdf}
-\caption{Two step ionization history $x_e(z)$ for the model of \refsec{example2}. In addition to a tanh transition at low-redshift as in \refsec{example1}, there is an additional ionization plateau at high redshifts with a fixed transition at $z_t = 28$ and $\Delta z = 1$. Here we show the best-fit model in the Planck 2018 data $(\taulo, \tauhi) = (0.053, 0.006)$, as well as  a model at the 95\% C.L. $(\taulo, \tauhi) = (0.039, 0.020)$ (see also Fig.~\ref{fig:two_parameter_model_2D}). \wh{inset label for ``two step"}}
+\caption{Two step ionization history $x_e(z)$ for the model of \refsec{example2}. In addition to a tanh transition at low-redshift as in \refsec{example1}, there is an additional ionization plateau at high redshifts with a fixed transition at $z_t = 28$ and $\Delta z = 1$. Here we show the best-fit model in the Planck 2018 data $(\taulo, \tauhi) = (0.053, 0.006)$, as well as  a model at the 95\% C.L. $(\taulo, \tauhi) = (0.043, 0.026)$ (see also Fig.~\ref{fig:two_parameter_model_2D}). }
 %best-fit (0.05290344, 0.005859431)
-%95%CL (0.039, 0.02) 
+%95%CL (0.0427, 0.0256): zre = 6.4685, xemin = 0.0925 
 \label{fig:two_step_model}
 \end{figure}
 
@@ -563,7 +563,12 @@ we can see that the tanh model does not allow for high redshift ionization by co
 
 \begin{figure}[t]
 %\includegraphics[width=0.47\textwidth]{results/cosmomc_kde/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.png}
-\includegraphics[width=0.48\textwidth]{paper/plots/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.pdf}
+%
+% longer Gaussian chains only 
+%\includegraphics[width=0.48\textwidth]{paper/plots/pl18_tanh_highz_test5_run1_vs_relike_tanh_highz_test8_run9_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.pdf}
+%
+% longer KDE and Gaussian chains
+\includegraphics[width=0.48\textwidth]{paper/plots/pl18_tanh_highz_test7_run1_vs_relike_tanh_highz_test9_run5_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.pdf}
 \caption{Two-step parameter constraints (marginalized posteriors and 68\% and 95\% C.L. contours).  The exact, KDE PC and Gaussian PC likelihoods again agree very well with a small contribution from high-$z$ through $\tau_{\rm hi}$ still allowed but not significantly favored.   Models of Fig.~\ref{fig:two_step_model} are marked and correspond to the best fit parameters and parameters 
 which maximize $\tau_{\rm h}$ on the 2D 95\% C.L. contour --
 suggested change in model - or find another reason for plotting the currently chosen one. \ch{updated plot coming up} \wh{add inset ``two step"} 
