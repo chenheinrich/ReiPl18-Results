@@ -1,0 +1,2 @@
+one-sided 95perc upper limit for tau(15.0, zmax) is tau < 0.015844617801082768
+two-sided 95perc upper limit for tau(15.0, zmax) is tau < 0.017388063541970575
