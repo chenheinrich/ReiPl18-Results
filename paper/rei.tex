@@ -95,7 +95,7 @@ pdfsubject={}
 
 We publish RELIKE (Reionization Effective Likelihood), an fast and accurate effective likelihood code based on constraints from the latest Planck 2018 data on the CMB reionization principal components (PC). This code allows one to constrain arbitrary global ionization history $x_e(z)$ between $6 < z < 30$ with Planck without having to modify CAMB each time a different model is being tested. We tested the code on two example models which showed good agreement with sampling the exact Planck likelihoods.
 We also find that contrary to Planck 2015, the Planck 2018 PC posteriors are well approximated by a Gaussian in PC amplitude space, this allows us to replace the kernel density estimate (KDE) evaluation of the PC chains in the code with an even faster Gaussian evaluation. We supply both the KDE and Gausisan modes of the likelihood in a CosmoMC implementation, and the Gaussian mode alone in an easy-to-use standalone python likelihood package that can be connected to any other sampler. We expect the code release to dramatically reduce the time for testing individual \ch{global} ionization models, and to provide consistent yet fast way of modeling the ionization history in joint analyses of Planck with other reionization datasets such as 21cm, luminosity function, star formation history, etc.
-Finally, we derive model-independent constraints: $\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068}$ and $\tau_{\rm PC}(15, 30) < 0.023 $ (95\% C.L.). The upper limits on high-redshift optical depth is at least a factor of 2 looser than those reported in the Planck 2018 cosmological parameter paper using the FlexKnot method; we demonstrate robustness of our results by explicitly recovering  \ch{$\tau_{\rm 2step}(15, 30) < 0.013 $ (95\% C.L.)} using a  two-step toy model without using PCs.}  
+Finally, we derive model-independent constraints: $\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068}$ and $\tau_{\rm PC}(15, 30) < 0.023 $ (95\% C.L.). The upper limits on high-redshift optical depth is at least a factor of 2 looser than those reported in the Planck 2018 cosmological parameter paper using the FlexKnot method; we demonstrate robustness of our results by explicitly recovering $\tau_{\rm 2step}(15, 30) < 0.017 $ (95\% C.L.) using a  two-step toy model without using PCs.}  
 
 \end{abstract}
 \pacs{}
@@ -114,7 +114,7 @@ Finally, we derive model-independent constraints: $\tau_{\rm PC} = 0.0619^{+0.00
 
 The cosmic microwave background (CMB) has entered an era of precision cosmology. The measurements from the Planck satellite have shown agreement with the standard $\Lambda$CDM model which describes the initial perturbations in the Universe and their evolution~\cite{Aghanim:2018eyx}. While many components of the standard cosmology model is well-understood, the details of the process of reionization however, remains one of the most uncertain pieces (see e.g.~\cite{2016ASSL..423.....M} and references therein). Its uncertainty propagates into the inferences of other important parameters such as the primordial power spectrum amplitude. Through it, the uncertainty in reionization will become one of the major sources of uncertainty for measuring the sum of neutrino masses from future gravitational lensing measurements of the CMB~ \cite{Smith:2006nk,Allison:2015qca}; and will also have implications for inferring cosmic acceleration through the growth of structure~\cite{Hu:2003pt}. 
 
-Typically, the impact of reionization on the primary CMB fluctuations has been modeled as a steplike transition in the global ionization history \ch{in the form of a tanh function}, with the step location parameterized by the total Thomson optical depth induced. This steplike \ch{tanh} model describes a Universe in which all hydrogen becomes fully ionized almost instantaneously at one particular redshift, and assumes, by construction, that there is negligible ionization before the transition. However, through the shape of the reionization bump induced in the CMB $E$-mode polarization at large angles, more information on the coarse-grained evolution of the ionization history can be obtained~\cite{Hu:2003gh, Mortonson:2007hq}. 
+Typically, the impact of reionization on the primary CMB fluctuations has been modeled as a steplike transition in the global ionization history \ch{in the form of a tanh function}, with the step location parameterized by the total Thomson optical depth induced. This \ch{steplike tanh} model describes a Universe in which all hydrogen becomes fully ionized almost instantaneously at one particular redshift, and assumes, by construction, that there is negligible ionization before the transition. However, through the shape of the reionization bump induced in the CMB $E$-mode polarization at large angles, more information on the coarse-grained evolution of the ionization history can be obtained~\cite{Hu:2003gh, Mortonson:2007hq}. 
 
 In fact, to extract the most information possible from this $E$-mode bump, Ref.~\cite{Hu:2003gh, Mortonson:2007hq} developed the principal component (PC) method, where a few PCs is sufficient to describe the entire model space of physical ionization histories regarding their observable impact on the large-angle $E$-mode power spectrum. This method has been applied to WMAP and Planck data to obtain complete constraints on reionization models~\cite{Mortonson:2008rx, Mortonson:2007hq, Heinrich:2016ojb, Aghanim:2018eyx}. It was also adopted for a Planck 2013 analysis for marginalizing ionization history when constraining inflationary parameters in Ref.~\cite{Planck:2013jfk}, for studying inflationary features vs reionization features in Ref.~\cite{Obied:2018qdr}, as well as massive neutrinos and gravitational waves in Ref.~\cite{Dai:2015dwa}. %\cite{Obied:2017tpd} 
 
@@ -124,14 +124,14 @@ In a re-analysis of the Planck 2015 data with PCs~\cite{Heinrich:2016ojb}, a com
 \ch{I'm here}
 Since the release of the Planck 2018 official analysis, an improved likelihood for the low-$\ell$ $E$-mode polarization was publicly released in 2019. This new likelihood,
 $\texttt{SRoll2}$\footnote{SRoll2: \url{http://sroll20.ias.u-psud.fr.}}
-~\cite{Delouis:2019bub}, allows for improved reionization constraints with its better foreground modeling: The error bar on the optical depth $\tau$ in the tanh model is reduced by about $\sim40\%$ from XX to $\tau = 0.0566^{+0.0053}_{−0.0062}$~\cite{}.\ch{doesn't seem to be true anymore, 40\% was compared to the Planck 2018 likelihood paper result, the cosmo parameter paper seems to have similar error bars: $0.0519^{+0.0030}_{−0.0079}$.
+~\cite{Delouis:2019bub}, allows for improved reionization constraints with its better foreground modeling: The error bar on the optical depth $\tau$ in the tanh model is reduced by about $\sim40\%$ from XX to $\tau = 0.0566^{+0.0053}_{-0.0062}$~\cite{}.\ch{doesn't seem to be true anymore, 40\% was compared to the Planck 2018 likelihood paper result, the cosmo parameter paper seems to have similar error bars: $0.0519^{+0.0030}_{−0.0079}$.}
 
 Since the Planck final release will likely be the best full-sky survey from space available to us in the next decade, it is important to extract all the information present in the data. In light of the $\texttt{SRoll2}$ likelihood release, we obtain new reionization PC constraints with this latest likelihood. Enabled by the completeness property of the PCs, we also turn these constraints into an effective likelihood useful for assessing the CMB likelihood of \textit{any} reionization model out to $\zmax$ = 30, following techniques tested in Ref.~\cite{Heinrich:2016ojb}. 
 
-\ch{write this part}
+\todo{write this part}
 The code is publicly available on GitHub\footnote{[give link]}. [a bit more description here]. [comment on speed]. [comment on joint likelihood].
 
-Extending PCs to cover up to $z_{\rm max} = 50$,we verified that there is no hint of ionization beyond $z>30$ in this Planck data release. But for the high-z ionization below $z=30$, we did find a less stringent constraint on $\tau(15, 30)$, the optical depth in the redshift range 15 to 30, that is XX times less stringent than the Planck official results using Flex Knots \ch{[fill in number]} in Ref.~\cite{Aghanim:2018eyx}. Moreover, we demonstrate that the PC results of Ref.~\cite{Aghanim:2018eyx} suffers from a logical flaw in the treatment of its priors following Ref.
+Extending PCs to cover up to $z_{\rm max} = 50$,we verified that there is no hint of ionization beyond $z>30$ in this Planck data release. But for the high-z ionization below $z=30$, we did find a less stringent constraint on $\tau(15, 30)$, the optical depth in the redshift range 15 to 30, that is about \ch{$\sim 3$ times} less stringent than the Planck official results using Flex Knots in Ref.~\cite{Aghanim:2018eyx}. Moreover, we demonstrate that the PC results of Ref.~\cite{Aghanim:2018eyx} suffers from a logical flaw in the treatment of its priors following Ref.
 ~\cite{Millea:2018bko} and ends up penalizing lower optical depth models. [quote difference in tau(15, 30) or total tau possibly attributed to this treatment]. %We follow the appendix of Ref.~\cite{Heinrich:2018btc} for the Planck 2015 data
 
 The paper is structured as follows. We first describe in \S\ref{sec:background} the background on the reionization principal components and the kernel density estimate (KDE) technique used for building the effective likelihood. Then in \S\ref{sec:results}, we describe the PC results using the Planck 2018 + \texttt{SRoll2} likelihood, and compare with previous results in literature. Then in \S\ref{sec:effective_likelihood}, we present the effective likelihood code, and demonstrate its fidelity with two examples, 1) the standard steplike model, and 2) a two-parameter model where a plateau of ionization at high-$z$ is added to the standard one-step model for illustration purposes. Finally, we summarize our results and conclude in \S\ref{sec:conclusion}.
@@ -377,8 +377,8 @@ from switching to the \texttt{SRoll2} likelihood mainly strengthens the upper bo
 %The trajectories shown in black lines are the steplike models of instantaneous reionization allowed by the Planck 2015 data with the arrow pointing in the direction of increasing optical depth. Clearly, these steplikes models are only a part of the allowed physical model space. By construction, they miss any high-redshift ionization component by assuming neglibile ionization levels before the transition redshift $z_{\rm re}$. 
 
 \begin{figure}
-\includegraphics[width=0.48\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
-\caption{Changes in the best constrained $m_1-m_2$ PC plane between Planck 2015 (red), Planck 2018 (blue, \texttt{SRoll2}, and Planck 2018 but with the \texttt{SimAll} likelihood (green). With Planck 2018, the \texttt{SRoll2} likelihood moderately improves the best constrained direction and raises the optical depth.  }
+\includegraphics[width=0.4\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
+\caption{Changes in the best constrained $m_1-m_2$ PC plane between Planck 2015 (red), Planck 2018 (blue, \texttt{SRoll2}, and Planck 2018 but with the \texttt{SimAll} likelihood (green). With Planck 2018, the \texttt{SRoll2} likelihood moderately improves the best constrained direction and raises the optical depth.  \todo{add SRollv2. convention: put labels only when we do comparisons}}
 \label{fig:plot_m1m2_2015_vs_2018}
 \end{figure}
 
@@ -443,7 +443,7 @@ We now turn to constraining reionization models with PCs using the
 effective likelihood approach described in~\S\ref{sec:effective_likelihood}.  The benefit of this approach is that
 complete constraints on any model of the ionization history  between $6 \leq z \leq \zmax$ are obtained ahead of time and compressed into a simpler likelihood, so that when doing model testing one no longer needs to modify the $x_e(z)$ function and jointly sample the other cosmological parameters in for example CAMB, each time a new ionization model needs to be tested. These provide savings on human time in addition to the computing speed-ups from the likelihood evaluations.
 
-Our code is available on GitHub at \todo{give URL\url{...}}. The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{SRoll2}$ likelihoods at $\zmax = 30$.  
+Our code is available on GitHub at {give URL\url{...}}. The initial release corresponds to the fiducial results in this paper, i.e.\ derived from the Planck 2018 $\texttt{plik\_lite\_TTTTTE} + \texttt{lowl} + \texttt{SRoll2}$ likelihoods at $\zmax = 30$.  
 This is also the default analysis for all results that follow except where noted.
 The most important part of the code release is the python package called RELIKE which provides the PC parameters for a model and also
 % added this since it now seemed to be emphasizing Gaussian only  - not sure that was intentional.
@@ -451,7 +451,7 @@ implements the Gaussian effective likelihood. The user can specify a customized 
 To obtain marginalized distributions more easily for high-dimensional parameter space, one may choose to sample RELIKE within a MCMC sampler such as Cobaya or Cosmosis \ch{[cite]}.
 
 \wh{query: since this is the place where KDE is given not sure ``convenience" is the transition we want here.   Do you want to say something about KDE up front?}
-we also provide a pre-assembled CosmoMC-Relike code using the CosmoMC sampler in generic mode, with which we have generated the results presented in this section. This CosmoMC-Relike code has an internal  implementation of the Gaussian and KDE likelihoods in fortran, which is separate from our main python package that only supports the Gaussian likelihood. 
+We also provide a pre-assembled CosmoMC code using the CosmoMC sampler in generic mode, with which we have generated the results presented in this section. This CosmoMC code has an internal  implementation of the Gaussian and KDE likelihoods in fortran, which is separate from our main python package that only supports the Gaussian likelihood. 
 
 When using the KDE likelihood, we suggest using the default value of $f = 0.14$ to avoid over-smoothing parameter posteriors while maintaining accuracy during the KDE operation. All our KDE results in this section are computed with $f = 0.14$, which we shall soon show to work well in recovering results from an exact MCMC. Note that in both the Gaussian and the KDE modes, the model parameters or priors must be arranged to explicitly satisfy fully-ionized hydrogen and singly-ionized helium for $z\leq 6$. 
 
@@ -519,7 +519,7 @@ has a 4\% larger 68\% confidence region  than the exact likelihood result
 %$\tau = 0.0591 \pm 0.0063$ (exact)
 %$\tau = 0.0588 \pm 0.0064$ (KDE)
 
-Instead of the KDE likelihood, we can alternatively use the Gaussian approximation given in Eq.~(\ref{eq:gaussian}). The Gaussian likelihood is faster to evaluate as it does not require looping over the entire $\sim 10^6$ points in the PC chain. \todo{[add timing here]} 
+Instead of the KDE likelihood, we can alternatively use the Gaussian approximation given in Eq.~(\ref{eq:gaussian}). The Gaussian likelihood is faster to evaluate as it does not require looping over the entire $\sim 10^6$ points in the PC chain. {[add timing here]} 
 \wh{not sure we need timing results but if you do add them remember you can make Gaussian even faster by precomputing the linear combinations of $m_a$ that diagonalize the covariance (the first one should essentially be $\tau_{12}$ which is interesting pedagogically)} \ch{[CH: got it.]}
 %
 We obtain for the tanh model 
@@ -551,7 +551,7 @@ we can see that the tanh model does not allow for high redshift ionization by co
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]{paper/plots/plot_xe_tanh_highz.pdf}
-\caption{Two step ionization history $x_e(z)$ for the model of \refsec{example2}. In addition to a tanh transition at low-redshift as in \refsec{example1}, there is an additional ionization plateau at high redshifts with a fixed transition at $z_t = 28$ and $\Delta z = 1$. Here we show the best-fit model in the Planck 2018 data $(\taulo, \tauhi) = (0.053, 0.006)$, as well as  a model at the 95\% C.L. $(\taulo, \tauhi) = (0.043, 0.026)$ (see also Fig.~\ref{fig:two_parameter_model_2D}). }
+\caption{Two step ionization history $x_e(z)$ for the model of \refsec{example2}. In addition to a tanh transition at low-redshift as in \refsec{example1}, there is an additional ionization plateau at high redshifts with a fixed transition at $z_t = 28$ and $\Delta z = 1$. Here we show the best-fit model in the Planck 2018 data $(\taulo, \tauhi) = (0.053, 0.006)$, as well as  a model at the 95\% C.L. $(\taulo, \tauhi) = (0.043, 0.026)$ (see also Fig.~\ref{fig:two_parameter_model_2D}). }\todo{CH: say in text 0.026 is 2D marginalized 95\%, 0.02 is 1D.}
 %best-fit (0.05290344, 0.005859431)
 %95%CL (0.0427, 0.0256): zre = 6.4685, xemin = 0.0925 
 \label{fig:two_step_model}
@@ -583,7 +583,7 @@ suggested change in model - or find another reason for plotting the currently ch
 \label{fig:plot_taugtz_two_step_contours}
 \end{figure}
  
- 
+\todo{change z1 z2 to zre and zhi everywhere.}
 The second example is a two-step model, where an additional step is used to give a high-$z$ ionization plateau: 
  \bea
 x_e&(z)&\,= \frac{1+f_{\rm He} - \xemin}{2}\left\{  1+ \tanh\left[ \frac{y(z_{1})-y(z)}{\Delta y} \right] \right\} \notag \\
@@ -607,19 +607,19 @@ In ~\reffig{two_parameter_model_2D}, we compare the 1D and 2D marginalized poste
 Note that in the canonical tanh model $\taulo \lesssim 0.04$ roughly corresponds to $\zre < 6$ so that the posteriors distort near this value.
 The models in Fig.~\ref{fig:two_step_model} are represented by the star and cross symbols for the best fit case and a model allowed at the 95\% CL.
 
-\todo{add timing results somewhere}
+{add timing results somewhere}
 
 The marginalized 1D constraints from the KDE and Gaussian likelihoods 
 \beq
-\taulo = 0.0525^{+0.0062}_{-0.0079}, \; \tauhi < 0.021\; \mathrm{(95\%\; C.L.)\; (KDE)}
+\taulo = 0.0525^{+0.0062}_{-0.0079}, \; \tauhi < 0.021 \quad (95\% \text{ C.L., KDE)}
 \eeq 
 and
 \beq
-\taulo = 0.0528^{+0.0064}_{- 0.0077}, \; \tauhi < 0.021\; \mathrm{(95\%\; C.L.)\; (Gaussian)}
+\taulo = 0.0528^{+0.0064}_{- 0.0077}, \; \tauhi < 0.021 \quad (95\% \text{ C.L., Gaussian)}
 \eeq 
 are consistent with those from the exact likelihood 
 \beq
-\taulo = 0.0526^{+0.0058}_{-0.0078}, \; \tauhi < 0.021\; \mathrm{(95\%\; C.L.)\; (Exact).
+\taulo = 0.0526^{+0.0058}_{-0.0078}, \; \tauhi < 0.021 \quad (95\% \text{ C.L., Exact).
 \eeq 
 }
 %exact: tauhi < 0.0206
@@ -628,9 +628,13 @@ are consistent with those from the exact likelihood
 
 % running longer KDE chains (numbers might be updated)
 
-
-Given the small amount of $\tau_{\rm hi}$ still allowed, the total optical depth constraints are correspondingly slightly larger than $\tau_{\rm tanh}$: \todo{give $\tau_{2\rm step}$.}
-
+\ch{comment here about 2D 95\% model picked with tau hi = 0.026 is higher because 0.021 is the 1D marginalized result.}
+Given the small amount of $\tau_{\rm hi}$ still allowed, the total optical depth constraints are correspondingly slightly larger than $\tau_{\rm tanh}$:
+\ch{
+\beq
+\tau_{\rm 2step} = 0.0621^{+0.0062}_{-0.0061}.
+\eeq
+}
 Finally the 95\% C.L. upper limit on high-redshift optical depth are also consistent:
 \begin{equation}
     \tau_{2\text{step}}(15, 30) < 0.016 \quad (95\% \text{ C.L., Exact)}
@@ -640,7 +644,7 @@ and
 $\tau_{2\text{step}}(15, 30) < 0.017$ for both effective likelihoods
 Note also that the 95\% C.L. allowed two-step model in 
 Fig.~\ref{fig:two_step_model} has
-\ch{$\tau_{2\text{step}}(15,30)= 0.017$.} 
+\ch{$\tau_{2\text{step}}(15,30)= 0.017$.}\todo{Need to change all 95\% upper limit on tau(15,30) to a one-sided computation instead of 2.}\todo{update plot two-step with longer chain results, run 2 more days exact two-step chains.} \todo{point out in text that 95\% upper limit on tau(15,30) not the same as plot.} 
 
 The Planck 2018 paper~\cite{Aghanim:2018eyx} also constrained $\tau(15, 30)$ in a model-independent way using the FlexKnot method, in which $x_e(z_i)$ at the $i$-th knots are varied as free parameters as well as the number of total knots. They obtained $\tau(15, 30) < 0.007$ (95\% C.L.), which would strongly rule out models that are still allowed at 95\% C.L. in this class. 
  In principle, the FlexKnot method allows for all possible physical ionization histories that increase monotonically with redshifts, and would include the two-parameter model described here. But apparently the implicit prior employed by the method disfavors optical depth at high redshift more than a flat prior in 
@@ -678,10 +682,12 @@ Using Eq.~(\ref{eq:cumtauPC}), we can derive constraints on the total optical
 depth $\tau_{\rm PC}=\tau_{\rm PC}(0,z_{\rm max})$ with the additional physicality priors on the PC amplitudes $m_a$ from
 Eq.~\ref{eq:individualprior}.  These 
 correspond to 
+%
 \beq
-\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068} \;\; (\texttt{SRoll2}),
+\tau_{\rm PC} = 0.0619^{+0.0056}_{-0.0068},
 \label{eq:tau_pc_zmax30}
 \eeq  
+%
 and the full posterior is shown in Fig.~\ref{fig:tauPC}. 
 Notice that the distribution matches that of the two step model from \S \ref{sec:example2} but almost $0.5\sigma$ shifted higher than that of the tanh model from \S \ref{sec:example1}.  
 
@@ -694,7 +700,7 @@ results based on the tanh model requires that reionization happens suddenly at $
 ionization at higher $z$.  While this prior may be well motivated
 theoretically \cite{XX} (sims that give prompt reionization), it should be distinguished from constraints that are data driven.  
 This was especially apparent with the Planck 2015 data where
-the PC constraints gave \ch{$\tau=0.092\pm0.015$ which differed substantially from the tanh $\tau=0.079\pm0.017$~\cite{Heinrich:2016ojb}}.  As we shall discuss
+the PC constraints gave \ch{$\tau_{\rm PC}=0.092\pm0.015$ which differed substantially from the tanh $\tau_{\rm PC}=0.079\pm0.017$~\cite{Heinrich:2016ojb}}.  As we shall discuss
 below, these differences were even more striking in the implications for the cumulative $\tau$ at high redshift as we have also concretely illustrated in the two-step model of \S \ref{sec:example2}.
 
 PC constraints on the total optical depth do not suffer from assuming a specific class of ionization histories as they parameterize any $x_e(z)$ from $z_{\rm min}=6$ to $z_{\rm max}=30$.
@@ -783,9 +789,12 @@ Finally, we check that our results (Eq.~\ref{eq:tau_pc_zmax30}) are robust to
  extending the PC
 range to
 $z_{\rm max}=50$ which is negligibly different
+\ch{
 \beq
-\tau_{\rm PC,\, \zmax=50} = 0.0626^{+0.0061}_{-0.0072}\;\; (\texttt{SRoll2}).
+%\tau_{\rm PC,\, \zmax=50} = 0.0626^{+0.0061}_{-0.0072}\;\; (\texttt{SRoll2}).
+\tau_{\rm PC} = 0.0626^{+0.0061}_{-0.0072}\quad (\zmax=50).
 \eeq
+CH: removing SRoll2 label in parenthesis and moving zmax=50 into the parenthesis.}
 Reverting the Planck 2018 likelihood to \texttt{SimAll} at $z_{\rm max}=30$ would give
 \beq
 \tau_{\rm PC} = 0.0582 ^{+0.0072}_{-0.0083}\;\; (\texttt{SimAll}).
@@ -838,13 +847,16 @@ contribution to the total optical depth.  Any finer redshift detail in the ioniz
 
 In Fig.~\ref{fig:plot_taugtz_2018_with_vs_without_physicality_prior}, we show the 
 the 68\% and 95\% confidence level contours for  $\tau_{\rm PC}(z,z_{\rm max})$ with and without the physicality prior on $m_1$.  Notice that without the prior, a larger range of unphysically negative optical depth is allowed whereas with the prior it is mostly eliminated except for the highest redshift.  Moreover upper bounds on the optical depth at high 
-redshift are largely unchanged.   These upper limits allow some contribution at high-$z$ but do not require it.   For example
+redshift are largely unchanged.   These upper limits allow some contribution at high-$z$ but do not require it.   For example,
+\ch{
 \beq
-\tau_{\rm PC}(15, 30) < 0.023 \; (95\%\; \mathrm{C.L.})\;\;(\texttt{SRoll2}).
+\tau_{\rm PC}(15, 30) < 0.023 \; (95\%\; \mathrm{C.L.}).
 \eeq
+}
 This should be contrasted with the tanh model 
  where it is  forbidden by form of the ionization history in conjunction with the total optical depth constraint.  
  On the other hand the bound is comparable to that obtained for the two-step model (see Eq.~\ref{eq:2stepbound}).  It is slightly larger given that the form of the two-step model still requires a steadily decreasing cumulative optical depth at $z>z_{\rm re}$).
+ \wh{I might add a few words about the relationship to $\tau_{\rm hi}$ but first let's make sure that all upper limits are quoted as one sided 95\% since I'm not sure we're comparing apples-to-apples yet..}
  
  
 These results are in contrast to those of the Planck 2015 analysis. 
@@ -884,12 +896,12 @@ For the high-redshift optical depth, we also obtain consistent upper limits
 %[double check on full chain (from 10/15) this is from 09/30.]
 %and 
 \beq
-\tau_{\rm PC}(15, 50) < 0.022 \; (95\%\; \mathrm{C.L.})\;\;(\texttt{SRoll2}).
+\tau_{\rm PC}(15, 50) < 0.022 \; (95\%\; \mathrm{C.L.}).
 \eeq
 
 \begin{figure}[ht]
 \includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_pc_zmax30_pl18_srollv2_with_and_without_physicality_prior_do_rescale_tau_false.pdf}
-\caption{Cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ from the model-independent PC approach with and without the physicality prior.   The prior helps exclude models with negative contributions at high-$z$ but conservatively allows some negative values at $z \sim z_{\rm max}=30$ where the oscillations in the PCs no longer cancel due to the cumulative integration.  Upper limits are nearly unaffected.} 
+\caption{Cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ from the model-independent PC approach with and without the physicality prior.   The prior helps exclude models with negative contributions at high-$z$ but conservatively allows some negative values at $z \sim z_{\rm max}=30$ where the oscillations in the PCs no longer cancel due to the cumulative integration.  Upper limits are nearly unaffected. \todo{change all tau cumulative plots for PC to $\tau_{\rm PC}$;} \todo{add (with prior)}} 
 }
 % no prior: 95\% C.L.  = [-0.01935756790924691, 0.021029019067727237]
 % with prior: {'z': 15, 'mean': 0.00694422689213187, 'std': 0.007568921831067864, 'limit68': [-0.0007215571045808687, 0.014684826477572082], 'limit95': [-0.006316156744039184, 0.02284538046347211]}
