@@ -1,29 +1,33 @@
-\documentclass[prd,twocolumn,amsmath,amssymb,floatfix,superscriptaddress,nofootinbib]{revtex4-1}
-\usepackage{bm}
-\usepackage{amsmath}
-\usepackage{epsfig}
-\usepackage{color}
+\documentclass[aps,prd,twocolumn,amsmath,amssymb,showpacs,floatfix,superscriptaddress,nofootinbib]{revtex4-1}
+
+\pdfoutput=1
+\synctex=1
+
+%\usepackage{epsfig}
 \usepackage{natbib}
-\usepackage{textcase}
-\usepackage{graphicx}
-\usepackage{ifthen}
-\usepackage{xstring}
-\usepackage{graphicx}
+%\usepackage{textcase}
+%\usepackage{ifthen}
+%\usepackage{xstring}
 \usepackage[utf8]{inputenc} 
+\usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{bm}
 \usepackage{latexsym}
+\usepackage{graphicx,epstopdf}
 \usepackage{epstopdf}
 \epstopdfsetup{update}
 \DeclareGraphicsExtensions{.ps, .png}
 \epstopdfDeclareGraphicsRule{.ps}{pdf}{.pdf}{ps2pdf -dEPSCrop -dNOSAFER #1 \OutputFile} 
 \usepackage{dcolumn} 
-\usepackage{multirow}
-\usepackage{appendix}
+%\usepackage{multirow}
+%\usepackage{appendix}
 \usepackage{footnote}
 \usepackage{tabularx,ragged2e,booktabs}
+\usepackage{breqn}
 \usepackage[normalem]{ulem}
 \usepackage{float}
 \restylefloat{table}
+\usepackage{color}
 
 \newcommand{\refsec}[1]{section~\ref{sec:#1}}
 \newcommand{\refeq}[1]{Eq.~(\ref{eq:#1})}
@@ -58,8 +62,8 @@
 \definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
 \newcommand{\todo}[1]{\textcolor{darkgreen}{\bf{#1}}}
 
-\newcommand{\relike}{RELIKE}%\texttt{RELIKE} 
-\newcommand{\cosmomcrelike}{\texttt{CosmoMC-relike}}
+\newcommand{\relike}{RELIKE}
+\newcommand{\cosmomcrelike}{\texttt{CosmoMC-RELIKE}}
 
 \def\mnras{Mon.\ Not.\ R.\ Astron.\ Soc.\ }
 \definecolor{darkgreen}{cmyk}{0.85,0.2,1.00,0.2} 
@@ -83,16 +87,14 @@ pdfsubject={}
 
 \begin{document}
 	
-\title{\relike: Reionization Effective Likelihood from Planck 2018 Data} 
+\title{RELIKE: Reionization Effective Likelihood from Planck 2018 Data} 
 
 \author{Chen Heinrich}\email{chenhe@caltech.edu}
-\affiliation{California Institute of Technology, Pasadena, California 91109, USA}
-\affiliation{Jet Propulsion Laboratory, California Institute of Technology, Pasadena, California 91109, USA}
+\affiliation{$California\ Institute\ of\ Technology,\ Pasadena,\ California\ 91109,\ USA$}
 
 \author{Wayne Hu}
-\affiliation{Kavli Institute for Cosmological Physics, Enrico Fermi Institute, University of Chicago, Chicago Illinois 60637}
-\affiliation{Department of Astronomy \& Astrophysics,
- University of Chicago, Illinois 60637}
+\affiliation{$Kavli\ Institute\ for\ Cosmological\ Physics,\ Enrico Fermi Institute,\ University of Chicago,\ Chicago\ Illinois\ 60637$}
+\affiliation{$Department\ of\ Astronomy\ \&\ Astrophysics,\ University\ of\ Chicago,\ Illinois\ 60637$}
 
 \begin{abstract}
 
@@ -105,7 +107,7 @@ The upper limits on the high-redshift optical depth is a factor of $\sim3$ large
 and we validate our results with a direct analysis of a two-step model which permits this small high-$z$ component.
 
 \end{abstract}
-\pacs{}
+%\pacs{}
 
 \maketitle
 
@@ -113,7 +115,7 @@ and we validate our results with a direct analysis of a two-step model which per
 \label{sec:intro}
 
 
-The cosmic microwave background (CMB) has helped establish the $\Lambda$CDM model as the standard cosmological model~\cite{Aghanim:2018eyx}. While many components of this standard cosmology model are well-understood, the details of the process of reionization however, remains one of the most uncertain pieces (see e.g.~\cite{2016ASSL..423.....M} and references therein).  It is usually characterized by a single parameter, the total Thomson optical depth, whose  uncertainty propagates into the inferences of other important parameters such as the primordial power spectrum amplitude. Through it, the uncertainty in reionization will become one of the major sources of uncertainty for measuring the sum of neutrino masses from future gravitational lensing measurements of the CMB~ \cite{Smith:2006nk,Allison:2015qca}; and will also have implications for inferring cosmic acceleration through the growth of structure~\cite{Hu:2003pt}. 
+The cosmic microwave background (CMB) has helped establish the $\Lambda$CDM model as the standard cosmological model~\cite{Aghanim:2018eyx}. While many components of this standard cosmology model are well-understood, the details of the process of reionization however, remains one of the most uncertain pieces (see e.g.~\cite{2016ASSL..423.....M} and references therein).  It is usually characterized by a single parameter, the total Thomson optical depth, whose  uncertainty propagates into the inferences of other important parameters such as the primordial power spectrum amplitude. Through it, the uncertainty in reionization will become one of the major sources of uncertainty for measuring the sum of neutrino masses from future gravitational lensing measurements of the CMB~ \cite{Smith:2006nk, Allison:2015qca} and will also have implications for inferring cosmic acceleration through the growth of structure~\cite{Hu:2003pt}. 
 
 Many probes of  the reionization era exist today and with future probes it will only become more important to combine them consistently the full implications of the CMB. In the CMB data, free electrons during the reionization epoch Compton scatter with the CMB photons to cause a suppression of the CMB primary anisotropies; on the large scales, the same scattering process of the CMB temperature quadrupole in the frame of the free electrons induces an additional reionization bump in the CMB $E$-mode polarization. On the small scales, the kinetic Sunyaev-Zeldovich (kSZ) effects generated by the scattering of the CMB photons off ionized gas in bulk motion~\cite{Sunyaev:1970er, Sunyaev:1980vz} are used to constrain morphology and duration of reionization~\cite{mcquinn_2005,mesinger_2012_kSZ}. Additionally, observations of galaxy luminosity functions, quasars, star formation rate, line-intensity mapping also provide important and complementary information on reionization~\cite{2016ASSL..423.....M}. In this paper, we aim to extract all the information in the large-scale $E$-mode observations for constraining the global ionization history of the Universe, and provide a way to consistently analyze them with all of these other probes.
  
@@ -214,7 +216,7 @@ priors in $m_a$ but discuss additional priors imposed by
 removing demonstrably  unphysical ionization histories in \S \ref{sec:cumulative}.
 
  \begin{figure}
-          \includegraphics[width=0.48\textwidth]{paper/plots/pl18_plot_pub_xe_basis_tau_basis_zmax30_heinrich.pdf}
+          \includegraphics[width=0.48\textwidth]{pl18_plot_pub_xe_basis_tau_basis_zmax30_heinrich.pdf}
           \caption{\textit{Top}: Rank-ordered CMB reionization principal components $S_a$ for $a = 1..5$ for $\zmax = 30$. We assume a fiducial model with fully ionized hydrogen and singly ionized helium by $z<6$, and doubly ionized helium at $z = 3.5$.
           \textit{Bottom}: The cumulative optical depth from $z$ to $z_{\rm max}$ of a unit amplitude PC. } 
           \label{fig:xe}
@@ -325,7 +327,7 @@ We use the official Planck likelihoods~\cite{Aghanim:2019ame} \texttt{plik\_lite
 which enables stronger reionization constraints, especially from the low multipole moments that are important for the low redshift constraints.
 
 \begin{figure*}
-\includegraphics[width=0.8\textwidth]{paper/plots/plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
+\includegraphics[width=0.8\textwidth]{plot_mj_triangle_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_srollv2_1015_wTauTrajectory_pl15_wTanhML_wGaussEllipse.pdf}
 \caption{Constraints from Planck data on the amplitudes of the five reionization principal components that describe all physical ionization models up to $z_{\rm max} = 30$. We show  the 68\% and 95\% $m_a-m_b$ constraints as well as marginal constraints on individual $m_a$ for Planck 2018 in blue,
 using \texttt{SRoll2} for the low-$\ell$ $EE$ likelihood, and compare that to the Planck 2015 constraints in red.  The corresponding marginal distributions for individual $m_a$ are also shown.
 When deriving model independent optical depth constraints we impose an additional physicality prior that excludes the gray region in $m_1$ and regions beyond the box limits in the others.
@@ -360,7 +362,7 @@ from switching to the \texttt{SRoll2} likelihood mainly strengthens the upper bo
 %The trajectories shown in black lines are the steplike models of instantaneous reionization allowed by the Planck 2015 data with the arrow pointing in the direction of increasing optical depth. Clearly, these steplikes models are only a part of the allowed physical model space. By construction, they miss any high-redshift ionization component by assuming neglibile ionization levels before the transition redshift $z_{\rm re}$. 
 
 \begin{figure}
-\includegraphics[width=0.4\textwidth]{plots/plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
+\includegraphics[width=0.4\textwidth]{plot_m1_m2_t18_r12_t19_t20_vs_pl18_pc_zmax30_pliklite_0930_vs_pl18_pc_zmax30_pliklite_srollv2_1015.pdf}
 \caption{Changes in the best constrained $m_1-m_2$ PC plane between Planck 2015 (red) and Planck 2018 (blue,  \texttt{SRoll2}; green, \texttt{SimAll}). The default \texttt{SRoll2} likelihood moderately improves the best constrained direction  and raises the optical depth for Planck 2018.}
 \label{fig:plot_m1m2_2015_vs_2018}
 \end{figure}
@@ -431,7 +433,7 @@ Next we demonstrate the use and the successful recovery of parameter posteriors 
 
 \begin{figure}
 \includegraphics[width=0.48\textwidth]
-{paper/plots/pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
+{pl18_tau_posterior_tanh_vs_tanh_kde_vs_tanh_gaussian_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
 \caption{Total optical depth $\tau_{\rm tanh}$ posterior for the tanh model in \refsec{example1} for the exact (Planck 2018) likelihood (shaded), KDE 
 (blue solid) and  Gaussian (black dashed)
 effective PC likelihoods. The overall agreement is excellent and the KDE results even capture the small skewness of the exact result.
@@ -442,7 +444,7 @@ effective PC likelihoods. The overall agreement is excellent and the KDE results
 
 
 \begin{figure}[ht]
-\includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_tanh_direct_vs_kde_vs_gaussian.pdf}
+\includegraphics[width=0.48\textwidth]{pl18_taugtz_tanh_direct_vs_kde_vs_gaussian.pdf}
 \caption{Cumulative optical depth in the tanh model as in Fig.~\ref{fig:tanh}
 (68\% and 95\% C.L. contours).  Overall agreement is good in regions where the contribution to $\tau_{\rm tanh}$ is high but the model form forbids high-$z$ contributions.    Oscillations around zero at high-z in the KDE and Gaussian PC representations are due to the effective low pass filter from the truncation at 5 PCs which does not produce any observable difference in the CMB. }
 \label{fig:plot_taugtz_PC_vs_tanh}
@@ -497,7 +499,7 @@ By construction, the tanh model does not allow for a significant fraction of the
 \label{sec:example2}
 
 \begin{figure}
-\includegraphics[width=0.48\textwidth]{paper/plots/plot_xe_tanh_highz.pdf}
+\includegraphics[width=0.48\textwidth]{plot_xe_tanh_highz.pdf}
 \caption{Two-step ionization history $x_e(z)$ for the model of \refsec{example2}. In addition to a tanh transition at low-redshift as in \refsec{example1}, there is an additional ionization plateau at high redshifts with a fixed transition at $z_{\rm hi} = 28$ and $\Delta z_{\rm hi} = 1$. Here we show the best-fit model in the Planck 2018 data $(\taulo, \tauhi) = (0.053, 0.006)$, as well as  a model on the 95\% C.L. contour of Fig.~\ref{fig:two_parameter_model_2D} which maximizes $\tauhi$, $(\taulo, \tauhi) = (0.043, 0.026)$. }
 \label{fig:two_step_model}
 \end{figure}
@@ -506,7 +508,7 @@ By construction, the tanh model does not allow for a significant fraction of the
 %
 
 \begin{figure}[t]
-\includegraphics[width=0.48\textwidth]{paper/plots/pl18_tanh_highz_test7_run1_vs_relike_tanh_highz_test9_run5_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.pdf}
+\includegraphics[width=0.48\textwidth]{pl18_tanh_highz_test7_run1_vs_relike_tanh_highz_test9_run5_f0p14_taulo_prior_0p03_zre_prior_6p1_taulo_prior_0p0_tri.pdf}
 \caption{Two-step parameter constraints (marginalized posteriors and 68\% and 95\% C.L. contours).  The exact, KDE PC and Gaussian PC likelihoods again agree very well and a small contribution from high-$z$ through $\tau_{\rm hi}$ is still allowed but not significantly favored.   Models of Fig.~\ref{fig:two_step_model} are marked and correspond to the best fit parameters and parameters 
 which maximize $\tau_{\rm hi}$ on the 2D 95\% C.L. contour.
 }
@@ -514,8 +516,7 @@ which maximize $\tau_{\rm hi}$ on the 2D 95\% C.L. contour.
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=0.48\textwidth]
-{paper/plots/pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian.pdf}
+\includegraphics[width=0.48\textwidth]{pl18_taugtz_tanh_highz_direct_vs_kde_vs_gaussian.pdf}
 \caption{Cumulative optical depth in the two-step model (as in Fig.~\ref{fig:plot_taugtz_PC_vs_tanh}).  Agreement between the exact, KDE PC and Gaussian PC likelihoods is again excellent and show that a small amount of high-$z$ ionization is allowed. The form of the model requires that the cumulative optical depth steadily declines above the first step at $z_{\rm re} \sim 6-7$ especially for $z\gtrsim 15$.
 }
 \label{fig:plot_taugtz_two_step_contours}
@@ -583,7 +584,7 @@ $\tau_{\rm hi}$ does.  We shall see in \S \ref{sec:modelindependent} that our mo
 
 \begin{figure}[ht]
 \includegraphics[width=0.48\textwidth]
-{paper/plots/pl18_tau_posterior_tanh_vs_tanh_highz_vs_pc_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
+{pl18_tau_posterior_tanh_vs_tanh_highz_vs_pc_dz_auto_zre_prior_6p1_normalized_by_max.pdf}
 \caption{Total optical depth posterior for the model-independent PC analysis (shaded) compared with the exact tanh model (blue solid line) and the two-step model (black dashed line) from Figs.~\ref{fig:tanh} and~\ref{fig:two_parameter_model_2D}. The PC analysis captures the ability to raise the optical depth through the high-$z$ contributions in models whose form allow it like in the two-step case.
 }
 \label{fig:tauPC}
@@ -636,7 +637,7 @@ These have in fact caused some confusion in the literature when interpreted in t
 
 
 \begin{figure}[ht]
-\includegraphics[width=0.48\textwidth]{paper/plots/plot_tau12_new_apply_cut_False_vs_True_pl18_pc_zmax30_pliklite_srollv2_1015_two_panels.pdf}
+\includegraphics[width=0.48\textwidth]{plot_tau12_new_apply_cut_False_vs_True_pl18_pc_zmax30_pliklite_srollv2_1015_two_panels.pdf}
 \caption{Total optical depth $\tau_{\rm PC}$ posterior (shaded) without (top) and with (bottom) the additional physicality prior of Eq.~(\ref{eq:individualprior}).  
 Imposing the physicality prior eliminates negative ionization at high $z$ and shifts the distribution to a higher total $\tau$. This unphysical contribution comes from the $m_1$ PC, as can be traced through the approximate $\tau_{12} \approx \tau_{\rm PC}$ built from a linear combination of the first two components defined in Eq.~(\ref{eq:tau12}) (blue lines).}
 \label{fig:tau12}
@@ -715,7 +716,7 @@ As with the tanh model, the \texttt{SRoll2} likelihood provides tighter constrai
 
 
  \begin{figure}
-          \includegraphics[width=0.9\columnwidth]{paper/plots/pl18_pc_zmax30_pliklite_srollv2_1015_plot_rotated_box_flat_tau12.pdf}
+          \includegraphics[width=0.9\columnwidth]{pl18_pc_zmax30_pliklite_srollv2_1015_plot_rotated_box_flat_tau12.pdf}
           \caption {Priors on the $m_1-m_2$ parameter space: the default physicality prior (inset square, solid lines) and an alternate prior which is  flat in its marginal
            $\tau_{12}$ distribution (rotated rectangle, dashed lines) given boundaries
            which are aligned with lines of constant $\tau_{12}$ (light gray lines). Note that although the physicality prior allows for more parameter space at higher $\tau_{12}$, that is also the region excluded by the data constraints (ellipses). The only difference in the prior across the allowed region is that the physicality prior removes cases where $m_1$ is so small that it requires negative ionization at high-$z$.} 
@@ -763,7 +764,7 @@ In Fig.~\ref{fig:plot_taugtz_zmax30_vs_zmax50}, we show that the 68\% and 95\% C
 we also obtain consistent upper limits to the $\zmax=30$ case of Eq.~(\ref{eq:tauPC15}).
 
 \begin{figure}[ht]
-\includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_pc_zmax30_pl18_srollv2_with_and_without_physicality_prior_do_rescale_tau_false.pdf}
+\includegraphics[width=0.48\textwidth]{pl18_taugtz_pc_zmax30_pl18_srollv2_with_and_without_physicality_prior_do_rescale_tau_false.pdf}
 \caption{Cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ from the model-independent PC approach with and without the physicality prior.   The prior helps exclude models with negative contributions at high-$z$ but conservatively allows some negative values at $z \sim z_{\rm max}=30$ where the oscillations in the PCs no longer cancel due to the cumulative integration.  Upper limits are nearly unaffected. 
 }
 \label{fig:plot_taugtz_2018_with_vs_without_physicality_prior}
@@ -771,7 +772,7 @@ we also obtain consistent upper limits to the $\zmax=30$ case of Eq.~(\ref{eq:ta
 
 
 \begin{figure}[ht]
-\includegraphics[width=0.45\textwidth]{paper/plots/pl18_taugtz_pc_zmax30_pl15_vs_pl18_simallEE_vs_pl18_srollv2_do_rescale_tau_false.pdf}
+\includegraphics[width=0.45\textwidth]{pl18_taugtz_pc_zmax30_pl15_vs_pl18_simallEE_vs_pl18_srollv2_do_rescale_tau_false.pdf}
 \caption{Changes in the
 cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ (as in Fig.~\ref{fig:plot_taugtz_2018_with_vs_without_physicality_prior}) 
 between Planck 2015 and 2018 (top panel) and between 2018 \texttt{SRoll2} (default) and $\texttt{SimAll}$.  Planck 2015 favored contributions at high $z$ which are disallowed in 2018 whereas the changes due to \texttt{SRoll2} mainly tighten the lower limits at low $z$.
@@ -781,7 +782,7 @@ between Planck 2015 and 2018 (top panel) and between 2018 \texttt{SRoll2} (defau
 
 
 \begin{figure}[ht]
-\includegraphics[width=0.48\textwidth]{paper/plots/pl18_taugtz_pl18_srollv2_pc_zmax30_vs_zmax50_do_rescale_tau_false.pdf}
+\includegraphics[width=0.48\textwidth]{pl18_taugtz_pl18_srollv2_pc_zmax30_vs_zmax50_do_rescale_tau_false.pdf}
 \caption{Robustness of the cumulative optical depth $\tau_{\rm PC}(z, \zmax)$ to changes from the default $\zmax = 30$ to $\zmax = 50$. Upper limits at $z \lesssim 30$ are nearly unaffected whereas extending $\zmax$ allows the high-$z$ component to come from even higher-$z$.
 }
 \label{fig:plot_taugtz_zmax30_vs_zmax50}
@@ -831,6 +832,9 @@ Likewise current and future CMB experiments such as CLASS~\cite{Watts:2018etg} a
 
 In sum, our release of the \relike\  code significantly reduces the time to constrain specific ionization models with Planck. It also opens the way for consistent and fast joint analyses of current and future CMB large-scale polarization data with a variety of increasingly rich reionization datasets in the next decades.
 
+\begin{acknowledgements}
+We thank Tzu-Ching Chang, GuoChao Sun, Lluis Mas-Aribas and Olivier Dor\'{e} for useful discussions. W.H. was supported by U.S. Dept. of Energy contract DE-FG02-13ER41958 and the Simons Foundation.
+\end{acknowledgements}
 
 \bibliography{rei.bib}
 
