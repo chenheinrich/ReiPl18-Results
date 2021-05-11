@@ -824,11 +824,9 @@ We also recommend using \relike\  to properly combine CMB large-scale datasets w
 To do so, one can interface the python \relike\  package with existing MCMC samplers for generic data such as Cobaya and CosmoSIS, or those adapted for specific reionization datasets (e.g.\ 21CMMC~\cite{Greig:2015qca} and CosmoMCReion~\cite{Chatterjee:2021ygm}). When the joint dataset is constraining enough (e.g.\ kSZ), one can sample while varying cosmological parameters since the \relike\  likelihood is valid for cosmologies consistent with the Planck best-fit. We expect that joint analyses work in the future (see e.g.\ Ref.~\cite{Ahn:2020btj, Qin:2020xrg} for some recent examples) would be made much easier with \relike. \\
 
 In the future, \relike\ can be extended in several ways.
-Recent studies of quasars may indicate that the Universe have not been entirely ionized by $z = 6$ ($\sim$80\% ionized at $z = 6$)~\cite{Becker:2021jyx}. If this result is confirmed,
-%in the future, 
-the PC approach can be easily modified for a smaller $\zmin$ in a manner similar to the $\zmax$ study here. 
+Recent studies of quasars may indicate that the Universe have not been entirely ionized by $z = 6$ ($\sim$80\% ionized at $z = 6$)~\cite{Becker:2021jyx}. If this result is confirmed, the PC approach can be easily modified for a smaller $\zmin$ in a manner similar to the $\zmax$ study here. 
 
-Likewise current and future CMB experiments such as CLASS~\cite{Watts:2018etg} and LiteBIRD~\cite{Hazumi:2021yqq} may also improve on Planck and eventually provide cosmic variance limited measurements of CMB polarization on the largest scales, yielding improved reionization constraints. The same approach used here can be easily updated to capture the better constraints from these data in a joint effective likelihood. \\
+Likewise current and future CMB experiments such as CLASS~\cite{Watts:2018etg, Watts:2019uvq} and LiteBIRD~\cite{Hazumi:2021yqq} may also improve on Planck and eventually provide cosmic variance limited measurements of CMB polarization on the largest scales, yielding improved reionization constraints. The same approach used here can be easily updated to capture the better constraints from these data in a joint effective likelihood. \\
 
 In sum, our release of the \relike\  code significantly reduces the time to constrain specific ionization models with Planck. It also opens the way for consistent and fast joint analyses of current and future CMB large-scale polarization data with a variety of increasingly rich reionization datasets in the next decades.
 
