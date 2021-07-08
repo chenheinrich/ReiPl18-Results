@@ -1,0 +1,53 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+
+\newcommand{\wh}[1]{\textcolor{blue}{#1}}
+
+\title{Response to Referee Report 1}
+\author{Chen Heinrich, Wayne Hu}
+\date{\today}
+\begin{document}
+\maketitle
+
+We thank the referee for the thoughtful comments and suggestions. We address each of them below, and summarize changes made in the manuscript. 
+
+\begin{enumerate}
+    \item{
+        \textit{This paper presents a new measurement of the optical depth likelihood from the Planck 2018 package, as well as a public package for connecting reionization models to the Planck data. The paper provides a very nice overview of the constraining power of the Planck measurements in this space and a “gold standard” measurement of the optical depth. The paper is an application (with extensive testing) of earlier techniques, so I do not have any major concerns. I therefore believe it should be published, although I have a couple of questions/comments for the authors.}
+
+        \textit{My most important comment is about the assumption that reionization is complete by z=6. As noted briefly in the conclusions, measurements of absorption toward high-z quasars over the last few years have cast considerable doubt on this assumption, even though it was conventional wisdom for many years. The data do not require reionization continuing to lower redshifts, but they certainly allow it (and some would say favor it). As such, I would strongly recommend providing some more quantitative guidance to the reader about how loosening the z$>$6 prior would affect the optical depth measurements.}\\
+        \\
+        The prior $z>6$ should not affect the optical depth measurement very much. One can see this by looking at the posterior plot on optical depth in the tanh model. $z=6$ corresponds to $\tau \approx 0.039$, which is disfavored by current Planck data. That being said, allowing for $z<6$ in the PC analysis could be useful when combining with other data sets. We plan to update our code release to include $z>5$ in the future.
+    }
+    
+    \item{
+        \textit{Second, the authors have demonstrated that the commonly-used tanh model places important implicit priors on reionization history models. While the PC approach is very nice in a mathematical sense, the tanh model is easy to visualize so offers advantages in developing intuition. I am just curious if the authors have any recommendations for more flexible functional forms that may be useful for developing intuition while allowing more, e.g., high-z contributions. This is probably beyond the scope but would be a useful service if available!
+        }\\
+        \\
+        We think that the two-step toy model in this paper could be useful for developing intuition. It maximizes the high-redshift ionization contributions with the ionization fraction being a plateau rather than a decaying tail. In fact, Watts et al. 2019 (https://arxiv.org/abs/1910.00590) used this toy model to evaluate the potential of future large-scale CMB experiments to constrain reionization. These future experiments are able to better constrain the $10\leq l\leq20$ region, which has higher sensitivity to the high-redshift component of reionization (e.g. $x_e^{\rm min}$ in the two-step model) than $l<10$ does.
+        }
+        
+    \item{
+        \textit{
+        Also, two very minor comments: (1) the paper roadmap at the end of the introduction ignores section V, and in the last paragraph of II.A. there appears to be a missing reference.
+        }\\
+        \\
+        Thank you for catching that! We added the following sentence in the roadmap: ``We also derive in \S V model-independent results on the optical depth using the PC analysis."
+        
+        We also fixed the citation at the end of section II.A. Thank you again!
+        }
+    
+
+\end{enumerate}
+
+
+\end{document}
+
+
